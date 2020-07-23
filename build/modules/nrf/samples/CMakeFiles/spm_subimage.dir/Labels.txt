@@ -1,0 +1,13 @@
+# Target labels
+ spm_subimage
+# Source files and their labels
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/samples/CMakeFiles/spm_subimage
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/samples/CMakeFiles/spm_subimage.rule
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/samples/CMakeFiles/spm_subimage-complete.rule
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/samples/spm_subimage-prefix/src/spm_subimage-stamp/spm_subimage-install.rule
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/samples/spm_subimage-prefix/src/spm_subimage-stamp/spm_subimage-mkdir.rule
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/samples/spm_subimage-prefix/src/spm_subimage-stamp/spm_subimage-download.rule
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/samples/spm_subimage-prefix/src/spm_subimage-stamp/spm_subimage-update.rule
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/samples/spm_subimage-prefix/src/spm_subimage-stamp/spm_subimage-patch.rule
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/samples/spm_subimage-prefix/src/spm_subimage-stamp/spm_subimage-configure.rule
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/samples/spm_subimage-prefix/src/spm_subimage-stamp/spm_subimage-build.rule

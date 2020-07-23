@@ -1,0 +1,28 @@
+# Available runners configured by board.cmake.
+runners:
+- nrfjprog
+- jlink
+
+# Default flash runner if --runner is not given.
+flash-runner: nrfjprog
+
+# Default debug runner if --runner is not given.
+debug-runner: jlink
+
+# Default command line arguments. The ones in "common" are always given.
+# The other sub-keys give runner-specific arguments.
+args:
+  common:
+  - --board-dir=/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/boards/arm/thingy91_nrf9160
+  - --elf-file=/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/zephyr.elf
+  - --hex-file=/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/zephyr.hex
+  - --bin-file=/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/zephyr.bin
+  - --gdb=/Users/tadmcallister/opt/gnuarmemb/gcc-arm-none-eabi-8-2019-q3-update/bin/arm-none-eabi-gdb
+  - --openocd=/Users/tadmcallister/.espressif/tools/openocd-esp32/v0.10.0-esp32-20190313/openocd-esp32/bin/openocd
+  nrfjprog:
+    - --nrf-family=NRF91
+    - --softreset
+  jlink:
+    - --dt-flash=y
+    - --device=cortex-m33
+    - --speed=4000
