@@ -103,13 +103,13 @@ struct k_msgq env_msg_q;
 /* Global Flags */
 volatile bool got_ntp = false;
 
+/* Global Variables */
+uint8_t iaq_accuracy;
+
 /* Forward declarations of functions */
 static void store_modem_configuration(void);
 static void env_data_ready(void);
 
-/*
-* bool if_qual - exclude readings of 999 from calculations
-*/
 
 /* Get average value of array */
 s32_t calculate_avg_val(s32_t a[], s32_t sz, bool is_qual)
@@ -126,8 +126,13 @@ s32_t calculate_avg_val(s32_t a[], s32_t sz, bool is_qual)
             excl_cnt += 1;
         }
     }
-    return (sum/(sz-excl_cnt));
+    if (excl_cnt == sz) {
+        return (EXCLUDE);
+    } else {
+        return (sum/(sz-excl_cnt));
+    }
 }
+
 
 /* Get min value of array */
 s32_t calculate_min_val(s32_t a[],s32_t sz, bool is_qual)
@@ -143,6 +148,7 @@ s32_t calculate_min_val(s32_t a[],s32_t sz, bool is_qual)
     }
     return min;
 }
+
 
 /* Get max value of array */
 s32_t calculate_max_val(s32_t a[],s32_t sz, bool is_qual)
@@ -163,18 +169,18 @@ s32_t calculate_max_val(s32_t a[],s32_t sz, bool is_qual)
 /* Handlers */
 void button_handler(u32_t button_state, u32_t has_changed)
 {
-    // printk("Button event: %x  %x\n", button_state, has_changed);
-    // if ( (has_changed & 0x01) && (button_state & 0x01) ) {
-    //     store_modem_configuration();
-    // }
+    LOG_INF("Button event: %x  %x\n", button_state, has_changed);
+    if ( (has_changed & 0x01) && (button_state & 0x01) ) {
+        store_modem_configuration();
+    }
 }
+
 
 /**@brief Handler for when receiving data from Google Cloud */ 
 void received_config_handler(const struct mqtt_publish_message *message) {
 
 	cJSON * data_json = cJSON_Parse(message->payload.data);
-
-    // LOG_INF("%s\n",cJSON_Print(data_json));
+    // printk("%s\n",cJSON_Print(data_json));
 
 	cJSON_Delete(data_json);
 }
@@ -186,7 +192,7 @@ void received_config_handler(const struct mqtt_publish_message *message) {
 static void modem_configure(void)
 {
     if (IS_ENABLED(CONFIG_LTE_AUTO_INIT_AND_CONNECT)) {
-        /* Do nothing, modem is already turned on and connected */
+    /* Do nothing, modem is already turned on and connected */
     } else {
         int err;
 
@@ -195,6 +201,7 @@ static void modem_configure(void)
         __ASSERT(err == 0, "LTE link could not be established. Rebooting\n");
     }
 }
+
 
 /**@brief Configures AT Command interface to the modem link. */
 static void at_configure(void)
@@ -205,6 +212,7 @@ static void at_configure(void)
 	err = at_cmd_init();
 	__ASSERT(err == 0, "AT CMD could not be established.");
 }
+
 
 /**@brief Soft boots modem to store current values to NVM */
 void store_modem_configuration(void)
@@ -231,40 +239,35 @@ void get_modem_info(struct m_info_t *info)
 {
     LOG_INF("Getting modem info\n");
     modem_info_string_get(MODEM_INFO_CELLID, info->cid, sizeof(info->cid));
-
     modem_info_string_get(MODEM_INFO_AREA_CODE, info->tac, sizeof(info->tac));
-
     modem_info_string_get(MODEM_INFO_RSRP, info->rssi, sizeof(info->rssi));
-
     modem_info_string_get(MODEM_INFO_APN, info->apn, sizeof(info->apn));
-
     modem_info_string_get(MODEM_INFO_FW_VERSION, info->fwv, sizeof(info->fwv));
-
 	modem_info_short_get(MODEM_INFO_BATTERY, &info->vltg);
-
     modem_info_short_get(MODEM_INFO_TEMP, &info->temp);
 }
 
-/**@brief Store sensor data and process once full and
-* initialises Google cloud thread
+
+/**@brief Store sensor data - process once full and
+* initialise Google cloud thread
 */
 void process_env_data(void) 
 {
-    struct env_data_t d_temp;
+    int err;
+    bool thread_started = false;
+
+    u32_t buffer_bytes_used;
+    u32_t run_count = 0;
 
     s32_t tempArray [DATA_ARRAY_SIZE];
     s32_t humiArray [DATA_ARRAY_SIZE];
     s32_t presArray [DATA_ARRAY_SIZE];
     s32_t qualArray [DATA_ARRAY_SIZE];
 
-    struct k_mbox_msg send_env_msg;
+    struct env_data_t d_temp;
     struct pac_data_t pac_data;
-
-    u32_t buffer_bytes_used;
-    u32_t run_count = 0;
-    bool thread_started = false;
-
-    int err;
+    
+    struct k_mbox_msg send_env_msg;
 
     while (true)
     {
@@ -283,9 +286,9 @@ void process_env_data(void)
             * can array be dynamically resized?
             */
             if (iaq_accuracy == BSEC_CALIBRATED) {
-                qualArray[i] = (s32_t)d_temp.q; // fill array with reading
+                qualArray[i] = (s32_t)d_temp.q; // fill array with valid readings
             } else {
-               qualArray[i] = NULL; //TODO: anything over 500 not valid iaq reading but valid pres?
+               qualArray[i] = EXCLUDE;  // fill array with magic number
             }
 
             /* Increment data getter counter */
@@ -377,9 +380,9 @@ void process_env_data(void)
         if (send_env_msg.size < buffer_bytes_used) {
             LOG_DBG("env msg RXer only had room for [%d] bytes", send_env_msg.info);
         }
-
     }
 }
+
 
 /**@brief Environmental sensor data ready callback */
 static void env_data_ready(void)
@@ -389,23 +392,17 @@ static void env_data_ready(void)
 
     LOG_INF("env sens data ready");
 
-    /*
-    Get sensor data and push to queue
-    */
+    /* Get sensor data and push to queue */
     if (! env_sensors_get_temperature(&temp)) {
-
         (env_data.t) = (s32_t)temp.value;
     }
     if (! env_sensors_get_humidity(&humi)) {
-
         (env_data.h) = (s32_t)humi.value;
     }
     if (! env_sensors_get_pressure(&pres)) {
-
         (env_data.p) = (s32_t)pres.value;
     }
     if (! env_sensors_get_air_quality(&qual)) {
-
         (env_data.q) = (s32_t)qual.value;
     }
 
@@ -421,8 +418,8 @@ void init_env_sensor(void)
 
     LOG_INF("Sensor workqueue started\n");
 	k_work_q_start(&env_sens_q, env_sens_stack_area,
-		       K_THREAD_STACK_SIZEOF(env_sens_stack_area),
-		       CONFIG_APPLICATION_WORKQUEUE_PRIORITY);
+		    K_THREAD_STACK_SIZEOF(env_sens_stack_area),
+		    CONFIG_APPLICATION_WORKQUEUE_PRIORITY);
 
     LOG_INF("Initializing environmental sensor\n");
     err = env_sensors_init_and_start(&env_sens_q, env_data_ready);
@@ -468,6 +465,9 @@ void app_gc_iot(void)
     }
     
     while(true) {
+        /*
+        * CAUTION! - cJSON allocs memory - ensure dealloced when done
+        */
         
         /* prepare to receive message */
         env_d_recv_msg.info = 256;
@@ -619,7 +619,7 @@ void app_gc_iot(void)
             LOG_INF("JSON data Publish failed\n");
         }
 
-        /* Cleanup JSON obj */
+        /* Cleanup JSON obj - release memory */
         cJSON_Delete(envSensObj);
 
         /* Reboot */
@@ -634,7 +634,8 @@ void app_gc_iot(void)
     
 }
 
-/**@brief Main Processing Thread */
+
+/**@brief Thread initialisation */
 void main(void)
 {
 
@@ -662,21 +663,22 @@ void main(void)
     LOG_INF("Initializing aggregated data mailbox\n");
     k_mbox_init(&env_d_mailbox);
 
-    /* Start data aggregation thread */
+    /* Initialise data aggregation thread */
     d_ag_tid = k_thread_create(&data_ag_thread, data_ag_stack_area, K_THREAD_STACK_SIZEOF(data_ag_stack_area),
         (k_thread_entry_t)process_env_data, NULL, NULL, NULL,
         7, 0, K_NO_WAIT);
 
-    /* Create time pool poll thread */
+    /* Initialise time pool poll thread */
     ntp_tid = k_thread_create(&ntp_thread, ntp_stack_area, K_THREAD_STACK_SIZEOF(ntp_stack_area),
         (k_thread_entry_t)ntp_poll, NULL, NULL, NULL,
         7, 0, K_NO_WAIT);
 
-   gc_tid = k_thread_create(&gc_thread, gc_stack_area, K_THREAD_STACK_SIZEOF(gc_stack_area),
+    /* Initialise Google Cloud thread */
+    gc_tid = k_thread_create(&gc_thread, gc_stack_area, K_THREAD_STACK_SIZEOF(gc_stack_area),
         (k_thread_entry_t)gcloud_thread, NULL, NULL, NULL,
         7, 0, K_NO_WAIT);
 
-    /* App thread entry */
+    /* Initialise App thread */
     app_tid = k_thread_create(&app_thread, app_stack_area, K_THREAD_STACK_SIZEOF(app_stack_area),
         (k_thread_entry_t)app_gc_iot, NULL, NULL, NULL,
         7, 0, K_NO_WAIT);
