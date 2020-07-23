@@ -6,19 +6,13 @@ This application gathers readings from a Bosch BME680 environmental sensor and p
 
 Overview
 ********
-The application gathers data in an array of size set in prj.conf. When full, it establishes a TLS session, authenticates with GC IoT Core and publishes data.
+The application gathers data in an array of size set in prj.conf. When full, it establishes a TLS session, authenticates to  GC IoT Core and publishes data.
 
 Requirements
 ************
 * Google Cloud SDK <https://cloud.google.com/sdk/docs/#install_the_latest_cloud_tools_version_cloudsdk_current_version>
 * Python 3
 * Segger J-Link debugger
-
-.. include:: /includes/boardname_tables/sample_boardnames.txt
-   :start-after: set5_start
-   :end-before: set5_end
-
-.. include:: /includes/spm.txt
 
 Dependencies
 ************
