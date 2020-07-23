@@ -1,6 +1,0 @@
-osource "/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/Kconfig.nrf"
-
-osource "/Users/tadmcallister/Nordic/safecility_thingy/ncs/bootloader/mcuboot/zephyr/Kconfig"
-
-osource "/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrfxlib/Kconfig.nrfxlib"
-
