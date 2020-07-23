@@ -1,7 +1,7 @@
 # Key files and Certificates
 *.pem
 /src/private_info/key.c
-/src/private_info_old
+/src/private_info_old/*
 
 # Prerequisites
 *.d
