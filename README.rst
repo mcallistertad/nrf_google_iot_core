@@ -23,13 +23,13 @@ Dependencies
 Getting Started
 ***************
 In prj.conf: set gcloud variables
-> CONFIG_GCLOUD_REGION="<region>"
-> CONFIG_GCLOUD_PROJECT_NAME="<project_name>"
-> CONFIG_GCLOUD_REGISTRY_NAME="<registry_name>"
-> CONFIG_GCLOUD_DEVICE_NAME="<device_name>"
+**CONFIG_GCLOUD_REGION="<region>"**
+**CONFIG_GCLOUD_PROJECT_NAME="<project_name>"**
+**CONFIG_GCLOUD_REGISTRY_NAME="<registry_name>"**
+**CONFIG_GCLOUD_DEVICE_NAME="<device_name>"**
 
 * Run shell script in src/private_info to generate GC IoT Core certs/ public key
-> sh create_keys.sh
+**sh create_keys.sh**
 
 References
 **********
