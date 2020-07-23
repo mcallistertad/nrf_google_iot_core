@@ -24,6 +24,7 @@ Dependencies
 ************
 * nrf-sdk v1.3 or newer - tracks master <https://github.com/nrfconnect/sdk-nrf/tree/v1.3-branch>
 * nRF91 modem firmware v1.2 <https://www.nordicsemi.com/-/media/Software-and-other-downloads/Dev-Kits/nRF9160-DK/nRF9160-modem-FW/mfwnrf9160120.zip>
+* nRF52 firmware - thingy91_nrf52_usb_uart_bridge_2019-11-29_d3130d77.hex
 
 References
 **********
