@@ -34,6 +34,11 @@
 #define REBOOT_TIMEOUT 30000 //CANDO: reduce timeout as above
 #define EXCLUDE 999
 
+#define IAQ_STABILISING 0
+#define IAQ_UNCERTAIN 1
+#define IAQ_CALIBRATING 2
+#define IAQ_CALIBRATED 3
+
 /* Register main module log */
 LOG_MODULE_REGISTER(google_mqtt, CONFIG_GCLOUD_LOG_LEVEL);
 
@@ -66,7 +71,7 @@ struct env_data_t {
     s32_t h;
     s32_t p;
     s32_t q;
-    bool c;
+    u8_t a;
 } env_d;
 
 /* Aggregated env data type */
@@ -105,7 +110,6 @@ struct k_msgq env_msg_q;
 volatile bool got_ntp = false;
 
 /* Global Variables */
-uint8_t iaq_accuracy;
 
 /* Forward declarations of functions */
 static void store_modem_configuration(void);
@@ -284,7 +288,7 @@ void process_env_data(void)
             /* guard qual array from spurious readings 
             * can array be dynamically resized?
             */
-            if (d_temp.c == true) {
+            if (d_temp.a == IAQ_CALIBRATED) {
                 qualArray[i] = (s32_t)d_temp.q; // fill array with valid readings
             } else {
                qualArray[i] = EXCLUDE;  // fill array with magic number
@@ -403,7 +407,7 @@ static void env_data_ready(void)
     }
     if (! env_sensors_get_air_quality(&qual)) {
         (env_data.q) = (s32_t)qual.value;
-        (env_data.c) = (bool)qual.is_calibrated;
+        (env_data.a) = (u8_t)qual.accuracy;
     }
 
     /* send data to main thread */
@@ -568,7 +572,7 @@ void app_gc_iot(void)
         jQualMin = cJSON_CreateNumber((s32_t)pac_data.ag_qual.min);
 
         /* If IAQ not calibrated */
-        if (pac_data.ag_qual.avg == EXCLUDE) {
+        if (pac_data.ag_qual.avg != EXCLUDE) {
             jQualAvg = cJSON_CreateString((const char*)jQualNotCalibrated);
         } else {
             jQualAvg = cJSON_CreateNumber((s32_t)pac_data.ag_qual.avg);

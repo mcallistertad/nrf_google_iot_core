@@ -44,7 +44,8 @@ typedef struct {
 	env_sensor_t type;
 	/** Sensor sample value. */
 	double value;
-	bool is_calibrated;
+	/** Sensor accuracy */
+	u8_t accuracy;
 } env_sensor_data_t;
 
 typedef void (*env_sensors_data_ready_cb)(void);

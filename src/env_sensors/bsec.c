@@ -262,6 +262,7 @@ static void output_ready(s64_t timestamp, float iaq, u8_t iaq_accuracy,
 	
 	key = k_spin_lock(&(air_quality_sensor.lock));
 	air_quality_sensor.sensor.value = iaq;
+	air_quality_sensor.sensor.accuracy = iaq_accuracy;
 	k_spin_unlock(&(air_quality_sensor.lock), key);
 }
 
