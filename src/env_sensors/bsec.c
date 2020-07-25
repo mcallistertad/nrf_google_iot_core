@@ -205,12 +205,13 @@ static void output_ready(s64_t timestamp, float iaq, u8_t iaq_accuracy,
 			float co2_equivalent, float breath_voc_equivalent)
 {
 
-	/* start periodic timer if BSEC calibrated */
+	/* start periodic timer if BSEC not calibrated */
 	if (!iaq_reading_ok) {
 		k_timer_start(&iaq_timer, K_SECONDS(1), K_SECONDS(1));
 	}
 
 	if (timer_stopped && iaq_reading_ok) {
+		
 		/* debug output ready data */
 		LOG_DBG("timestamp, %d", timestamp);
 		LOG_DBG("BSEC return code, %d", bsec_status);

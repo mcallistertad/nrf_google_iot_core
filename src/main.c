@@ -66,6 +66,7 @@ struct env_data_t {
     s32_t h;
     s32_t p;
     s32_t q;
+    bool c;
 } env_d;
 
 /* Aggregated env data type */
@@ -139,7 +140,6 @@ s32_t calculate_min_val(s32_t a[],s32_t sz, bool is_qual)
 {
     s32_t min, i;
     s32_t excl_cnt = 0;
-
  	min=a[0];
  	
     for(i=1; i<sz; i++) {
@@ -155,7 +155,6 @@ s32_t calculate_max_val(s32_t a[],s32_t sz, bool is_qual)
 {
  	s32_t max,i;
     s32_t excl_cnt = 0;
-    
  	max=a[0];
 
     for(i=1; i<sz; i++) {
@@ -285,7 +284,7 @@ void process_env_data(void)
             /* guard qual array from spurious readings 
             * can array be dynamically resized?
             */
-            if (iaq_accuracy == BSEC_CALIBRATED) {
+            if (d_temp.c == true) {
                 qualArray[i] = (s32_t)d_temp.q; // fill array with valid readings
             } else {
                qualArray[i] = EXCLUDE;  // fill array with magic number
@@ -404,6 +403,7 @@ static void env_data_ready(void)
     }
     if (! env_sensors_get_air_quality(&qual)) {
         (env_data.q) = (s32_t)qual.value;
+        (env_data.c) = (bool)qual.is_calibrated;
     }
 
     /* send data to main thread */
@@ -546,6 +546,8 @@ void app_gc_iot(void)
         cJSON *jSampSz = NULL;
         cJSON *jSampFrq = NULL;
 
+        const char * jQualNotCalibrated = "NC";
+
         /* Initialise empty string */
         char * JSONEnvString = NULL;
 
@@ -564,8 +566,14 @@ void app_gc_iot(void)
 
         jQualMax = cJSON_CreateNumber((s32_t)pac_data.ag_qual.max);
         jQualMin = cJSON_CreateNumber((s32_t)pac_data.ag_qual.min);
-        jQualAvg = cJSON_CreateNumber((s32_t)pac_data.ag_qual.avg);
 
+        /* If IAQ not calibrated */
+        if (pac_data.ag_qual.avg == EXCLUDE) {
+            jQualAvg = cJSON_CreateString((const char*)jQualNotCalibrated);
+        } else {
+            jQualAvg = cJSON_CreateNumber((s32_t)pac_data.ag_qual.avg);
+        }
+        
         jSampSz = cJSON_CreateNumber(DATA_ARRAY_SIZE);
         jSampFrq = cJSON_CreateNumber(33);
 
