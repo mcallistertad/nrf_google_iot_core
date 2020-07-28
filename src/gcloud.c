@@ -210,13 +210,11 @@ static int make_jwt(char *buffer, size_t buffer_size) {
         return err;
     }
 
-    /*
-    Get Unix time from modem thread and mask upper bits
-    */
+    /* Get Unix time from modem thread and mask upper bits */
     s64_t ntp;
     date_time_now(&ntp);
 
-    s64_t unixtime = (ntp/1000);
+    s64_t unixtime = (ntp/1000);    //TODO: Is unix time valid as jwt timestamp?
     s32_t x = (s32_t)(unixtime>>32); 
     s32_t y = (s32_t)unixtime;
 
