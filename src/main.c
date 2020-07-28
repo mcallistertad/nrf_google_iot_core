@@ -30,6 +30,7 @@
 #define CONFIG_APPLICATION_WORKQUEUE_PRIORITY 7
 
 #define DATA_ARRAY_SIZE 240 
+#define SAMP_FREQ 33
 #define THREAD_INDEX DATA_ARRAY_SIZE-2
 #define REBOOT_TIMEOUT 20000
 #define EXCLUDE 999
@@ -281,7 +282,7 @@ void process_env_data(void)
         /* Get data and store - for size of array */
         for (int i = 0; i < DATA_ARRAY_SIZE; i++)
         {
-            /* pull data from queue */
+            /* Pull data from queue */
             LOG_DBG("Getting environmental data: [%d] of [%d]", i, DATA_ARRAY_SIZE);
             k_msgq_get(&env_msg_q, &d_temp, K_FOREVER);
 
@@ -289,9 +290,7 @@ void process_env_data(void)
             humiArray[i] = (s32_t)d_temp.h;
             presArray[i] = (s32_t)d_temp.p;
 
-            /* guard qual array from spurious readings 
-            * can array be dynamically resized?
-            */
+            /* Guard qual array from spurious readings */
             if (d_temp.a == IAQ_CALIBRATED) {
                 qualArray[i] = (s32_t)d_temp.q; // fill array with valid readings
             } else {
@@ -373,17 +372,17 @@ void process_env_data(void)
         
         buffer_bytes_used = sizeof(p_d);   //TODO: test that size is correct
 
-        /* prepare to send message */
+        /* Prepare to send message */
         send_env_msg.info = buffer_bytes_used;
         send_env_msg.size = buffer_bytes_used;
         send_env_msg.tx_data = &pac_data;
         send_env_msg.tx_block.data = NULL;
         send_env_msg.tx_target_thread = K_ANY;
 
-        /* send message and wait until a consumer receives it */
+        /* Send message and wait until a consumer receives it */
         k_mbox_put(&env_d_mailbox, &send_env_msg, K_FOREVER);
 
-        /* verify that message data was fully received */
+        /* Verify that message data was fully received */
         if (send_env_msg.size < buffer_bytes_used) {
             LOG_DBG("env msg RXer only had room for [%d] bytes", send_env_msg.info);
         }
@@ -414,7 +413,7 @@ static void env_data_ready(void)
         (env_data.a) = (u8_t)qual.accuracy;
     }
 
-    /* send data to main thread */
+    /* Send data to main thread */
     k_msgq_put(&env_msg_q, &env_data, K_NO_WAIT); //TODO: Is flushing the desired behaviour?
 }
 
@@ -445,7 +444,7 @@ int ntp_poll(void)
 {
     s64_t date_time_stamp;
 
-    // TODO: Add 
+    // TODO: Add max try count
     while (date_time_now(&date_time_stamp) != 0)
     {
         LOG_ERR("Couldn't get time\n");
@@ -466,7 +465,7 @@ void app_gc_iot(void)
 
     struct k_mbox_msg env_d_recv_msg;
 
-    /* Block until  */
+    /* Block until time avail */
     while (!got_ntp) 
     {   
         LOG_INF("Waiting on Modem Time\n");
@@ -478,16 +477,16 @@ void app_gc_iot(void)
         * CAUTION! - cJSON allocs memory - ensure dealloced when done
         */
         
-        /* prepare to receive message */
+        /* Prepare to receive message from producer */
         env_d_recv_msg.info = 256;
         env_d_recv_msg.size = sizeof(pac_data);
         env_d_recv_msg.rx_source_thread = K_ANY; //TODO: Get producer thread id
 
-        /* get data from mailbox - blocking */
+        /* Get data from mailbox - blocking */
         LOG_DBG("App thread waiting for data from producer\n");
         k_mbox_get(&env_d_mailbox, &env_d_recv_msg, &pac_data, K_FOREVER);
 
-        /* verify that message data was fully received */
+        /* Verify that message data was fully received */
         if (env_d_recv_msg.info != env_d_recv_msg.size) {
             LOG_INF("Sender tried to send [%d] bytes\n", env_d_recv_msg.info);
         } else {
@@ -563,7 +562,7 @@ void app_gc_iot(void)
         /* Initialise empty string */
         char * JSONEnvString = NULL;
 
-        /* create cJSON items */
+        /* Create cJSON items */
         jTempMax = cJSON_CreateNumber((s32_t)pac_data.ag_temp.max);
         jTempMin = cJSON_CreateNumber((s32_t)pac_data.ag_temp.min);
         jTempAvg = cJSON_CreateNumber((s32_t)pac_data.ag_temp.avg);
@@ -579,15 +578,15 @@ void app_gc_iot(void)
         jQualMax = cJSON_CreateNumber((s32_t)pac_data.ag_qual.max);
         jQualMin = cJSON_CreateNumber((s32_t)pac_data.ag_qual.min);
 
-        /* If IAQ not calibrated */
-        if (pac_data.ag_qual.avg != EXCLUDE) {
+        /* IAQ calibration */
+        if (pac_data.ag_qual.avg == EXCLUDE) {
             jQualAvg = cJSON_CreateString((const char*)jQualNotCalibrated);
         } else {
             jQualAvg = cJSON_CreateNumber((s32_t)pac_data.ag_qual.avg);
         }
         
         jSampSz = cJSON_CreateNumber(DATA_ARRAY_SIZE);
-        jSampFrq = cJSON_CreateNumber(33);
+        jSampFrq = cJSON_CreateNumber(SAMP_FREQ);
 
         jCid = cJSON_CreateString((const char*)info.cid);
         jTac = cJSON_CreateString((const char*)info.tac);
