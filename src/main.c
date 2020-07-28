@@ -30,14 +30,18 @@
 #define CONFIG_APPLICATION_WORKQUEUE_PRIORITY 7
 
 #define DATA_ARRAY_SIZE 240 
-#define THREAD_INDEX DATA_ARRAY_SIZE-2 //CANDO: test n-1 to minimise tls session data usage 
-#define REBOOT_TIMEOUT 30000 //CANDO: reduce timeout as above
+#define THREAD_INDEX DATA_ARRAY_SIZE-2
+#define REBOOT_TIMEOUT 20000
 #define EXCLUDE 999
 
 #define IAQ_STABILISING 0
 #define IAQ_UNCERTAIN 1
 #define IAQ_CALIBRATING 2
 #define IAQ_CALIBRATED 3
+
+
+/* Info */
+static const char* device_fw_ver = APP_GIT_VERSION;
 
 /* Register main module log */
 LOG_MODULE_REGISTER(google_mqtt, CONFIG_GCLOUD_LOG_LEVEL);
@@ -441,6 +445,7 @@ int ntp_poll(void)
 {
     s64_t date_time_stamp;
 
+    // TODO: Add 
     while (date_time_now(&date_time_stamp) != 0)
     {
         LOG_ERR("Couldn't get time\n");
@@ -502,6 +507,7 @@ void app_gc_iot(void)
         /* Create cJSON object */
         cJSON * envSensObj = cJSON_CreateObject();
 
+        /* Create cJSON strings */
         const char * jCidString = "cid";
         const char * jTacString = "tac";
         const char * jRssiString = "rssi";
@@ -517,7 +523,9 @@ void app_gc_iot(void)
         cJSON *jVltg = NULL;
         cJSON *jTemp = NULL;
 
-        /* Create cJSON strings */
+        const char * jDevFwvString = "dvfwv";
+        cJSON *jDvFwv = NULL;
+
         const char * jTempMaxString = "tempMax";
         const char * jHumiMaxString = "humiMax";
         const char * jPresMaxString = "presMax";
@@ -589,6 +597,8 @@ void app_gc_iot(void)
         jVltg = cJSON_CreateNumber((u16_t)info.vltg);
         jTemp = cJSON_CreateNumber((u16_t)info.temp);
 
+        jDvFwv = cJSON_CreateString((const char*)device_fw_ver);
+
         /* Add cJSON items to object */
         cJSON_AddItemToObject(envSensObj, jTempMaxString, jTempMax);
         cJSON_AddItemToObject(envSensObj, jHumiMaxString, jHumiMax);
@@ -616,6 +626,7 @@ void app_gc_iot(void)
         cJSON_AddItemToObject(envSensObj, jVltgString, jVltg);
         cJSON_AddItemToObject(envSensObj, jTempString, jTemp);
 
+        cJSON_AddItemToObject(envSensObj, jDevFwvString, jDvFwv);
 
         /* Create JSON string from object */
         JSONEnvString = cJSON_Print(envSensObj);
@@ -650,7 +661,6 @@ void app_gc_iot(void)
 /**@brief Thread initialisation */
 void main(void)
 {
-
     LOG_INF("Google Cloud env sensor app started");
 
 	k_work_q_start(&app_work_q, wdt_stack_area,

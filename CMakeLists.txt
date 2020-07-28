@@ -45,3 +45,22 @@ add_subdirectory(src/watchdog)
 if (CONFIG_USE_BME680_BSEC)
   target_link_libraries(app PUBLIC bsec_lib)
 endif()
+
+# Get git tag
+exec_program(
+  "git"
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ARGS "describe --abbrev=4 --dirty --always --tags"
+  OUTPUT_VARIABLE GIT_TAG )
+
+# If tag found get the SHA1 hash instead
+if( ${GIT_TAG} MATCHES "fatal:.*" )
+exec_program(
+  "git"
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ARGS "rev-parse HEAD"
+  OUTPUT_VARIABLE GIT_VERSION )
+else()
+  set( GIT_VERSION ${GIT_TAG} )
+endif()
+add_definitions( -DAPP_GIT_VERSION="${GIT_VERSION}")
