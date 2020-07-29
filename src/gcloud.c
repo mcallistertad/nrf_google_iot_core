@@ -1,5 +1,4 @@
 #include<logging/log.h>
-LOG_MODULE_REGISTER(gcloud);
 
 #include <zephyr.h>
 #include <kernel.h>
@@ -59,6 +58,8 @@ LOG_MODULE_REGISTER(gcloud);
 #define GCLOUD_THREAD_STACK_SIZE 2048
 
 #define GCLOUD_THREAD_PRIORITY 7
+
+LOG_MODULE_REGISTER(gcloud);
 
 /* Buffers for MQTT client. */
 static u8_t rx_buffer[CONFIG_MQTT_MESSAGE_BUFFER_SIZE];

@@ -40,12 +40,11 @@
 #define IAQ_CALIBRATING 2
 #define IAQ_CALIBRATED 3
 
+/* Register main module log */
+LOG_MODULE_REGISTER(google_mqtt, CONFIG_GCLOUD_LOG_LEVEL);
 
 /* Info */
 static const char* device_fw_ver = APP_GIT_VERSION;
-
-/* Register main module log */
-LOG_MODULE_REGISTER(google_mqtt, CONFIG_GCLOUD_LOG_LEVEL);
 
 /* Stack definition for application */
 static K_THREAD_STACK_DEFINE(app_stack_area, 8192);
@@ -145,15 +144,17 @@ s32_t calculate_avg_val(s32_t a[], s32_t sz, bool is_qual)
 
 
 /* Get min value of array */
-s32_t calculate_min_val(s32_t a[],s32_t sz, bool is_qual)
+s32_t calculate_min_val(s32_t a[],s32_t sz)
 {
     s32_t min, i;
     s32_t excl_cnt = 0;
+
  	min=a[0];
  	
     for(i=1; i<sz; i++) {
-        if(min>a[i])
-        min=a[i];   
+        if(min>a[i]) {
+            min=a[i];  
+        } 
     }
     return min;
 }
@@ -164,11 +165,20 @@ s32_t calculate_max_val(s32_t a[],s32_t sz, bool is_qual)
 {
  	s32_t max,i;
     s32_t excl_cnt = 0;
- 	max=a[0];
 
-    for(i=1; i<sz; i++) {
-        if(max<a[i])
-        max=a[i];       
+    max=a[0];
+    
+    for(i=1; i<sz; i++) 
+    {
+        if (is_qual) {
+            if(max==EXCLUDE || max<a[i]) {
+                max=a[i];   
+            }
+        } else {
+            if(max<a[i]) {
+                max=a[i];   
+            }
+        }
     }
     return max;
 }
@@ -208,6 +218,8 @@ static void modem_configure(void)
         err = lte_lc_init_and_connect();
         __ASSERT(err == 0, "LTE link could not be established. Rebooting\n");
     }
+    /* Enable PSM mode */
+    lte_lc_psm_req(true);
 }
 
 
@@ -291,7 +303,7 @@ void process_env_data(void)
             presArray[i] = (s32_t)d_temp.p;
 
             /* Guard qual array from spurious readings */
-            if (d_temp.a == IAQ_CALIBRATED) {
+            if (d_temp.a != IAQ_STABILISING) {
                 qualArray[i] = (s32_t)d_temp.q; // fill array with valid readings
             } else {
                qualArray[i] = EXCLUDE;  // fill array with magic number
@@ -347,10 +359,10 @@ void process_env_data(void)
 
         /* Calculate data min */
         LOG_INF("Calculating environmental data type min");
-        pac_data.ag_temp.min = calculate_min_val(tempArray, DATA_ARRAY_SIZE, false);
-        pac_data.ag_humi.min = calculate_min_val(humiArray, DATA_ARRAY_SIZE, false);
-        pac_data.ag_pres.min = calculate_min_val(presArray, DATA_ARRAY_SIZE, false);
-        pac_data.ag_qual.min = calculate_min_val(qualArray, DATA_ARRAY_SIZE, true);
+        pac_data.ag_temp.min = calculate_min_val(tempArray, DATA_ARRAY_SIZE);
+        pac_data.ag_humi.min = calculate_min_val(humiArray, DATA_ARRAY_SIZE);
+        pac_data.ag_pres.min = calculate_min_val(presArray, DATA_ARRAY_SIZE);
+        pac_data.ag_qual.min = calculate_min_val(qualArray, DATA_ARRAY_SIZE);
         LOG_INF("Min temp: %d", (s32_t)pac_data.ag_temp.min);
         LOG_INF("Min humi: %d", (s32_t)pac_data.ag_humi.min);
         LOG_INF("Min pres: %d", (s32_t)pac_data.ag_pres.min);
@@ -511,7 +523,7 @@ void app_gc_iot(void)
         const char * jTacString = "tac";
         const char * jRssiString = "rssi";
         const char * jApnString = "apn";
-        const char * jFwvString = "fwv";
+        const char * jFwvString = "mfwv";
         const char * jVltgString = "vltg";
         const char * jTempString = "itemp";
         cJSON *jCid = NULL;
@@ -522,7 +534,7 @@ void app_gc_iot(void)
         cJSON *jVltg = NULL;
         cJSON *jTemp = NULL;
 
-        const char * jDevFwvString = "dvfwv";
+        const char * jDevFwvString = "dfwv";
         cJSON *jDvFwv = NULL;
 
         const char * jTempMaxString = "tempMax";
@@ -557,7 +569,8 @@ void app_gc_iot(void)
         cJSON *jSampSz = NULL;
         cJSON *jSampFrq = NULL;
 
-        const char * jQualNotCalibrated = "NC";
+        const char * jQualCalString = "calibration";
+        cJSON *jQualCal = NULL;
 
         /* Initialise empty string */
         char * JSONEnvString = NULL;
@@ -577,12 +590,13 @@ void app_gc_iot(void)
 
         jQualMax = cJSON_CreateNumber((s32_t)pac_data.ag_qual.max);
         jQualMin = cJSON_CreateNumber((s32_t)pac_data.ag_qual.min);
+        jQualAvg = cJSON_CreateNumber((s32_t)pac_data.ag_qual.avg);
 
         /* IAQ calibration */
         if (pac_data.ag_qual.avg == EXCLUDE) {
-            jQualAvg = cJSON_CreateString((const char*)jQualNotCalibrated);
+            jQualCal = cJSON_CreateString("not calibrated");
         } else {
-            jQualAvg = cJSON_CreateNumber((s32_t)pac_data.ag_qual.avg);
+            
         }
         
         jSampSz = cJSON_CreateNumber(DATA_ARRAY_SIZE);
@@ -624,6 +638,8 @@ void app_gc_iot(void)
         cJSON_AddItemToObject(envSensObj, jFwvString, jFwv);
         cJSON_AddItemToObject(envSensObj, jVltgString, jVltg);
         cJSON_AddItemToObject(envSensObj, jTempString, jTemp);
+
+        cJSON_AddItemToObject(envSensObj, jQualCalString, jQualCal);
 
         cJSON_AddItemToObject(envSensObj, jDevFwvString, jDvFwv);
 
