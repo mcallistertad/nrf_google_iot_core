@@ -151,7 +151,7 @@ s32_t calculate_min_val(s32_t a[],s32_t sz)
 
  	min=a[0];
  	
-    for(i=1; i<sz; i++) {
+    for(i=0; i<sz; i++) {
         if(min>a[i]) {
             min=a[i];  
         } 
@@ -168,7 +168,7 @@ s32_t calculate_max_val(s32_t a[],s32_t sz, bool is_qual)
 
     max=a[0];
     
-    for(i=1; i<sz; i++) 
+    for(i=0; i<sz; i++) 
     {
         if (is_qual) {
             if(max==EXCLUDE || max<a[i]) {
