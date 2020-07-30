@@ -74778,13 +74778,13 @@ void received_config_handler(const struct mqtt_publish_message *message) {
    32c2e:	e7f9      	b.n	32c24 <calculate_avg_val+0x28>
 
 00032c30 <calculate_min_val>:
-    for(i=1; i<sz; i++) {
-   32c30:	2301      	movs	r3, #1
+    for(i=0; i<sz; i++) {
+   32c30:	2300      	movs	r3, #0
 {
    32c32:	b510      	push	{r4, lr}
  	min=a[0];
    32c34:	6802      	ldr	r2, [r0, #0]
-    for(i=1; i<sz; i++) {
+    for(i=0; i<sz; i++) {
    32c36:	428b      	cmp	r3, r1
    32c38:	db01      	blt.n	32c3e <calculate_min_val+0xe>
 }
@@ -74792,7 +74792,7 @@ void received_config_handler(const struct mqtt_publish_message *message) {
    32c3c:	bd10      	pop	{r4, pc}
         if(min>a[i]) {
    32c3e:	f850 4023 	ldr.w	r4, [r0, r3, lsl #2]
-    for(i=1; i<sz; i++) {
+    for(i=0; i<sz; i++) {
    32c42:	3301      	adds	r3, #1
    32c44:	42a2      	cmp	r2, r4
    32c46:	bfa8      	it	ge
@@ -74802,13 +74802,13 @@ void received_config_handler(const struct mqtt_publish_message *message) {
 00032c4c <calculate_max_val>:
 {
    32c4c:	b570      	push	{r4, r5, r6, lr}
-    for(i=1; i<sz; i++) 
-   32c4e:	2501      	movs	r5, #1
+    for(i=0; i<sz; i++) 
+   32c4e:	2500      	movs	r5, #0
             if(max==EXCLUDE || max<a[i]) {
    32c50:	f240 36e7 	movw	r6, #999	; 0x3e7
     max=a[0];
    32c54:	6803      	ldr	r3, [r0, #0]
-    for(i=1; i<sz; i++) 
+    for(i=0; i<sz; i++) 
    32c56:	428d      	cmp	r5, r1
    32c58:	db01      	blt.n	32c5e <calculate_max_val+0x12>
 }
@@ -74824,7 +74824,7 @@ void received_config_handler(const struct mqtt_publish_message *message) {
    32c68:	429c      	cmp	r4, r3
    32c6a:	bfb8      	it	lt
    32c6c:	461c      	movlt	r4, r3
-    for(i=1; i<sz; i++) 
+    for(i=0; i<sz; i++) 
    32c6e:	3501      	adds	r5, #1
    32c70:	4623      	mov	r3, r4
    32c72:	e7f0      	b.n	32c56 <calculate_max_val+0xa>
