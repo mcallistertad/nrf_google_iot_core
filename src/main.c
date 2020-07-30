@@ -596,7 +596,7 @@ void app_gc_iot(void)
         if (pac_data.ag_qual.avg == EXCLUDE) {
             jQualCal = cJSON_CreateString("not calibrated");
         } else {
-            
+           jQualCal = cJSON_CreateString("calibrated"); 
         }
         
         jSampSz = cJSON_CreateNumber(DATA_ARRAY_SIZE);
