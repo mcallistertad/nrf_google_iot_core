@@ -7,7 +7,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
         read -p "Are you sure? " -n 1 -r
         echo
+
         echo "Removing old secrets\n"
+
         if [[ $REPLY =~ ^[Yy]$ ]]
         then
                 dir=$(pwd)
@@ -26,7 +28,9 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
         echo "Creating secrets"
+
         python3 create_keys.py -d $devicename -e
+
         echo Created $devicename certificates
-        exit 1
+        exit 0
 fi

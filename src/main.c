@@ -381,7 +381,6 @@ void process_env_data(void)
 
         /* Callback to Google Cloud Thread */
         LOG_INF("Sending data to google iot thread");
-        
         buffer_bytes_used = sizeof(p_d);   //TODO: test that size is correct
 
         /* Prepare to send message */
