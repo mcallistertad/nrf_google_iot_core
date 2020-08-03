@@ -44,7 +44,7 @@ Disassembly of section rom_start:
 
 0000c200 <m_firmware_info>:
     c200:	281ee6de 8fcebb4c 00005b02 0000003c     ...(L....[..<...
-    c210:	00035284 00000001 0000c000 0000c000     .R..............
+    c210:	00035278 00000001 0000c000 0000c000     xR..............
     c220:	9102ffff 00000000 00000000 00000000     ................
 	...
 
@@ -8858,9 +8858,9 @@ static inline u32_t log_const_source_id(
    120a8:	7819      	ldrb	r1, [r3, #0]
    120aa:	2900      	cmp	r1, #0
    120ac:	f000 825d 	beq.w	1256a <app_gc_iot+0x4da>
-            jQualCal = cJSON_CreateString("not calibrated");
+            jQualCal = cJSON_CreateString("no");
         } else {
-           jQualCal = cJSON_CreateString("calibrated"); 
+           jQualCal = cJSON_CreateString("yes"); 
         }
         
         jSampSz = cJSON_CreateNumber(DATA_ARRAY_SIZE);
@@ -9029,10 +9029,10 @@ static inline u32_t log_const_source_id(
    1225e:	9010      	str	r0, [sp, #64]	; 0x40
         if (pac_data.ag_qual.avg == EXCLUDE) {
    12260:	429a      	cmp	r2, r3
-            jQualCal = cJSON_CreateString("not calibrated");
+            jQualCal = cJSON_CreateString("no");
    12262:	bf0c      	ite	eq
    12264:	4863      	ldreq	r0, [pc, #396]	; (123f4 <app_gc_iot+0x364>)
-           jQualCal = cJSON_CreateString("calibrated"); 
+           jQualCal = cJSON_CreateString("yes"); 
    12266:	4864      	ldrne	r0, [pc, #400]	; (123f8 <app_gc_iot+0x368>)
    12268:	f020 fdb2 	bl	32dd0 <cJSON_CreateString>
         jSampSz = cJSON_CreateNumber(DATA_ARRAY_SIZE);
@@ -9212,28 +9212,28 @@ static inline u32_t log_const_source_id(
    123e8:	0003b4d1 	.word	0x0003b4d1
    123ec:	0003b4dc 	.word	0x0003b4dc
    123f0:	0003b4eb 	.word	0x0003b4eb
-   123f4:	0003b4f7 	.word	0x0003b4f7
-   123f8:	0003b4fb 	.word	0x0003b4fb
-   123fc:	0003b506 	.word	0x0003b506
-   12400:	0003b511 	.word	0x0003b511
-   12404:	0003b519 	.word	0x0003b519
-   12408:	0003b521 	.word	0x0003b521
-   1240c:	0003b529 	.word	0x0003b529
-   12410:	0003b531 	.word	0x0003b531
-   12414:	0003b539 	.word	0x0003b539
-   12418:	0003b541 	.word	0x0003b541
-   1241c:	0003b549 	.word	0x0003b549
-   12420:	0003b551 	.word	0x0003b551
-   12424:	0003b559 	.word	0x0003b559
-   12428:	0003b561 	.word	0x0003b561
-   1242c:	0003b569 	.word	0x0003b569
-   12430:	0003b571 	.word	0x0003b571
-   12434:	0003b57a 	.word	0x0003b57a
-   12438:	0003ef31 	.word	0x0003ef31
-   1243c:	0003b584 	.word	0x0003b584
-   12440:	0003b588 	.word	0x0003b588
-   12444:	0003b58d 	.word	0x0003b58d
-   12448:	0003b591 	.word	0x0003b591
+   123f4:	0003f4a0 	.word	0x0003f4a0
+   123f8:	0003b4f7 	.word	0x0003b4f7
+   123fc:	0003b4fb 	.word	0x0003b4fb
+   12400:	0003b506 	.word	0x0003b506
+   12404:	0003b50e 	.word	0x0003b50e
+   12408:	0003b516 	.word	0x0003b516
+   1240c:	0003b51e 	.word	0x0003b51e
+   12410:	0003b526 	.word	0x0003b526
+   12414:	0003b52e 	.word	0x0003b52e
+   12418:	0003b536 	.word	0x0003b536
+   1241c:	0003b53e 	.word	0x0003b53e
+   12420:	0003b546 	.word	0x0003b546
+   12424:	0003b54e 	.word	0x0003b54e
+   12428:	0003b556 	.word	0x0003b556
+   1242c:	0003b55e 	.word	0x0003b55e
+   12430:	0003b566 	.word	0x0003b566
+   12434:	0003b56f 	.word	0x0003b56f
+   12438:	0003ef25 	.word	0x0003ef25
+   1243c:	0003b579 	.word	0x0003b579
+   12440:	0003b57d 	.word	0x0003b57d
+   12444:	0003b582 	.word	0x0003b582
+   12448:	0003b586 	.word	0x0003b586
    1244c:	495a      	ldr	r1, [pc, #360]	; (125b8 <app_gc_iot+0x528>)
    1244e:	4620      	mov	r0, r4
    12450:	f004 fde0 	bl	17014 <cJSON_AddItemToObject>
@@ -9386,17 +9386,17 @@ static inline u32_t log_const_source_id(
 	    int pub_success = gcloud_publish(JSONEnvString, strlens(JSONEnvString), MQTT_QOS_0_AT_MOST_ONCE);
    125b4:	4619      	mov	r1, r3
    125b6:	e786      	b.n	124c6 <app_gc_iot+0x436>
-   125b8:	0003b596 	.word	0x0003b596
-   125bc:	0003b59b 	.word	0x0003b59b
-   125c0:	0003b5a1 	.word	0x0003b5a1
-   125c4:	0003b5ad 	.word	0x0003b5ad
+   125b8:	0003b58b 	.word	0x0003b58b
+   125bc:	0003b590 	.word	0x0003b590
+   125c0:	0003b596 	.word	0x0003b596
+   125c4:	0003b5a1 	.word	0x0003b5a1
    125c8:	0003b421 	.word	0x0003b421
-   125cc:	0003b5b2 	.word	0x0003b5b2
-   125d0:	0003b5d2 	.word	0x0003b5d2
-   125d4:	0003b5e5 	.word	0x0003b5e5
-   125d8:	0003b605 	.word	0x0003b605
-   125dc:	0003b61f 	.word	0x0003b61f
-   125e0:	0003b63a 	.word	0x0003b63a
+   125cc:	0003b5a6 	.word	0x0003b5a6
+   125d0:	0003b5c6 	.word	0x0003b5c6
+   125d4:	0003b5d9 	.word	0x0003b5d9
+   125d8:	0003b5f9 	.word	0x0003b5f9
+   125dc:	0003b613 	.word	0x0003b613
+   125e0:	0003b62e 	.word	0x0003b62e
    125e4:	0003b493 	.word	0x0003b493
 
 000125e8 <print_number>:
@@ -9586,14 +9586,14 @@ __ssp_bos_icheck2_restrict(strcpy, char *, const char *)
    1274c:	3eb0c6f7 	.word	0x3eb0c6f7
    12750:	00000000 	.word	0x00000000
    12754:	41cdcd65 	.word	0x41cdcd65
-   12758:	0003fd1f 	.word	0x0003fd1f
+   12758:	0003fd13 	.word	0x0003fd13
    1275c:	20020080 	.word	0x20020080
    12760:	3cb00000 	.word	0x3cb00000
    12764:	c1e00000 	.word	0xc1e00000
-   12768:	0003c645 	.word	0x0003c645
-   1276c:	0003c4ef 	.word	0x0003c4ef
-   12770:	0003c4f4 	.word	0x0003c4f4
-   12774:	0003c4f7 	.word	0x0003c4f7
+   12768:	0003c639 	.word	0x0003c639
+   1276c:	0003c4e3 	.word	0x0003c4e3
+   12770:	0003c4e8 	.word	0x0003c4e8
+   12774:	0003c4eb 	.word	0x0003c4eb
 
 00012778 <sntp_query>:
 
@@ -10220,25 +10220,25 @@ clean_exit:
    12bb6:	e74c      	b.n	12a52 <at_handler+0x192>
    12bb8:	00039f38 	.word	0x00039f38
    12bbc:	00039f98 	.word	0x00039f98
-   12bc0:	0003e52a 	.word	0x0003e52a
+   12bc0:	0003e51e 	.word	0x0003e51e
    12bc4:	0003a730 	.word	0x0003a730
-   12bc8:	0003e4ef 	.word	0x0003e4ef
-   12bcc:	0003e54a 	.word	0x0003e54a
-   12bd0:	0003e99e 	.word	0x0003e99e
-   12bd4:	0003e5e0 	.word	0x0003e5e0
-   12bd8:	0003e9c7 	.word	0x0003e9c7
+   12bc8:	0003e4e3 	.word	0x0003e4e3
+   12bcc:	0003e53e 	.word	0x0003e53e
+   12bd0:	0003e992 	.word	0x0003e992
+   12bd4:	0003e5d4 	.word	0x0003e5d4
+   12bd8:	0003e9bb 	.word	0x0003e9bb
    12bdc:	20022378 	.word	0x20022378
    12be0:	20022374 	.word	0x20022374
    12be4:	2002807e 	.word	0x2002807e
    12be8:	20022390 	.word	0x20022390
    12bec:	20022398 	.word	0x20022398
-   12bf0:	0003e89c 	.word	0x0003e89c
-   12bf4:	0003e566 	.word	0x0003e566
-   12bf8:	0003e592 	.word	0x0003e592
-   12bfc:	0003e5b3 	.word	0x0003e5b3
-   12c00:	0003e60c 	.word	0x0003e60c
-   12c04:	0003e694 	.word	0x0003e694
-   12c08:	0003e624 	.word	0x0003e624
+   12bf0:	0003e890 	.word	0x0003e890
+   12bf4:	0003e55a 	.word	0x0003e55a
+   12bf8:	0003e586 	.word	0x0003e586
+   12bfc:	0003e5a7 	.word	0x0003e5a7
+   12c00:	0003e600 	.word	0x0003e600
+   12c04:	0003e688 	.word	0x0003e688
+   12c08:	0003e618 	.word	0x0003e618
 	err = at_params_int_get(&resp_list, mode_index, &temp_mode);
    12c0c:	aa09      	add	r2, sp, #36	; 0x24
    12c0e:	4639      	mov	r1, r7
@@ -10585,27 +10585,27 @@ clean_exit:
    12ec6:	e730      	b.n	12d2a <at_handler+0x46a>
    12ec8:	47ae147b 	.word	0x47ae147b
    12ecc:	40247ae1 	.word	0x40247ae1
-   12ed0:	0003e64f 	.word	0x0003e64f
-   12ed4:	0003e678 	.word	0x0003e678
-   12ed8:	0003e4ef 	.word	0x0003e4ef
-   12edc:	0003e6bb 	.word	0x0003e6bb
-   12ee0:	0003e6d4 	.word	0x0003e6d4
-   12ee4:	0003e6f9 	.word	0x0003e6f9
-   12ee8:	0003e813 	.word	0x0003e813
+   12ed0:	0003e643 	.word	0x0003e643
+   12ed4:	0003e66c 	.word	0x0003e66c
+   12ed8:	0003e4e3 	.word	0x0003e4e3
+   12edc:	0003e6af 	.word	0x0003e6af
+   12ee0:	0003e6c8 	.word	0x0003e6c8
+   12ee4:	0003e6ed 	.word	0x0003e6ed
+   12ee8:	0003e807 	.word	0x0003e807
    12eec:	4023d70a 	.word	0x4023d70a
-   12ef0:	0003e99e 	.word	0x0003e99e
+   12ef0:	0003e992 	.word	0x0003e992
    12ef4:	3fa3d70a 	.word	0x3fa3d70a
-   12ef8:	0003e729 	.word	0x0003e729
-   12efc:	0003e755 	.word	0x0003e755
-   12f00:	0003e781 	.word	0x0003e781
+   12ef8:	0003e71d 	.word	0x0003e71d
+   12efc:	0003e749 	.word	0x0003e749
+   12f00:	0003e775 	.word	0x0003e775
    12f04:	0003b3d0 	.word	0x0003b3d0
-   12f08:	0003e7a5 	.word	0x0003e7a5
+   12f08:	0003e799 	.word	0x0003e799
    12f0c:	0003b3f0 	.word	0x0003b3f0
    12f10:	40a3d70a 	.word	0x40a3d70a
-   12f14:	0003e7d0 	.word	0x0003e7d0
+   12f14:	0003e7c4 	.word	0x0003e7c4
    12f18:	42c80000 	.word	0x42c80000
-   12f1c:	0003e508 	.word	0x0003e508
-   12f20:	0003e7ed 	.word	0x0003e7ed
+   12f1c:	0003e4fc 	.word	0x0003e4fc
+   12f20:	0003e7e1 	.word	0x0003e7e1
    12f24:	00000000 	.word	0x00000000
 
 00012f28 <ceil>:
@@ -12342,9 +12342,9 @@ clean_exit:
    14220:	509f79fb 	.word	0x509f79fb
    14224:	3fd34413 	.word	0x3fd34413
    14228:	7ff00000 	.word	0x7ff00000
-   1422c:	00040978 	.word	0x00040978
-   14230:	0004096f 	.word	0x0004096f
-   14234:	0003fd20 	.word	0x0003fd20
+   1422c:	0004096c 	.word	0x0004096c
+   14230:	00040963 	.word	0x00040963
+   14234:	0003fd14 	.word	0x0003fd14
    14238:	3ff80000 	.word	0x3ff80000
    1423c:	0003a150 	.word	0x0003a150
    14240:	0003a128 	.word	0x0003a128
@@ -13160,8 +13160,8 @@ clean_exit:
    14a52:	4680      	mov	r8, r0
    14a54:	e7ea      	b.n	14a2c <_dtoa_r+0xb2c>
    14a56:	bf00      	nop
-   14a58:	0003fd1f 	.word	0x0003fd1f
-   14a5c:	0004096f 	.word	0x0004096f
+   14a58:	0003fd13 	.word	0x0003fd13
+   14a5c:	00040963 	.word	0x00040963
 
 00014a60 <env_data_ready>:
     LOG_INF("env sens data ready");
@@ -13233,7 +13233,7 @@ clean_exit:
    14adc:	f85d fb04 	ldr.w	pc, [sp], #4
    14ae0:	00039f38 	.word	0x00039f38
    14ae4:	00039f80 	.word	0x00039f80
-   14ae8:	0003b645 	.word	0x0003b645
+   14ae8:	0003b639 	.word	0x0003b639
    14aec:	200210d0 	.word	0x200210d0
 
 00014af0 <ntp_poll>:
@@ -13271,7 +13271,7 @@ clean_exit:
    14b32:	bf00      	nop
    14b34:	00039f38 	.word	0x00039f38
    14b38:	00039f80 	.word	0x00039f80
-   14b3c:	0003b815 	.word	0x0003b815
+   14b3c:	0003b809 	.word	0x0003b809
    14b40:	20027622 	.word	0x20027622
 
 00014b44 <process_env_data>:
@@ -13611,22 +13611,22 @@ clean_exit:
    14ea0:	00039f38 	.word	0x00039f38
    14ea4:	200210d0 	.word	0x200210d0
    14ea8:	0003b410 	.word	0x0003b410
-   14eac:	0003b828 	.word	0x0003b828
-   14eb0:	0003b855 	.word	0x0003b855
-   14eb4:	0003b866 	.word	0x0003b866
-   14eb8:	0003b88b 	.word	0x0003b88b
-   14ebc:	0003b899 	.word	0x0003b899
-   14ec0:	0003b8c9 	.word	0x0003b8c9
+   14eac:	0003b81c 	.word	0x0003b81c
+   14eb0:	0003b849 	.word	0x0003b849
+   14eb4:	0003b85a 	.word	0x0003b85a
+   14eb8:	0003b87f 	.word	0x0003b87f
+   14ebc:	0003b88d 	.word	0x0003b88d
+   14ec0:	0003b8bd 	.word	0x0003b8bd
    14ec4:	00032bdd 	.word	0x00032bdd
-   14ec8:	0003b8e5 	.word	0x0003b8e5
-   14ecc:	0003b92e 	.word	0x0003b92e
-   14ed0:	0003b956 	.word	0x0003b956
-   14ed4:	0003b964 	.word	0x0003b964
-   14ed8:	0003b972 	.word	0x0003b972
-   14edc:	0003b980 	.word	0x0003b980
-   14ee0:	0003b98e 	.word	0x0003b98e
-   14ee4:	0003b9b6 	.word	0x0003b9b6
-   14ee8:	0003b9c3 	.word	0x0003b9c3
+   14ec8:	0003b8d9 	.word	0x0003b8d9
+   14ecc:	0003b922 	.word	0x0003b922
+   14ed0:	0003b94a 	.word	0x0003b94a
+   14ed4:	0003b958 	.word	0x0003b958
+   14ed8:	0003b966 	.word	0x0003b966
+   14edc:	0003b974 	.word	0x0003b974
+   14ee0:	0003b982 	.word	0x0003b982
+   14ee4:	0003b9aa 	.word	0x0003b9aa
+   14ee8:	0003b9b7 	.word	0x0003b9b7
    14eec:	f023 033f 	bic.w	r3, r3, #63	; 0x3f
    14ef0:	f043 0303 	orr.w	r3, r3, #3
    14ef4:	f363 0207 	bfi	r2, r3, #0, #8
@@ -13806,19 +13806,19 @@ clean_exit:
    150b6:	f8ad 3028 	strh.w	r3, [sp, #40]	; 0x28
    150ba:	f01e fd8a 	bl	33bd2 <log_string_sync>
    150be:	e614      	b.n	14cea <process_env_data+0x1a6>
-   150c0:	0003b9d0 	.word	0x0003b9d0
-   150c4:	0003b9dd 	.word	0x0003b9dd
-   150c8:	0003b9ea 	.word	0x0003b9ea
-   150cc:	0003ba12 	.word	0x0003ba12
-   150d0:	0003ba1f 	.word	0x0003ba1f
-   150d4:	0003ba2c 	.word	0x0003ba2c
-   150d8:	0003ba39 	.word	0x0003ba39
-   150dc:	0003ba46 	.word	0x0003ba46
+   150c0:	0003b9c4 	.word	0x0003b9c4
+   150c4:	0003b9d1 	.word	0x0003b9d1
+   150c8:	0003b9de 	.word	0x0003b9de
+   150cc:	0003ba06 	.word	0x0003ba06
+   150d0:	0003ba13 	.word	0x0003ba13
+   150d4:	0003ba20 	.word	0x0003ba20
+   150d8:	0003ba2d 	.word	0x0003ba2d
+   150dc:	0003ba3a 	.word	0x0003ba3a
    150e0:	200210bc 	.word	0x200210bc
    150e4:	0003b410 	.word	0x0003b410
-   150e8:	0003ba68 	.word	0x0003ba68
-   150ec:	0003b8b2 	.word	0x0003b8b2
-   150f0:	0003b913 	.word	0x0003b913
+   150e8:	0003ba5c 	.word	0x0003ba5c
+   150ec:	0003b8a6 	.word	0x0003b8a6
+   150f0:	0003b907 	.word	0x0003b907
 
 000150f4 <get_modem_info>:
 {
@@ -13875,7 +13875,7 @@ clean_exit:
    15160:	f00c bbea 	b.w	21938 <modem_info_short_get>
    15164:	00039f38 	.word	0x00039f38
    15168:	00039f80 	.word	0x00039f80
-   1516c:	0003b659 	.word	0x0003b659
+   1516c:	0003b64d 	.word	0x0003b64d
 
 00015170 <init_env_sensor>:
     LOG_INF("Sensor workqueue started\n");
@@ -13936,13 +13936,13 @@ clean_exit:
    151ea:	bf00      	nop
    151ec:	00039f80 	.word	0x00039f80
    151f0:	00039f38 	.word	0x00039f38
-   151f4:	0003b66d 	.word	0x0003b66d
+   151f4:	0003b661 	.word	0x0003b661
    151f8:	2002b208 	.word	0x2002b208
    151fc:	20021264 	.word	0x20021264
-   15200:	0003b687 	.word	0x0003b687
+   15200:	0003b67b 	.word	0x0003b67b
    15204:	00014a61 	.word	0x00014a61
-   15208:	0003b6aa 	.word	0x0003b6aa
-   1520c:	0003b6db 	.word	0x0003b6db
+   15208:	0003b69e 	.word	0x0003b69e
+   1520c:	0003b6cf 	.word	0x0003b6cf
 
 00015210 <main>:
 
@@ -14127,21 +14127,21 @@ void main(void)
    1537e:	bf00      	nop
    15380:	00039f80 	.word	0x00039f80
    15384:	00039f38 	.word	0x00039f38
-   15388:	0003b6fd 	.word	0x0003b6fd
+   15388:	0003b6f1 	.word	0x0003b6f1
    1538c:	20030408 	.word	0x20030408
    15390:	20020f2c 	.word	0x20020f2c
-   15394:	0003b721 	.word	0x0003b721
-   15398:	0003b735 	.word	0x0003b735
-   1539c:	0003b75a 	.word	0x0003b75a
-   153a0:	0003b74c 	.word	0x0003b74c
-   153a4:	0003b763 	.word	0x0003b763
-   153a8:	0003b780 	.word	0x0003b780
-   153ac:	0003b7b0 	.word	0x0003b7b0
-   153b0:	0003b687 	.word	0x0003b687
-   153b4:	0003b7c9 	.word	0x0003b7c9
+   15394:	0003b715 	.word	0x0003b715
+   15398:	0003b729 	.word	0x0003b729
+   1539c:	0003b74e 	.word	0x0003b74e
+   153a0:	0003b740 	.word	0x0003b740
+   153a4:	0003b757 	.word	0x0003b757
+   153a8:	0003b774 	.word	0x0003b774
+   153ac:	0003b7a4 	.word	0x0003b7a4
+   153b0:	0003b67b 	.word	0x0003b67b
+   153b4:	0003b7bd 	.word	0x0003b7bd
    153b8:	200210fc 	.word	0x200210fc
    153bc:	200210d0 	.word	0x200210d0
-   153c0:	0003b7ef 	.word	0x0003b7ef
+   153c0:	0003b7e3 	.word	0x0003b7e3
    153c4:	200210bc 	.word	0x200210bc
    153c8:	00014b45 	.word	0x00014b45
    153cc:	2002d208 	.word	0x2002d208
@@ -14213,7 +14213,7 @@ void input_timer_handler(struct k_timer *timer_id) {
    15458:	200207a0 	.word	0x200207a0
    1545c:	00039f38 	.word	0x00039f38
    15460:	00039f78 	.word	0x00039f78
-   15464:	0003c135 	.word	0x0003c135
+   15464:	0003c129 	.word	0x0003c129
 
 00015468 <make_jwt.constprop.0>:
 static int make_jwt(char *buffer, size_t buffer_size) {
@@ -14311,13 +14311,13 @@ static int make_jwt(char *buffer, size_t buffer_size) {
    1552c:	20027625 	.word	0x20027625
    15530:	00039f38 	.word	0x00039f38
    15534:	00039f78 	.word	0x00039f78
-   15538:	0003c160 	.word	0x0003c160
-   1553c:	0003c17f 	.word	0x0003c17f
-   15540:	0003c193 	.word	0x0003c193
-   15544:	0003c1a6 	.word	0x0003c1a6
+   15538:	0003c154 	.word	0x0003c154
+   1553c:	0003c173 	.word	0x0003c173
+   15540:	0003c187 	.word	0x0003c187
+   15544:	0003c19a 	.word	0x0003c19a
    15548:	20020084 	.word	0x20020084
    1554c:	20020404 	.word	0x20020404
-   15550:	0003c1c4 	.word	0x0003c1c4
+   15550:	0003c1b8 	.word	0x0003c1b8
 
 00015554 <reconnect_timer_handler>:
 
@@ -14366,7 +14366,7 @@ void reconnect_timer_handler(struct k_timer *timer_id) {
    155a0:	200207a0 	.word	0x200207a0
    155a4:	00039f38 	.word	0x00039f38
    155a8:	00039f78 	.word	0x00039f78
-   155ac:	0003c47a 	.word	0x0003c47a
+   155ac:	0003c46e 	.word	0x0003c46e
 
 000155b0 <gcloud_provision>:
 int gcloud_provision(void) {
@@ -14432,9 +14432,9 @@ int gcloud_provision(void) {
    15634:	00039f78 	.word	0x00039f78
    15638:	00039f38 	.word	0x00039f38
    1563c:	01010000 	.word	0x01010000
-   15640:	0003baf3 	.word	0x0003baf3
-   15644:	0003bd29 	.word	0x0003bd29
-   15648:	0003badb 	.word	0x0003badb
+   15640:	0003bae7 	.word	0x0003bae7
+   15644:	0003bd1d 	.word	0x0003bd1d
+   15648:	0003bacf 	.word	0x0003bacf
 
 0001564c <gcloud_connect>:
 int gcloud_connect(received_config_handler_t received_config_cb) {
@@ -14517,8 +14517,8 @@ int gcloud_connect(received_config_handler_t received_config_cb) {
    156d4:	20027623 	.word	0x20027623
    156d8:	00039f38 	.word	0x00039f38
    156dc:	00039f78 	.word	0x00039f78
-   156e0:	0003bd4d 	.word	0x0003bd4d
-   156e4:	0003bd85 	.word	0x0003bd85
+   156e0:	0003bd41 	.word	0x0003bd41
+   156e4:	0003bd79 	.word	0x0003bd79
    156e8:	200207a0 	.word	0x200207a0
 
 000156ec <mqtt_event_handler>:
@@ -14889,33 +14889,33 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
    159da:	e6f6      	b.n	157ca <mqtt_event_handler+0xde>
    159dc:	00039f78 	.word	0x00039f78
    159e0:	00039f38 	.word	0x00039f38
-   159e4:	0003c1da 	.word	0x0003c1da
-   159e8:	0003baba 	.word	0x0003baba
-   159ec:	0003c1e9 	.word	0x0003c1e9
-   159f0:	0003c1f9 	.word	0x0003c1f9
+   159e4:	0003c1ce 	.word	0x0003c1ce
+   159e8:	0003baae 	.word	0x0003baae
+   159ec:	0003c1dd 	.word	0x0003c1dd
+   159f0:	0003c1ed 	.word	0x0003c1ed
    159f4:	20027623 	.word	0x20027623
    159f8:	20027624 	.word	0x20027624
    159fc:	02932e00 	.word	0x02932e00
    15a00:	20020610 	.word	0x20020610
    15a04:	200207a0 	.word	0x200207a0
-   15a08:	0003c216 	.word	0x0003c216
-   15a0c:	0003c244 	.word	0x0003c244
-   15a10:	0003c25b 	.word	0x0003c25b
-   15a14:	0003c278 	.word	0x0003c278
-   15a18:	0003c28d 	.word	0x0003c28d
-   15a1c:	0003c2a4 	.word	0x0003c2a4
-   15a20:	0003c2be 	.word	0x0003c2be
-   15a24:	0003c2cc 	.word	0x0003c2cc
-   15a28:	0003c2d8 	.word	0x0003c2d8
+   15a08:	0003c20a 	.word	0x0003c20a
+   15a0c:	0003c238 	.word	0x0003c238
+   15a10:	0003c24f 	.word	0x0003c24f
+   15a14:	0003c26c 	.word	0x0003c26c
+   15a18:	0003c281 	.word	0x0003c281
+   15a1c:	0003c298 	.word	0x0003c298
+   15a20:	0003c2b2 	.word	0x0003c2b2
+   15a24:	0003c2c0 	.word	0x0003c2c0
+   15a28:	0003c2cc 	.word	0x0003c2cc
    15a2c:	20021530 	.word	0x20021530
-   15a30:	0003c2e6 	.word	0x0003c2e6
+   15a30:	0003c2da 	.word	0x0003c2da
    15a34:	200205e4 	.word	0x200205e4
-   15a38:	0003c30c 	.word	0x0003c30c
-   15a3c:	0003c332 	.word	0x0003c332
-   15a40:	0003c348 	.word	0x0003c348
-   15a44:	0003c362 	.word	0x0003c362
-   15a48:	0003c378 	.word	0x0003c378
-   15a4c:	0003c391 	.word	0x0003c391
+   15a38:	0003c300 	.word	0x0003c300
+   15a3c:	0003c326 	.word	0x0003c326
+   15a40:	0003c33c 	.word	0x0003c33c
+   15a44:	0003c356 	.word	0x0003c356
+   15a48:	0003c36c 	.word	0x0003c36c
+   15a4c:	0003c385 	.word	0x0003c385
             LOG_DBG("MQTT PUBREL event");
    15a50:	2304      	movs	r3, #4
    15a52:	f04f 0000 	mov.w	r0, #0
@@ -15001,16 +15001,16 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
    15b16:	490a      	ldr	r1, [pc, #40]	; (15b40 <mqtt_event_handler+0x454>)
    15b18:	e697      	b.n	1584a <mqtt_event_handler+0x15e>
    15b1a:	bf00      	nop
-   15b1c:	0003baba 	.word	0x0003baba
-   15b20:	0003c3b5 	.word	0x0003c3b5
-   15b24:	0003c3cb 	.word	0x0003c3cb
-   15b28:	0003c3dc 	.word	0x0003c3dc
-   15b2c:	0003c3f3 	.word	0x0003c3f3
-   15b30:	0003c40d 	.word	0x0003c40d
-   15b34:	0003c41c 	.word	0x0003c41c
-   15b38:	0003c432 	.word	0x0003c432
-   15b3c:	0003c44a 	.word	0x0003c44a
-   15b40:	0003c462 	.word	0x0003c462
+   15b1c:	0003baae 	.word	0x0003baae
+   15b20:	0003c3a9 	.word	0x0003c3a9
+   15b24:	0003c3bf 	.word	0x0003c3bf
+   15b28:	0003c3d0 	.word	0x0003c3d0
+   15b2c:	0003c3e7 	.word	0x0003c3e7
+   15b30:	0003c401 	.word	0x0003c401
+   15b34:	0003c410 	.word	0x0003c410
+   15b38:	0003c426 	.word	0x0003c426
+   15b3c:	0003c43e 	.word	0x0003c43e
+   15b40:	0003c456 	.word	0x0003c456
 
 00015b44 <gcloud_thread>:
 
@@ -15312,25 +15312,25 @@ static inline void freeaddrinfo(struct zsock_addrinfo *ai)
    15e00:	20020610 	.word	0x20020610
    15e04:	00039f78 	.word	0x00039f78
    15e08:	00039f38 	.word	0x00039f38
-   15e0c:	0003bda3 	.word	0x0003bda3
+   15e0c:	0003bd97 	.word	0x0003bd97
    15e10:	200207a0 	.word	0x200207a0
-   15e14:	0003bdc0 	.word	0x0003bdc0
-   15e18:	0003bacd 	.word	0x0003bacd
-   15e1c:	0003bdd4 	.word	0x0003bdd4
-   15e20:	0003bdea 	.word	0x0003bdea
-   15e24:	0003bdfe 	.word	0x0003bdfe
-   15e28:	0003be61 	.word	0x0003be61
+   15e14:	0003bdb4 	.word	0x0003bdb4
+   15e18:	0003bac1 	.word	0x0003bac1
+   15e1c:	0003bdc8 	.word	0x0003bdc8
+   15e20:	0003bdde 	.word	0x0003bdde
+   15e24:	0003bdf2 	.word	0x0003bdf2
+   15e28:	0003be55 	.word	0x0003be55
    15e2c:	200214b0 	.word	0x200214b0
-   15e30:	0003be70 	.word	0x0003be70
-   15e34:	0003be86 	.word	0x0003be86
-   15e38:	0003bf28 	.word	0x0003bf28
-   15e3c:	0003bf41 	.word	0x0003bf41
+   15e30:	0003be64 	.word	0x0003be64
+   15e34:	0003be7a 	.word	0x0003be7a
+   15e38:	0003bf1c 	.word	0x0003bf1c
+   15e3c:	0003bf35 	.word	0x0003bf35
    15e40:	20027624 	.word	0x20027624
-   15e44:	0003bf55 	.word	0x0003bf55
+   15e44:	0003bf49 	.word	0x0003bf49
    15e48:	20027610 	.word	0x20027610
-   15e4c:	0003be20 	.word	0x0003be20
-   15e50:	0003baa2 	.word	0x0003baa2
-   15e54:	0003be3e 	.word	0x0003be3e
+   15e4c:	0003be14 	.word	0x0003be14
+   15e50:	0003ba96 	.word	0x0003ba96
+   15e54:	0003be32 	.word	0x0003be32
     LOG_DBG("JWT:\n%s\n", log_strdup(jwt_buffer));
    15e58:	f8bd 3018 	ldrh.w	r3, [sp, #24]
    15e5c:	f8bd 2018 	ldrh.w	r2, [sp, #24]
@@ -15618,26 +15618,26 @@ static inline void freeaddrinfo(struct zsock_addrinfo *ai)
    16110:	e62f      	b.n	15d72 <gcloud_thread+0x22e>
    16112:	bf00      	nop
    16114:	20027625 	.word	0x20027625
-   16118:	0003bea2 	.word	0x0003bea2
-   1611c:	0003baae 	.word	0x0003baae
-   16120:	0003beaf 	.word	0x0003beaf
+   16118:	0003be96 	.word	0x0003be96
+   1611c:	0003baa2 	.word	0x0003baa2
+   16120:	0003bea3 	.word	0x0003bea3
    16124:	2002006c 	.word	0x2002006c
    16128:	20027610 	.word	0x20027610
-   1612c:	0003bec3 	.word	0x0003bec3
+   1612c:	0003beb7 	.word	0x0003beb7
    16130:	000156ed 	.word	0x000156ed
    16134:	20020074 	.word	0x20020074
    16138:	20027725 	.word	0x20027725
    1613c:	20027b25 	.word	0x20027b25
-   16140:	0003bf72 	.word	0x0003bf72
+   16140:	0003bf66 	.word	0x0003bf66
    16144:	200214b0 	.word	0x200214b0
-   16148:	0003bf8c 	.word	0x0003bf8c
+   16148:	0003bf80 	.word	0x0003bf80
    1614c:	20027623 	.word	0x20027623
-   16150:	0003bfa7 	.word	0x0003bfa7
-   16154:	0003bfc0 	.word	0x0003bfc0
-   16158:	0003bfda 	.word	0x0003bfda
-   1615c:	0003bff4 	.word	0x0003bff4
-   16160:	0003c019 	.word	0x0003c019
-   16164:	0003c02d 	.word	0x0003c02d
+   16150:	0003bf9b 	.word	0x0003bf9b
+   16154:	0003bfb4 	.word	0x0003bfb4
+   16158:	0003bfce 	.word	0x0003bfce
+   1615c:	0003bfe8 	.word	0x0003bfe8
+   16160:	0003c00d 	.word	0x0003c00d
+   16164:	0003c021 	.word	0x0003c021
                 LOG_INF("Got RECONNECT_TIMEOUT command");
    16168:	f8bd 305c 	ldrh.w	r3, [sp, #92]	; 0x5c
    1616c:	f8bd 205c 	ldrh.w	r2, [sp, #92]	; 0x5c
@@ -15783,22 +15783,22 @@ static inline void freeaddrinfo(struct zsock_addrinfo *ai)
    162b4:	f01d fc8d 	bl	33bd2 <log_string_sync>
    162b8:	e456      	b.n	15b68 <gcloud_thread+0x24>
    162ba:	bf00      	nop
-   162bc:	0003c04a 	.word	0x0003c04a
-   162c0:	0003c068 	.word	0x0003c068
+   162bc:	0003c03e 	.word	0x0003c03e
+   162c0:	0003c05c 	.word	0x0003c05c
    162c4:	20027623 	.word	0x20027623
    162c8:	20020610 	.word	0x20020610
-   162cc:	0003bacd 	.word	0x0003bacd
-   162d0:	0003c07f 	.word	0x0003c07f
+   162cc:	0003bac1 	.word	0x0003bac1
+   162d0:	0003c073 	.word	0x0003c073
    162d4:	200214b0 	.word	0x200214b0
-   162d8:	0003c096 	.word	0x0003c096
+   162d8:	0003c08a 	.word	0x0003c08a
    162dc:	200207a0 	.word	0x200207a0
-   162e0:	0003c0c2 	.word	0x0003c0c2
+   162e0:	0003c0b6 	.word	0x0003c0b6
    162e4:	20027624 	.word	0x20027624
-   162e8:	0003c0e2 	.word	0x0003c0e2
+   162e8:	0003c0d6 	.word	0x0003c0d6
    162ec:	20020060 	.word	0x20020060
    162f0:	002a0001 	.word	0x002a0001
-   162f4:	0003c0f8 	.word	0x0003c0f8
-   162f8:	0003c119 	.word	0x0003c119
+   162f4:	0003c0ec 	.word	0x0003c0ec
+   162f8:	0003c10d 	.word	0x0003c10d
 
 000162fc <parse_string>:
 
@@ -16070,7 +16070,7 @@ static const char *parse_string(cJSON *item, const char *str)
    16490:	20020080 	.word	0x20020080
    16494:	20021534 	.word	0x20021534
    16498:	000ffc00 	.word	0x000ffc00
-   1649c:	0003c4d5 	.word	0x0003c4d5
+   1649c:	0003c4c9 	.word	0x0003c4c9
 
 000164a0 <cJSON_New_Item>:
 	cJSON *node = (cJSON *)cJSON_malloc(sizeof(cJSON));
@@ -16425,9 +16425,9 @@ static const char *parse_value(cJSON *item, const char *value)
 	return 0; /* malformed. */
    166a0:	e712      	b.n	164c8 <parse_value+0x8>
    166a2:	bf00      	nop
-   166a4:	0003c4dc 	.word	0x0003c4dc
-   166a8:	0003c4e1 	.word	0x0003c4e1
-   166ac:	0003c4e7 	.word	0x0003c4e7
+   166a4:	0003c4d0 	.word	0x0003c4d0
+   166a8:	0003c4d5 	.word	0x0003c4d5
+   166ac:	0003c4db 	.word	0x0003c4db
    166b0:	20021534 	.word	0x20021534
 
 000166b4 <ensure>:
@@ -16759,9 +16759,9 @@ __ssp_bos_icheck2_restrict(strcpy, char *, const char *)
 				break; /* escape and print */
    168b6:	e7d3      	b.n	16860 <print_string_ptr+0x110>
    168b8:	20020080 	.word	0x20020080
-   168bc:	0003c4fa 	.word	0x0003c4fa
-   168c0:	0003c4fd 	.word	0x0003c4fd
-   168c4:	0003c505 	.word	0x0003c505
+   168bc:	0003c4ee 	.word	0x0003c4ee
+   168c0:	0003c4f1 	.word	0x0003c4f1
+   168c4:	0003c4f9 	.word	0x0003c4f9
 
 000168c8 <print_array.isra.4>:
 static char *print_array(cJSON *item, int depth, int fmt, printbuffer *p)
@@ -17058,7 +17058,7 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
    16aae:	f10a 0a02 	add.w	sl, sl, #2
    16ab2:	f80a 3c01 	strb.w	r3, [sl, #-1]
    16ab6:	e7ee      	b.n	16a96 <print_array.isra.4+0x1ce>
-   16ab8:	0003c4ec 	.word	0x0003c4ec
+   16ab8:	0003c4e0 	.word	0x0003c4e0
    16abc:	20020080 	.word	0x20020080
    16ac0:	2002007c 	.word	0x2002007c
 
@@ -17170,9 +17170,9 @@ __ssp_bos_icheck2_restrict(strcpy, char *, const char *)
    16b76:	2400      	movs	r4, #0
    16b78:	e7ba      	b.n	16af0 <print_value+0x2c>
    16b7a:	bf00      	nop
-   16b7c:	0003c4dc 	.word	0x0003c4dc
-   16b80:	0003c4e1 	.word	0x0003c4e1
-   16b84:	0003c4e7 	.word	0x0003c4e7
+   16b7c:	0003c4d0 	.word	0x0003c4d0
+   16b80:	0003c4d5 	.word	0x0003c4d5
+   16b84:	0003c4db 	.word	0x0003c4db
 
 00016b88 <print_object.isra.3>:
 }
@@ -18004,8 +18004,8 @@ void timer_work_handler(struct k_work *work)
    170a4:	20021568 	.word	0x20021568
    170a8:	00039f38 	.word	0x00039f38
    170ac:	00039f58 	.word	0x00039f58
-   170b0:	0003c50b 	.word	0x0003c50b
-   170b4:	0003c7e5 	.word	0x0003c7e5
+   170b0:	0003c4ff 	.word	0x0003c4ff
+   170b4:	0003c7d9 	.word	0x0003c7d9
 
 000170b8 <timer_stop_work_handler>:
 
@@ -18042,8 +18042,8 @@ void timer_stop_work_handler(struct k_work *work)
    170e8:	00039f38 	.word	0x00039f38
    170ec:	00039f58 	.word	0x00039f58
    170f0:	20021568 	.word	0x20021568
-   170f4:	0003c51e 	.word	0x0003c51e
-   170f8:	0003c7bf 	.word	0x0003c7bf
+   170f4:	0003c512 	.word	0x0003c512
+   170f8:	0003c7b3 	.word	0x0003c7b3
    170fc:	20020424 	.word	0x20020424
 
 00017100 <submit_poll_work>:
@@ -18090,7 +18090,7 @@ static inline int submit_poll_work(const u32_t delay_s)
    17148:	4801      	ldr	r0, [pc, #4]	; (17150 <state_save+0xc>)
    1714a:	f002 bd81 	b.w	19c50 <settings_save_one>
    1714e:	bf00      	nop
-   17150:	0003c7b4 	.word	0x0003c7b4
+   17150:	0003c7a8 	.word	0x0003c7a8
 
 00017154 <settings_set>:
 {
@@ -18125,7 +18125,7 @@ static inline int submit_poll_work(const u32_t delay_s)
    17182:	2800      	cmp	r0, #0
    17184:	dcf5      	bgt.n	17172 <settings_set+0x1e>
    17186:	e7f0      	b.n	1716a <settings_set+0x16>
-   17188:	0003c7b9 	.word	0x0003c7b9
+   17188:	0003c7ad 	.word	0x0003c7ad
    1718c:	20021564 	.word	0x20021564
    17190:	20027f28 	.word	0x20027f28
 
@@ -18369,15 +18369,15 @@ static void env_sensors_poll_fn(struct k_work *work)
    17354:	00039f38 	.word	0x00039f38
    17358:	00039f58 	.word	0x00039f58
    1735c:	20020424 	.word	0x20020424
-   17360:	0003c536 	.word	0x0003c536
-   17364:	0003c61d 	.word	0x0003c61d
-   17368:	0003c62f 	.word	0x0003c62f
-   1736c:	0003c648 	.word	0x0003c648
-   17370:	0003c65c 	.word	0x0003c65c
-   17374:	0003c677 	.word	0x0003c677
-   17378:	0003c68c 	.word	0x0003c68c
-   1737c:	0003c6b2 	.word	0x0003c6b2
-   17380:	0003c6d6 	.word	0x0003c6d6
+   17360:	0003c52a 	.word	0x0003c52a
+   17364:	0003c611 	.word	0x0003c611
+   17368:	0003c623 	.word	0x0003c623
+   1736c:	0003c63c 	.word	0x0003c63c
+   17370:	0003c650 	.word	0x0003c650
+   17374:	0003c66b 	.word	0x0003c66b
+   17378:	0003c680 	.word	0x0003c680
+   1737c:	0003c6a6 	.word	0x0003c6a6
+   17380:	0003c6ca 	.word	0x0003c6ca
 			LOG_DBG("IAQ calibrated [%d]\n");
    17384:	4a86      	ldr	r2, [pc, #536]	; (175a0 <output_ready+0x370>)
    17386:	4987      	ldr	r1, [pc, #540]	; (175a4 <output_ready+0x374>)
@@ -18616,19 +18616,19 @@ static ALWAYS_INLINE void k_spin_unlock(struct k_spinlock *l,
    1759a:	4915      	ldr	r1, [pc, #84]	; (175f0 <output_ready+0x3c0>)
    1759c:	e6cb      	b.n	17336 <output_ready+0x106>
    1759e:	bf00      	nop
-   175a0:	0003c536 	.word	0x0003c536
-   175a4:	0003c6fa 	.word	0x0003c6fa
+   175a0:	0003c52a 	.word	0x0003c52a
+   175a4:	0003c6ee 	.word	0x0003c6ee
    175a8:	20027f26 	.word	0x20027f26
    175ac:	20020424 	.word	0x20020424
    175b0:	2002063c 	.word	0x2002063c
    175b4:	20020918 	.word	0x20020918
-   175b8:	0003c735 	.word	0x0003c735
-   175bc:	0003c75b 	.word	0x0003c75b
-   175c0:	0003b763 	.word	0x0003b763
-   175c4:	0003c770 	.word	0x0003c770
+   175b8:	0003c729 	.word	0x0003c729
+   175bc:	0003c74f 	.word	0x0003c74f
+   175c0:	0003b757 	.word	0x0003b757
+   175c4:	0003c764 	.word	0x0003c764
    175c8:	20020900 	.word	0x20020900
-   175cc:	0003c788 	.word	0x0003c788
-   175d0:	0003c79f 	.word	0x0003c79f
+   175cc:	0003c77c 	.word	0x0003c77c
+   175d0:	0003c793 	.word	0x0003c793
    175d4:	20020038 	.word	0x20020038
    175d8:	20020020 	.word	0x20020020
    175dc:	20020058 	.word	0x20020058
@@ -18636,7 +18636,7 @@ static ALWAYS_INLINE void k_spin_unlock(struct k_spinlock *l,
    175e4:	447a0000 	.word	0x447a0000
    175e8:	20020018 	.word	0x20020018
    175ec:	20020000 	.word	0x20020000
-   175f0:	0003c713 	.word	0x0003c713
+   175f0:	0003c707 	.word	0x0003c707
 
 000175f4 <k_work_submit_to_queue.constprop.7>:
  * @param work_q Address of workqueue.
@@ -18807,13 +18807,13 @@ static inline void k_work_submit(struct k_work *work)
    1770e:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
    17712:	e7fb      	b.n	1770c <env_sensors_get_temperature+0x88>
    17714:	20020918 	.word	0x20020918
-   17718:	0003c735 	.word	0x0003c735
-   1771c:	0003c75b 	.word	0x0003c75b
-   17720:	0003b763 	.word	0x0003b763
-   17724:	0003c770 	.word	0x0003c770
+   17718:	0003c729 	.word	0x0003c729
+   1771c:	0003c74f 	.word	0x0003c74f
+   17720:	0003b757 	.word	0x0003b757
+   17724:	0003c764 	.word	0x0003c764
    17728:	20020900 	.word	0x20020900
-   1772c:	0003c788 	.word	0x0003c788
-   17730:	0003c79f 	.word	0x0003c79f
+   1772c:	0003c77c 	.word	0x0003c77c
+   17730:	0003c793 	.word	0x0003c793
 
 00017734 <env_sensors_get_humidity>:
 {
@@ -18882,13 +18882,13 @@ static inline void k_work_submit(struct k_work *work)
    177be:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
    177c2:	e7fb      	b.n	177bc <env_sensors_get_humidity+0x88>
    177c4:	20020038 	.word	0x20020038
-   177c8:	0003c735 	.word	0x0003c735
-   177cc:	0003c75b 	.word	0x0003c75b
-   177d0:	0003b763 	.word	0x0003b763
-   177d4:	0003c770 	.word	0x0003c770
+   177c8:	0003c729 	.word	0x0003c729
+   177cc:	0003c74f 	.word	0x0003c74f
+   177d0:	0003b757 	.word	0x0003b757
+   177d4:	0003c764 	.word	0x0003c764
    177d8:	20020020 	.word	0x20020020
-   177dc:	0003c788 	.word	0x0003c788
-   177e0:	0003c79f 	.word	0x0003c79f
+   177dc:	0003c77c 	.word	0x0003c77c
+   177e0:	0003c793 	.word	0x0003c793
 
 000177e4 <env_sensors_get_pressure>:
 {
@@ -18957,13 +18957,13 @@ static inline void k_work_submit(struct k_work *work)
    1786e:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
    17872:	e7fb      	b.n	1786c <env_sensors_get_pressure+0x88>
    17874:	20020058 	.word	0x20020058
-   17878:	0003c735 	.word	0x0003c735
-   1787c:	0003c75b 	.word	0x0003c75b
-   17880:	0003b763 	.word	0x0003b763
-   17884:	0003c770 	.word	0x0003c770
+   17878:	0003c729 	.word	0x0003c729
+   1787c:	0003c74f 	.word	0x0003c74f
+   17880:	0003b757 	.word	0x0003b757
+   17884:	0003c764 	.word	0x0003c764
    17888:	20020040 	.word	0x20020040
-   1788c:	0003c788 	.word	0x0003c788
-   17890:	0003c79f 	.word	0x0003c79f
+   1788c:	0003c77c 	.word	0x0003c77c
+   17890:	0003c793 	.word	0x0003c793
 
 00017894 <env_sensors_get_air_quality>:
 {
@@ -19032,13 +19032,13 @@ static inline void k_work_submit(struct k_work *work)
    1791e:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
    17922:	e7fb      	b.n	1791c <env_sensors_get_air_quality+0x88>
    17924:	20020018 	.word	0x20020018
-   17928:	0003c735 	.word	0x0003c735
-   1792c:	0003c75b 	.word	0x0003c75b
-   17930:	0003b763 	.word	0x0003b763
-   17934:	0003c770 	.word	0x0003c770
+   17928:	0003c729 	.word	0x0003c729
+   1792c:	0003c74f 	.word	0x0003c74f
+   17930:	0003b757 	.word	0x0003b757
+   17934:	0003c764 	.word	0x0003c764
    17938:	20020000 	.word	0x20020000
-   1793c:	0003c788 	.word	0x0003c788
-   17940:	0003c79f 	.word	0x0003c79f
+   1793c:	0003c77c 	.word	0x0003c77c
+   17940:	0003c793 	.word	0x0003c793
 
 00017944 <env_sensors_init_and_start>:
 
@@ -19256,17 +19256,17 @@ int env_sensors_init_and_start(struct k_work_q *work_q,
    17ac6:	bf00      	nop
    17ac8:	00039f38 	.word	0x00039f38
    17acc:	00039f58 	.word	0x00039f58
-   17ad0:	0003c55e 	.word	0x0003c55e
-   17ad4:	0003c543 	.word	0x0003c543
-   17ad8:	0003c569 	.word	0x0003c569
+   17ad0:	0003c552 	.word	0x0003c552
+   17ad4:	0003c537 	.word	0x0003c537
+   17ad8:	0003c55d 	.word	0x0003c55d
    17adc:	20021560 	.word	0x20021560
-   17ae0:	0003c56f 	.word	0x0003c56f
-   17ae4:	0003c585 	.word	0x0003c585
+   17ae0:	0003c563 	.word	0x0003c563
+   17ae4:	0003c579 	.word	0x0003c579
    17ae8:	00017155 	.word	0x00017155
-   17aec:	0003c58a 	.word	0x0003c58a
-   17af0:	0003c5fe 	.word	0x0003c5fe
-   17af4:	0003c5ab 	.word	0x0003c5ab
-   17af8:	0003c5dc 	.word	0x0003c5dc
+   17aec:	0003c57e 	.word	0x0003c57e
+   17af0:	0003c5f2 	.word	0x0003c5f2
+   17af4:	0003c59f 	.word	0x0003c59f
+   17af8:	0003c5d0 	.word	0x0003c5d0
    17afc:	20030608 	.word	0x20030608
    17b00:	00017119 	.word	0x00017119
    17b04:	2002156c 	.word	0x2002156c
@@ -19283,7 +19283,7 @@ int env_sensors_init_and_start(struct k_work_q *work_q,
    17b30:	00017635 	.word	0x00017635
    17b34:	3f99999a 	.word	0x3f99999a
    17b38:	3eaaaa3b 	.word	0x3eaaaa3b
-   17b3c:	0003c5c0 	.word	0x0003c5c0
+   17b3c:	0003c5b4 	.word	0x0003c5b4
 
 00017b40 <bsec_iot_init>:
  *
@@ -20887,9 +20887,9 @@ static inline int k_delayed_work_submit(struct k_delayed_work *work,
    186d0:	20021698 	.word	0x20021698
    186d4:	00039ff8 	.word	0x00039ff8
    186d8:	00039f38 	.word	0x00039f38
-   186dc:	0003c802 	.word	0x0003c802
-   186e0:	0003c818 	.word	0x0003c818
-   186e4:	0003c82d 	.word	0x0003c82d
+   186dc:	0003c7f6 	.word	0x0003c7f6
+   186e0:	0003c80c 	.word	0x0003c80c
+   186e4:	0003c821 	.word	0x0003c821
    186e8:	20027524 	.word	0x20027524
 
 000186ec <watchdog_init_and_start>:
@@ -21045,22 +21045,22 @@ int watchdog_init_and_start(struct k_work_q *work_q)
    1880a:	f06f 0415 	mvn.w	r4, #21
    1880e:	e78a      	b.n	18726 <watchdog_init_and_start+0x3a>
    18810:	20021694 	.word	0x20021694
-   18814:	0003c852 	.word	0x0003c852
+   18814:	0003c846 	.word	0x0003c846
    18818:	00039ff8 	.word	0x00039ff8
    1881c:	00039f38 	.word	0x00039f38
    18820:	20021698 	.word	0x20021698
-   18824:	0003c856 	.word	0x0003c856
+   18824:	0003c84a 	.word	0x0003c84a
    18828:	0003a218 	.word	0x0003a218
-   1882c:	0003c872 	.word	0x0003c872
-   18830:	0003c8a0 	.word	0x0003c8a0
-   18834:	0003c8c8 	.word	0x0003c8c8
-   18838:	0003c8ee 	.word	0x0003c8ee
+   1882c:	0003c866 	.word	0x0003c866
+   18830:	0003c894 	.word	0x0003c894
+   18834:	0003c8bc 	.word	0x0003c8bc
+   18838:	0003c8e2 	.word	0x0003c8e2
    1883c:	00018645 	.word	0x00018645
    18840:	00018671 	.word	0x00018671
-   18844:	0003c82d 	.word	0x0003c82d
+   18844:	0003c821 	.word	0x0003c821
    18848:	20027524 	.word	0x20027524
-   1884c:	0003c8ff 	.word	0x0003c8ff
-   18850:	0003c931 	.word	0x0003c931
+   1884c:	0003c8f3 	.word	0x0003c8f3
+   18850:	0003c925 	.word	0x0003c925
 
 00018854 <_check_fd>:
 	return -1;
@@ -21617,7 +21617,7 @@ static int str_encode(const char **str, json_append_bytes_t append_bytes,
    18b66:	4618      	mov	r0, r3
    18b68:	e7f6      	b.n	18b58 <str_encode+0x3c>
    18b6a:	bf00      	nop
-   18b6c:	0003c4fb 	.word	0x0003c4fb
+   18b6c:	0003c4ef 	.word	0x0003c4ef
 
 00018b70 <json_obj_encode>:
 }
@@ -21727,10 +21727,10 @@ int json_obj_encode(const struct json_obj_descr *descr, size_t descr_len,
 }
    18bea:	b001      	add	sp, #4
    18bec:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
-   18bf0:	0003c956 	.word	0x0003c956
-   18bf4:	0003c95a 	.word	0x0003c95a
-   18bf8:	0003e3ce 	.word	0x0003e3ce
-   18bfc:	0003c958 	.word	0x0003c958
+   18bf0:	0003c94a 	.word	0x0003c94a
+   18bf4:	0003c94e 	.word	0x0003c94e
+   18bf8:	0003e3c2 	.word	0x0003e3c2
+   18bfc:	0003c94c 	.word	0x0003c94c
 
 00018c00 <encode>:
 {
@@ -21878,12 +21878,12 @@ int json_obj_encode(const struct json_obj_descr *descr, size_t descr_len,
 		return num_encode(ptr, append_bytes, data);
    18ce8:	e7b3      	b.n	18c52 <encode+0x52>
    18cea:	bf00      	nop
-   18cec:	0003c4e7 	.word	0x0003c4e7
-   18cf0:	0003c4e1 	.word	0x0003c4e1
-   18cf4:	0003c954 	.word	0x0003c954
-   18cf8:	0003c4ed 	.word	0x0003c4ed
-   18cfc:	0003c958 	.word	0x0003c958
-   18d00:	0003c645 	.word	0x0003c645
+   18cec:	0003c4db 	.word	0x0003c4db
+   18cf0:	0003c4d5 	.word	0x0003c4d5
+   18cf4:	0003c948 	.word	0x0003c948
+   18cf8:	0003c4e1 	.word	0x0003c4e1
+   18cfc:	0003c94c 	.word	0x0003c94c
+   18d00:	0003c639 	.word	0x0003c639
 
 00018d04 <nordicsemi_nrf91_init>:
 	__asm__ volatile(
@@ -22123,9 +22123,9 @@ static inline void log_backend_activate(const struct log_backend *const backend,
    18e10:	bd70      	pop	{r4, r5, r6, pc}
    18e12:	bf00      	nop
    18e14:	0003a008 	.word	0x0003a008
-   18e18:	0003c99a 	.word	0x0003c99a
-   18e1c:	0003b763 	.word	0x0003b763
-   18e20:	0003c969 	.word	0x0003c969
+   18e18:	0003c98e 	.word	0x0003c98e
+   18e1c:	0003b757 	.word	0x0003b757
+   18e20:	0003c95d 	.word	0x0003c95d
    18e24:	20027fb3 	.word	0x20027fb3
    18e28:	200206d4 	.word	0x200206d4
 
@@ -22179,9 +22179,9 @@ static inline void log_backend_activate(const struct log_backend *const backend,
    18e7a:	e7ee      	b.n	18e5a <log_init+0x2e>
    18e7c:	0003a008 	.word	0x0003a008
    18e80:	0003a018 	.word	0x0003a018
-   18e84:	0003c9b1 	.word	0x0003c9b1
-   18e88:	0003c960 	.word	0x0003c960
-   18e8c:	0003c9e8 	.word	0x0003c9e8
+   18e84:	0003c9a5 	.word	0x0003c9a5
+   18e88:	0003c954 	.word	0x0003c954
+   18e8c:	0003c9dc 	.word	0x0003c9dc
    18e90:	200216ec 	.word	0x200216ec
 
 00018e94 <z_impl_log_panic>:
@@ -22392,17 +22392,17 @@ static u32_t prefix_print(const struct log_output *log_output,
    18fe2:	4f08      	ldr	r7, [pc, #32]	; (19004 <prefix_print+0x10c>)
    18fe4:	e7c1      	b.n	18f6a <prefix_print+0x72>
    18fe6:	bf00      	nop
-   18fe8:	0003ca8c 	.word	0x0003ca8c
+   18fe8:	0003ca80 	.word	0x0003ca80
    18fec:	0003a228 	.word	0x0003a228
-   18ff0:	0003e609 	.word	0x0003e609
-   18ff4:	0003ca7e 	.word	0x0003ca7e
+   18ff0:	0003e5fd 	.word	0x0003e5fd
+   18ff4:	0003ca72 	.word	0x0003ca72
    18ff8:	0003a23c 	.word	0x0003a23c
-   18ffc:	0003cab1 	.word	0x0003cab1
-   19000:	0003ca88 	.word	0x0003ca88
-   19004:	0003ca83 	.word	0x0003ca83
+   18ffc:	0003caa5 	.word	0x0003caa5
+   19000:	0003ca7c 	.word	0x0003ca7c
+   19004:	0003ca77 	.word	0x0003ca77
    19008:	200216f0 	.word	0x200216f0
    1900c:	200216f4 	.word	0x200216f4
-   19010:	0003ca95 	.word	0x0003ca95
+   19010:	0003ca89 	.word	0x0003ca89
 
 00019014 <postfix_print>:
 
@@ -22442,10 +22442,10 @@ static void postfix_print(const struct log_output *log_output,
 }
    1903c:	bd38      	pop	{r3, r4, r5, pc}
    1903e:	bf00      	nop
-   19040:	0003ca7e 	.word	0x0003ca7e
-   19044:	0003e609 	.word	0x0003e609
-   19048:	0003cb70 	.word	0x0003cb70
-   1904c:	0003f556 	.word	0x0003f556
+   19040:	0003ca72 	.word	0x0003ca72
+   19044:	0003e5fd 	.word	0x0003e5fd
+   19048:	0003cb64 	.word	0x0003cb64
+   1904c:	0003f54a 	.word	0x0003f54a
 
 00019050 <hexdump_line_print>:
 {
@@ -22559,14 +22559,14 @@ static void postfix_print(const struct log_output *log_output,
    19108:	4620      	mov	r0, r4
    1910a:	f7ff fee3 	bl	18ed4 <print_formatted>
    1910e:	e7dc      	b.n	190ca <hexdump_line_print+0x7a>
-   19110:	0003cb70 	.word	0x0003cb70
-   19114:	0003f556 	.word	0x0003f556
-   19118:	0003ca37 	.word	0x0003ca37
-   1911c:	0003ca35 	.word	0x0003ca35
-   19120:	0003ca33 	.word	0x0003ca33
-   19124:	0003ca2d 	.word	0x0003ca2d
-   19128:	0004016c 	.word	0x0004016c
-   1912c:	0003ca39 	.word	0x0003ca39
+   19110:	0003cb64 	.word	0x0003cb64
+   19114:	0003f54a 	.word	0x0003f54a
+   19118:	0003ca2b 	.word	0x0003ca2b
+   1911c:	0003ca29 	.word	0x0003ca29
+   19120:	0003ca27 	.word	0x0003ca27
+   19124:	0003ca21 	.word	0x0003ca21
+   19128:	00040160 	.word	0x00040160
+   1912c:	0003ca2d 	.word	0x0003ca2d
 
 00019130 <log_output_string>:
 }
@@ -22649,7 +22649,7 @@ void log_output_string(const struct log_output *log_output,
    19192:	f7ff ff3f 	bl	19014 <postfix_print>
    19196:	e7f1      	b.n	1917c <log_output_string+0x4c>
    19198:	00033bf9 	.word	0x00033bf9
-   1919c:	0003ca7c 	.word	0x0003ca7c
+   1919c:	0003ca70 	.word	0x0003ca70
 
 000191a0 <log_output_hexdump>:
 
@@ -22731,7 +22731,7 @@ void log_output_hexdump(const struct log_output *log_output,
    19208:	eba5 0508 	sub.w	r5, r5, r8
    1920c:	e7e3      	b.n	191d6 <log_output_hexdump+0x36>
    1920e:	bf00      	nop
-   19210:	0003e609 	.word	0x0003e609
+   19210:	0003e5fd 	.word	0x0003e5fd
 
 00019214 <log_output_timestamp_freq_set>:
 	buffer_write(outf, (u8_t *)postfix, sizeof(postfix) - 1, dev);
@@ -22823,10 +22823,10 @@ static inline void log_output_ctx_set(const struct log_output *log_output,
 	log_output_ctx_set(&log_output, dev);
 }
    1926a:	bd08      	pop	{r3, pc}
-   1926c:	0003caed 	.word	0x0003caed
-   19270:	0003c1a2 	.word	0x0003c1a2
-   19274:	0003cad7 	.word	0x0003cad7
-   19278:	0003caf4 	.word	0x0003caf4
+   1926c:	0003cae1 	.word	0x0003cae1
+   19270:	0003c196 	.word	0x0003c196
+   19274:	0003cacb 	.word	0x0003cacb
+   19278:	0003cae8 	.word	0x0003cae8
    1927c:	20021700 	.word	0x20021700
 
 00019280 <sync_hexdump>:
@@ -22908,10 +22908,10 @@ enum net_context_state net_context_get_state(struct net_context *context)
    192e4:	f3c0 0041 	ubfx	r0, r0, #1, #2
    192e8:	bd10      	pop	{r4, pc}
    192ea:	bf00      	nop
-   192ec:	0003cb67 	.word	0x0003cb67
-   192f0:	0003cb3a 	.word	0x0003cb3a
-   192f4:	0003b763 	.word	0x0003b763
-   192f8:	0003cb6f 	.word	0x0003cb6f
+   192ec:	0003cb5b 	.word	0x0003cb5b
+   192f0:	0003cb2e 	.word	0x0003cb2e
+   192f4:	0003b757 	.word	0x0003b757
+   192f8:	0003cb63 	.word	0x0003cb63
 
 000192fc <net_context_get_type>:
  *
@@ -22941,10 +22941,10 @@ enum net_sock_type net_context_get_type(struct net_context *context)
    19324:	f3c0 1081 	ubfx	r0, r0, #6, #2
    19328:	bd10      	pop	{r4, pc}
    1932a:	bf00      	nop
-   1932c:	0003cb67 	.word	0x0003cb67
-   19330:	0003cb3a 	.word	0x0003cb3a
-   19334:	0003b763 	.word	0x0003b763
-   19338:	0003cb6f 	.word	0x0003cb6f
+   1932c:	0003cb5b 	.word	0x0003cb5b
+   19330:	0003cb2e 	.word	0x0003cb2e
+   19334:	0003b757 	.word	0x0003b757
+   19338:	0003cb63 	.word	0x0003cb63
 
 0001933c <zsock_accepted_cb>:
 #include <syscalls/zsock_shutdown_mrsh.c>
@@ -23131,12 +23131,12 @@ static void zsock_accepted_cb(struct net_context *new_ctx,
    19464:	340c      	adds	r4, #12
    19466:	e7c5      	b.n	193f4 <z_impl_zsock_socket+0x14>
    19468:	00039f2c 	.word	0x00039f2c
-   1946c:	0003cb72 	.word	0x0003cb72
-   19470:	0003cbc0 	.word	0x0003cbc0
-   19474:	0003b763 	.word	0x0003b763
-   19478:	0003cbed 	.word	0x0003cbed
-   1947c:	0003cba6 	.word	0x0003cba6
-   19480:	0003cb6f 	.word	0x0003cb6f
+   1946c:	0003cb66 	.word	0x0003cb66
+   19470:	0003cbb4 	.word	0x0003cbb4
+   19474:	0003b757 	.word	0x0003b757
+   19478:	0003cbe1 	.word	0x0003cbe1
+   1947c:	0003cb9a 	.word	0x0003cb9a
+   19480:	0003cb63 	.word	0x0003cb63
    19484:	00039f38 	.word	0x00039f38
 
 00019488 <zsock_bind_ctx>:
@@ -23958,13 +23958,13 @@ static inline uintptr_t sock_get_flag(struct net_context *ctx, uintptr_t mask)
    19978:	4805      	ldr	r0, [pc, #20]	; (19990 <zsock_recvfrom_ctx+0x2f4>)
    1997a:	f01a f913 	bl	33ba4 <assert_post_action>
    1997e:	e69a      	b.n	196b6 <zsock_recvfrom_ctx+0x1a>
-   19980:	0003cb67 	.word	0x0003cb67
-   19984:	0003cb3a 	.word	0x0003cb3a
-   19988:	0003b763 	.word	0x0003b763
-   1998c:	0003cb6f 	.word	0x0003cb6f
-   19990:	0003cb72 	.word	0x0003cb72
-   19994:	0003fd1f 	.word	0x0003fd1f
-   19998:	0003cc0c 	.word	0x0003cc0c
+   19980:	0003cb5b 	.word	0x0003cb5b
+   19984:	0003cb2e 	.word	0x0003cb2e
+   19988:	0003b757 	.word	0x0003b757
+   1998c:	0003cb63 	.word	0x0003cb63
+   19990:	0003cb66 	.word	0x0003cb66
+   19994:	0003fd13 	.word	0x0003fd13
+   19998:	0003cc00 	.word	0x0003cc00
 
 0001999c <z_impl_zsock_poll>:
 
@@ -24255,11 +24255,11 @@ void socket_offload_dns_register(const struct socket_dns_offload *ops)
    19b78:	6025      	str	r5, [r4, #0]
 }
    19b7a:	bd38      	pop	{r3, r4, r5, pc}
-   19b7c:	0003fa3c 	.word	0x0003fa3c
-   19b80:	0003b763 	.word	0x0003b763
-   19b84:	0003cc22 	.word	0x0003cc22
+   19b7c:	0003fa30 	.word	0x0003fa30
+   19b80:	0003b757 	.word	0x0003b757
+   19b84:	0003cc16 	.word	0x0003cc16
    19b88:	2002170c 	.word	0x2002170c
-   19b8c:	0003cc5d 	.word	0x0003cc5d
+   19b8c:	0003cc51 	.word	0x0003cc51
 
 00019b90 <socket_offload_getaddrinfo>:
 
@@ -24314,10 +24314,10 @@ int socket_offload_getaddrinfo(const char *node, const char *service,
 	return dns_offload->getaddrinfo(node, service, hints, res);
    19be2:	4760      	bx	ip
    19be4:	2002170c 	.word	0x2002170c
-   19be8:	0003cc92 	.word	0x0003cc92
-   19bec:	0003b763 	.word	0x0003b763
-   19bf0:	0003cc22 	.word	0x0003cc22
-   19bf4:	0003cc9e 	.word	0x0003cc9e
+   19be8:	0003cc86 	.word	0x0003cc86
+   19bec:	0003b757 	.word	0x0003b757
+   19bf0:	0003cc16 	.word	0x0003cc16
+   19bf4:	0003cc92 	.word	0x0003cc92
 
 00019bf8 <socket_offload_freeaddrinfo>:
 
@@ -24361,10 +24361,10 @@ void socket_offload_freeaddrinfo(struct zsock_addrinfo *res)
    19c38:	685b      	ldr	r3, [r3, #4]
    19c3a:	4718      	bx	r3
    19c3c:	2002170c 	.word	0x2002170c
-   19c40:	0003cc92 	.word	0x0003cc92
-   19c44:	0003b763 	.word	0x0003b763
-   19c48:	0003cc22 	.word	0x0003cc22
-   19c4c:	0003cc78 	.word	0x0003cc78
+   19c40:	0003cc86 	.word	0x0003cc86
+   19c44:	0003b757 	.word	0x0003b757
+   19c48:	0003cc16 	.word	0x0003cc16
+   19c4c:	0003cc6c 	.word	0x0003cc6c
 
 00019c50 <settings_save_one>:
 int settings_save_one(const char *name, const void *value, size_t val_len)
@@ -24609,10 +24609,10 @@ Z_GENLIST_PEEK_NEXT_NO_CHECK(slist, snode)
    19d8e:	bf00      	nop
    19d90:	00039f38 	.word	0x00039f38
    19d94:	00039f38 	.word	0x00039f38
-   19d98:	0003ccb7 	.word	0x0003ccb7
-   19d9c:	0003cce9 	.word	0x0003cce9
-   19da0:	0003b763 	.word	0x0003b763
-   19da4:	0003cbed 	.word	0x0003cbed
+   19d98:	0003ccab 	.word	0x0003ccab
+   19d9c:	0003ccdd 	.word	0x0003ccdd
+   19da0:	0003b757 	.word	0x0003b757
+   19da4:	0003cbe1 	.word	0x0003cbe1
    19da8:	2002171c 	.word	0x2002171c
    19dac:	20020748 	.word	0x20020748
 
@@ -24720,11 +24720,11 @@ Z_GENLIST_PEEK_NEXT_NO_CHECK(slist, snode)
    19e3a:	e7f0      	b.n	19e1e <settings_commit_subtree+0x6e>
    19e3c:	00039f38 	.word	0x00039f38
    19e40:	00039f38 	.word	0x00039f38
-   19e44:	0003cce9 	.word	0x0003cce9
-   19e48:	0003b763 	.word	0x0003b763
-   19e4c:	0003cbed 	.word	0x0003cbed
+   19e44:	0003ccdd 	.word	0x0003ccdd
+   19e48:	0003b757 	.word	0x0003b757
+   19e4c:	0003cbe1 	.word	0x0003cbe1
    19e50:	2002171c 	.word	0x2002171c
-   19e54:	0003ccb7 	.word	0x0003ccb7
+   19e54:	0003ccab 	.word	0x0003ccab
 
 00019e58 <settings_subsys_init>:
 void settings_init(void);
@@ -24802,7 +24802,7 @@ static inline void k_cpu_idle(void)
    19e9c:	f000 ff30 	bl	1ad00 <arch_cpu_idle>
    19ea0:	e7fc      	b.n	19e9c <sys_reboot+0x24>
    19ea2:	bf00      	nop
-   19ea4:	0003cd17 	.word	0x0003cd17
+   19ea4:	0003cd0b 	.word	0x0003cd0b
 
 00019ea8 <uart_console_init>:
  * @brief Initialize one UART as the console/debug port
@@ -24837,7 +24837,7 @@ static int uart_console_init(struct device *arg)
    19ec2:	2000      	movs	r0, #0
    19ec4:	bd10      	pop	{r4, pc}
    19ec6:	bf00      	nop
-   19ec8:	0003caed 	.word	0x0003caed
+   19ec8:	0003cae1 	.word	0x0003cae1
    19ecc:	00019ed5 	.word	0x00019ed5
    19ed0:	20021724 	.word	0x20021724
 
@@ -24925,9 +24925,9 @@ static enum clock_control_status get_status(struct device *dev,
 		return CLOCK_CONTROL_STATUS_ON;
    19f30:	2002      	movs	r0, #2
    19f32:	e7fc      	b.n	19f2e <get_status+0x32>
-   19f34:	0003cddb 	.word	0x0003cddb
-   19f38:	0003b763 	.word	0x0003b763
-   19f3c:	0003cda0 	.word	0x0003cda0
+   19f34:	0003cdcf 	.word	0x0003cdcf
+   19f38:	0003b757 	.word	0x0003b757
+   19f3c:	0003cd94 	.word	0x0003cd94
 
 00019f40 <clock_async_start>:
 }
@@ -25116,12 +25116,12 @@ Z_GENLIST_PEEK_NEXT_NO_CHECK(slist, snode)
    1a048:	f06f 000f 	mvn.w	r0, #15
 }
    1a04c:	e8bd 8ff8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}
-   1a050:	0003cddb 	.word	0x0003cddb
-   1a054:	0003b763 	.word	0x0003b763
-   1a058:	0003cda0 	.word	0x0003cda0
-   1a05c:	0003cd8e 	.word	0x0003cd8e
+   1a050:	0003cdcf 	.word	0x0003cdcf
+   1a054:	0003b757 	.word	0x0003b757
+   1a058:	0003cd94 	.word	0x0003cd94
+   1a05c:	0003cd82 	.word	0x0003cd82
    1a060:	40005000 	.word	0x40005000
-   1a064:	0003cd40 	.word	0x0003cd40
+   1a064:	0003cd34 	.word	0x0003cd34
 
 0001a068 <clock_stop>:
 {
@@ -25186,9 +25186,9 @@ Z_GENLIST_PEEK_NEXT_NO_CHECK(slist, snode)
 	int err = 0;
    1a0d4:	2000      	movs	r0, #0
    1a0d6:	e7f5      	b.n	1a0c4 <clock_stop+0x5c>
-   1a0d8:	0003cddb 	.word	0x0003cddb
-   1a0dc:	0003b763 	.word	0x0003b763
-   1a0e0:	0003cda0 	.word	0x0003cda0
+   1a0d8:	0003cdcf 	.word	0x0003cdcf
+   1a0dc:	0003b757 	.word	0x0003b757
+   1a0e0:	0003cd94 	.word	0x0003cd94
 
 0001a0e4 <clk_init>:
  * symbol.
@@ -25577,9 +25577,9 @@ void __weak z_clock_isr(void *arg)
 	__ASSERT_NO_MSG(false);
    1a2ae:	2117      	movs	r1, #23
    1a2b0:	f019 bc78 	b.w	33ba4 <assert_post_action>
-   1a2b4:	0003ce32 	.word	0x0003ce32
-   1a2b8:	0003fd1f 	.word	0x0003fd1f
-   1a2bc:	0003b763 	.word	0x0003b763
+   1a2b4:	0003ce26 	.word	0x0003ce26
+   1a2b8:	0003fd13 	.word	0x0003fd13
+   1a2bc:	0003b757 	.word	0x0003b757
 
 0001a2c0 <handle_next_tick_case>:
  * counter progresses during that time it means that 1 tick elapsed and
@@ -25744,7 +25744,7 @@ NRF_STATIC_INLINE void nrf_rtc_task_trigger(NRF_RTC_Type * p_reg, nrf_rtc_task_t
    1a358:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
    1a35c:	e7fb      	b.n	1a356 <z_clock_driver_init+0x4a>
    1a35e:	bf00      	nop
-   1a360:	0003cdff 	.word	0x0003cdff
+   1a360:	0003cdf3 	.word	0x0003cdf3
    1a364:	40015000 	.word	0x40015000
    1a368:	40015140 	.word	0x40015140
    1a36c:	e000e100 	.word	0xe000e100
@@ -25960,14 +25960,14 @@ u32_t z_clock_elapsed(void)
    1a4b4:	4620      	mov	r0, r4
    1a4b6:	bd38      	pop	{r3, r4, r5, pc}
    1a4b8:	2002176c 	.word	0x2002176c
-   1a4bc:	0003c735 	.word	0x0003c735
-   1a4c0:	0003c75b 	.word	0x0003c75b
-   1a4c4:	0003b763 	.word	0x0003b763
-   1a4c8:	0003c770 	.word	0x0003c770
+   1a4bc:	0003c729 	.word	0x0003c729
+   1a4c0:	0003c74f 	.word	0x0003c74f
+   1a4c4:	0003b757 	.word	0x0003b757
+   1a4c8:	0003c764 	.word	0x0003c764
    1a4cc:	40015000 	.word	0x40015000
    1a4d0:	20021768 	.word	0x20021768
-   1a4d4:	0003c788 	.word	0x0003c788
-   1a4d8:	0003c79f 	.word	0x0003c79f
+   1a4d4:	0003c77c 	.word	0x0003c77c
+   1a4d8:	0003c793 	.word	0x0003c793
 
 0001a4dc <z_timer_cycle_get_32>:
 
@@ -26034,14 +26034,14 @@ u32_t z_timer_cycle_get_32(void)
    1a558:	bd38      	pop	{r3, r4, r5, pc}
    1a55a:	bf00      	nop
    1a55c:	2002176c 	.word	0x2002176c
-   1a560:	0003c735 	.word	0x0003c735
-   1a564:	0003c75b 	.word	0x0003c75b
-   1a568:	0003b763 	.word	0x0003b763
-   1a56c:	0003c770 	.word	0x0003c770
+   1a560:	0003c729 	.word	0x0003c729
+   1a564:	0003c74f 	.word	0x0003c74f
+   1a568:	0003b757 	.word	0x0003b757
+   1a56c:	0003c764 	.word	0x0003c764
    1a570:	40015000 	.word	0x40015000
    1a574:	20021768 	.word	0x20021768
-   1a578:	0003c788 	.word	0x0003c788
-   1a57c:	0003c79f 	.word	0x0003c79f
+   1a578:	0003c77c 	.word	0x0003c77c
+   1a57c:	0003c793 	.word	0x0003c793
 
 0001a580 <uECC_set_rng>:
 static uECC_RNG_Function g_rng_function = 0;
@@ -26583,7 +26583,7 @@ int tc_aes128_set_encrypt_key(TCAesKeySched_t s, const uint8_t *k)
    1a7d8:	4620      	mov	r0, r4
    1a7da:	e7f9      	b.n	1a7d0 <tc_aes128_set_encrypt_key+0x98>
    1a7dc:	0003a0a0 	.word	0x0003a0a0
-   1a7e0:	0003ce64 	.word	0x0003ce64
+   1a7e0:	0003ce58 	.word	0x0003ce58
 
 0001a7e4 <tc_aes_encrypt>:
 	t[12] = s[12]; t[13] = s[1]; t[14] = s[6]; t[15] = s[11];
@@ -26724,7 +26724,7 @@ int tc_aes_encrypt(uint8_t *out, const uint8_t *in, const TCAesKeySched_t s)
    1a8ae:	e7fa      	b.n	1a8a6 <tc_aes_encrypt+0xc2>
    1a8b0:	4610      	mov	r0, r2
    1a8b2:	e7f8      	b.n	1a8a6 <tc_aes_encrypt+0xc2>
-   1a8b4:	0003ce64 	.word	0x0003ce64
+   1a8b4:	0003ce58 	.word	0x0003ce58
 
 0001a8b8 <compress>:
 	n |= ((unsigned int)(*((*c)++)));
@@ -27416,10 +27416,10 @@ __STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
    1ac38:	555c      	strblt	r4, [r3, r5]
 }
    1ac3a:	bd70      	pop	{r4, r5, r6, pc}
-   1ac3c:	0003cf64 	.word	0x0003cf64
-   1ac40:	0003cf9a 	.word	0x0003cf9a
-   1ac44:	0003b763 	.word	0x0003b763
-   1ac48:	0003cfb5 	.word	0x0003cfb5
+   1ac3c:	0003cf58 	.word	0x0003cf58
+   1ac40:	0003cf8e 	.word	0x0003cf8e
+   1ac44:	0003b757 	.word	0x0003b757
+   1ac48:	0003cfa9 	.word	0x0003cfa9
    1ac4c:	e000ed14 	.word	0xe000ed14
 
 0001ac50 <_arch_isr_direct_pm>:
@@ -27803,12 +27803,12 @@ void z_arm_fatal_error(unsigned int reason, const z_arch_esf_t *esf)
    1ae20:	f010 bd10 	b.w	2b844 <z_fatal_error>
    1ae24:	00039fc8 	.word	0x00039fc8
    1ae28:	00039f38 	.word	0x00039f38
-   1ae2c:	0003cfea 	.word	0x0003cfea
-   1ae30:	0003d019 	.word	0x0003d019
-   1ae34:	0003d048 	.word	0x0003d048
-   1ae38:	0003d09a 	.word	0x0003d09a
-   1ae3c:	0003d0a9 	.word	0x0003d0a9
-   1ae40:	0003d057 	.word	0x0003d057
+   1ae2c:	0003cfde 	.word	0x0003cfde
+   1ae30:	0003d00d 	.word	0x0003d00d
+   1ae34:	0003d03c 	.word	0x0003d03c
+   1ae38:	0003d08e 	.word	0x0003d08e
+   1ae3c:	0003d09d 	.word	0x0003d09d
+   1ae40:	0003d04b 	.word	0x0003d04b
 
 0001ae44 <z_SysNmiOnReset>:
 _ASM_FILE_PROLOGUE
@@ -28243,18 +28243,18 @@ static u32_t mem_manage_fault(z_arch_esf_t *esf, int from_hard_fault,
    1b036:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
    1b038:	00039fc8 	.word	0x00039fc8
    1b03c:	00039f38 	.word	0x00039f38
-   1b040:	0003d15f 	.word	0x0003d15f
+   1b040:	0003d153 	.word	0x0003d153
    1b044:	e000ed00 	.word	0xe000ed00
-   1b048:	0003d175 	.word	0x0003d175
-   1b04c:	0003d1a8 	.word	0x0003d1a8
-   1b050:	0003d1bb 	.word	0x0003d1bb
-   1b054:	0003d1d3 	.word	0x0003d1d3
-   1b058:	0003d1e9 	.word	0x0003d1e9
-   1b05c:	0003d208 	.word	0x0003d208
-   1b060:	0003fd1f 	.word	0x0003fd1f
-   1b064:	0003d237 	.word	0x0003d237
-   1b068:	0003b763 	.word	0x0003b763
-   1b06c:	0003d271 	.word	0x0003d271
+   1b048:	0003d169 	.word	0x0003d169
+   1b04c:	0003d19c 	.word	0x0003d19c
+   1b050:	0003d1af 	.word	0x0003d1af
+   1b054:	0003d1c7 	.word	0x0003d1c7
+   1b058:	0003d1dd 	.word	0x0003d1dd
+   1b05c:	0003d1fc 	.word	0x0003d1fc
+   1b060:	0003fd13 	.word	0x0003fd13
+   1b064:	0003d22b 	.word	0x0003d22b
+   1b068:	0003b757 	.word	0x0003b757
+   1b06c:	0003d265 	.word	0x0003d265
 
 0001b070 <bus_fault.isra.3>:
  *
@@ -28414,15 +28414,15 @@ static int bus_fault(z_arch_esf_t *esf, int from_hard_fault, bool *recoverable)
    1b16e:	bf00      	nop
    1b170:	00039fc8 	.word	0x00039fc8
    1b174:	00039f38 	.word	0x00039f38
-   1b178:	0003d0d7 	.word	0x0003d0d7
+   1b178:	0003d0cb 	.word	0x0003d0cb
    1b17c:	e000ed00 	.word	0xe000ed00
-   1b180:	0003d0ed 	.word	0x0003d0ed
-   1b184:	0003d1a8 	.word	0x0003d1a8
-   1b188:	0003d0fe 	.word	0x0003d0fe
-   1b18c:	0003d117 	.word	0x0003d117
-   1b190:	0003d12c 	.word	0x0003d12c
-   1b194:	0003d147 	.word	0x0003d147
-   1b198:	0003d208 	.word	0x0003d208
+   1b180:	0003d0e1 	.word	0x0003d0e1
+   1b184:	0003d19c 	.word	0x0003d19c
+   1b188:	0003d0f2 	.word	0x0003d0f2
+   1b18c:	0003d10b 	.word	0x0003d10b
+   1b190:	0003d120 	.word	0x0003d120
+   1b194:	0003d13b 	.word	0x0003d13b
+   1b198:	0003d1fc 	.word	0x0003d1fc
 
 0001b19c <usage_fault.isra.4>:
  *
@@ -28567,15 +28567,15 @@ static u32_t usage_fault(const z_arch_esf_t *esf)
    1b296:	bf00      	nop
    1b298:	00039fc8 	.word	0x00039fc8
    1b29c:	00039f38 	.word	0x00039f38
-   1b2a0:	0003d2ab 	.word	0x0003d2ab
+   1b2a0:	0003d29f 	.word	0x0003d29f
    1b2a4:	e000ed00 	.word	0xe000ed00
-   1b2a8:	0003d2c3 	.word	0x0003d2c3
-   1b2ac:	0003d2d6 	.word	0x0003d2d6
-   1b2b0:	0003d2f0 	.word	0x0003d2f0
-   1b2b4:	0003d31a 	.word	0x0003d31a
-   1b2b8:	0003d338 	.word	0x0003d338
-   1b2bc:	0003d35d 	.word	0x0003d35d
-   1b2c0:	0003d377 	.word	0x0003d377
+   1b2a8:	0003d2b7 	.word	0x0003d2b7
+   1b2ac:	0003d2ca 	.word	0x0003d2ca
+   1b2b0:	0003d2e4 	.word	0x0003d2e4
+   1b2b4:	0003d30e 	.word	0x0003d30e
+   1b2b8:	0003d32c 	.word	0x0003d32c
+   1b2bc:	0003d351 	.word	0x0003d351
+   1b2c0:	0003d36b 	.word	0x0003d36b
 
 0001b2c4 <z_arm_fault>:
  * @param psp PSP value immediately after the exception occurred
@@ -28825,21 +28825,21 @@ void z_arm_fault(u32_t msp, u32_t psp, u32_t exc_return)
    1b48c:	e000ed00 	.word	0xe000ed00
    1b490:	00039f38 	.word	0x00039f38
    1b494:	00039fc8 	.word	0x00039fc8
-   1b498:	0003d3d0 	.word	0x0003d3d0
-   1b49c:	0003d237 	.word	0x0003d237
-   1b4a0:	0003d3f3 	.word	0x0003d3f3
-   1b4a4:	0003b763 	.word	0x0003b763
-   1b4a8:	0003d406 	.word	0x0003d406
-   1b4ac:	0003d444 	.word	0x0003d444
-   1b4b0:	0003d45b 	.word	0x0003d45b
-   1b4b4:	0003d47c 	.word	0x0003d47c
+   1b498:	0003d3c4 	.word	0x0003d3c4
+   1b49c:	0003d22b 	.word	0x0003d22b
+   1b4a0:	0003d3e7 	.word	0x0003d3e7
+   1b4a4:	0003b757 	.word	0x0003b757
+   1b4a8:	0003d3fa 	.word	0x0003d3fa
+   1b4ac:	0003d438 	.word	0x0003d438
+   1b4b0:	0003d44f 	.word	0x0003d44f
+   1b4b4:	0003d470 	.word	0x0003d470
    1b4b8:	e000ed28 	.word	0xe000ed28
    1b4bc:	e000ed29 	.word	0xe000ed29
    1b4c0:	e000ed2a 	.word	0xe000ed2a
-   1b4c4:	0003d49b 	.word	0x0003d49b
-   1b4c8:	0003d3a2 	.word	0x0003d3a2
-   1b4cc:	0003d3b7 	.word	0x0003d3b7
-   1b4d0:	0003d4d1 	.word	0x0003d4d1
+   1b4c4:	0003d48f 	.word	0x0003d48f
+   1b4c8:	0003d396 	.word	0x0003d396
+   1b4cc:	0003d3ab 	.word	0x0003d3ab
+   1b4d0:	0003d4c5 	.word	0x0003d4c5
 
 0001b4d4 <z_arm_fault_init>:
  */
@@ -29032,10 +29032,10 @@ void z_impl_k_thread_abort(k_tid_t thread)
    1b5a0:	e8bd 4038 	ldmia.w	sp!, {r3, r4, r5, lr}
 	z_reschedule_irqlock(key);
    1b5a4:	f01d bb7e 	b.w	38ca4 <z_reschedule_irqlock>
-   1b5a8:	0003d525 	.word	0x0003d525
-   1b5ac:	0003d4e4 	.word	0x0003d4e4
-   1b5b0:	0003b763 	.word	0x0003b763
-   1b5b4:	0003d553 	.word	0x0003d553
+   1b5a8:	0003d519 	.word	0x0003d519
+   1b5ac:	0003d4d8 	.word	0x0003d4d8
+   1b5b0:	0003b757 	.word	0x0003b757
+   1b5b4:	0003d547 	.word	0x0003d547
    1b5b8:	200274dc 	.word	0x200274dc
    1b5bc:	e000ed00 	.word	0xe000ed00
 
@@ -29219,7 +29219,7 @@ static int region_allocate_and_init(const u8_t index,
    1b676:	e7fa      	b.n	1b66e <region_allocate_and_init+0x2a>
    1b678:	00039f38 	.word	0x00039f38
    1b67c:	00039fb8 	.word	0x00039fb8
-   1b680:	0003d6f9 	.word	0x0003d6f9
+   1b680:	0003d6ed 	.word	0x0003d6ed
 
 0001b684 <mpu_configure_regions_and_partition.constprop.2>:
  * sanity check of the memory regions to be programmed.
@@ -29446,8 +29446,8 @@ static int mpu_configure_regions_and_partition(const struct k_mem_partition
    1b7f4:	e000ed90 	.word	0xe000ed90
    1b7f8:	00039f38 	.word	0x00039f38
    1b7fc:	00039fb8 	.word	0x00039fb8
-   1b800:	0003d6d6 	.word	0x0003d6d6
-   1b804:	0003d6b3 	.word	0x0003d6b3
+   1b800:	0003d6ca 	.word	0x0003d6ca
+   1b804:	0003d6a7 	.word	0x0003d6a7
 
 0001b808 <arm_core_mpu_enable>:
 void arm_core_mpu_enable(void)
@@ -29581,15 +29581,15 @@ static int arm_mpu_init(struct device *arg)
    1b8b0:	e7db      	b.n	1b86a <arm_mpu_init+0x3e>
    1b8b2:	bf00      	nop
    1b8b4:	0003a4a0 	.word	0x0003a4a0
-   1b8b8:	0003d5cd 	.word	0x0003d5cd
-   1b8bc:	0003fd1f 	.word	0x0003fd1f
-   1b8c0:	0003b763 	.word	0x0003b763
-   1b8c4:	0003d60d 	.word	0x0003d60d
+   1b8b8:	0003d5c1 	.word	0x0003d5c1
+   1b8bc:	0003fd13 	.word	0x0003fd13
+   1b8c0:	0003b757 	.word	0x0003b757
+   1b8c4:	0003d601 	.word	0x0003d601
    1b8c8:	e000ed90 	.word	0xe000ed90
    1b8cc:	0044ffaa 	.word	0x0044ffaa
    1b8d0:	20027fb7 	.word	0x20027fb7
-   1b8d4:	0003d641 	.word	0x0003d641
-   1b8d8:	0003d692 	.word	0x0003d692
+   1b8d4:	0003d635 	.word	0x0003d635
+   1b8d8:	0003d686 	.word	0x0003d686
 
 0001b8dc <arm_core_mpu_configure_static_mpu_regions>:
 {
@@ -29635,10 +29635,10 @@ static int mpu_configure_static_mpu_regions(const struct k_mem_partition
 }
    1b912:	bd38      	pop	{r3, r4, r5, pc}
    1b914:	20027fb7 	.word	0x20027fb7
-   1b918:	0003d5cd 	.word	0x0003d5cd
-   1b91c:	0003fd1f 	.word	0x0003fd1f
-   1b920:	0003b763 	.word	0x0003b763
-   1b924:	0003d572 	.word	0x0003d572
+   1b918:	0003d5c1 	.word	0x0003d5c1
+   1b91c:	0003fd13 	.word	0x0003fd13
+   1b920:	0003b757 	.word	0x0003b757
+   1b924:	0003d566 	.word	0x0003d566
 
 0001b928 <arm_core_mpu_mark_areas_for_dynamic_regions>:
 {
@@ -29762,10 +29762,10 @@ static int mpu_configure_static_mpu_regions(const struct k_mem_partition
    1b9e8:	20021770 	.word	0x20021770
    1b9ec:	e000ed90 	.word	0xe000ed90
    1b9f0:	20027fb7 	.word	0x20027fb7
-   1b9f4:	0003d5cd 	.word	0x0003d5cd
-   1b9f8:	0003fd1f 	.word	0x0003fd1f
-   1b9fc:	0003b763 	.word	0x0003b763
-   1ba00:	0003d59e 	.word	0x0003d59e
+   1b9f4:	0003d5c1 	.word	0x0003d5c1
+   1b9f8:	0003fd13 	.word	0x0003fd13
+   1b9fc:	0003b757 	.word	0x0003b757
+   1ba00:	0003d592 	.word	0x0003d592
 
 0001ba04 <__stdout_hook_install>:
 
@@ -29880,7 +29880,7 @@ __weak void _exit(int status)
 	while (1) {
 		;
    1ba72:	e7fe      	b.n	1ba72 <_exit+0xa>
-   1ba74:	0003d71f 	.word	0x0003d71f
+   1ba74:	0003d713 	.word	0x0003d713
 
 0001ba78 <_sbrk>:
 }
@@ -30145,19 +30145,19 @@ static int thingy91_board_init(struct device *dev)
    1bc4e:	bf00      	nop
    1bc50:	00039f38 	.word	0x00039f38
    1bc54:	00039f48 	.word	0x00039f48
-   1bc58:	0003d744 	.word	0x0003d744
-   1bc5c:	0003d898 	.word	0x0003d898
-   1bc60:	0003d762 	.word	0x0003d762
-   1bc64:	0003d773 	.word	0x0003d773
-   1bc68:	0003fd1f 	.word	0x0003fd1f
-   1bc6c:	0003d78e 	.word	0x0003d78e
-   1bc70:	0003b763 	.word	0x0003b763
-   1bc74:	0003d7cc 	.word	0x0003d7cc
-   1bc78:	0003d7f5 	.word	0x0003d7f5
-   1bc7c:	0003d7f8 	.word	0x0003d7f8
-   1bc80:	0003d855 	.word	0x0003d855
-   1bc84:	0003d86b 	.word	0x0003d86b
-   1bc88:	0003d883 	.word	0x0003d883
+   1bc58:	0003d738 	.word	0x0003d738
+   1bc5c:	0003d88c 	.word	0x0003d88c
+   1bc60:	0003d756 	.word	0x0003d756
+   1bc64:	0003d767 	.word	0x0003d767
+   1bc68:	0003fd13 	.word	0x0003fd13
+   1bc6c:	0003d782 	.word	0x0003d782
+   1bc70:	0003b757 	.word	0x0003b757
+   1bc74:	0003d7c0 	.word	0x0003d7c0
+   1bc78:	0003d7e9 	.word	0x0003d7e9
+   1bc7c:	0003d7ec 	.word	0x0003d7ec
+   1bc80:	0003d849 	.word	0x0003d849
+   1bc84:	0003d85f 	.word	0x0003d85f
+   1bc88:	0003d877 	.word	0x0003d877
 
 0001bc8c <net_buf_id>:
 
@@ -30265,10 +30265,10 @@ static inline void net_buf_simple_reset(struct net_buf_simple *buf)
 }
    1bd18:	bd10      	pop	{r4, pc}
    1bd1a:	bf00      	nop
-   1bd1c:	0003d90e 	.word	0x0003d90e
-   1bd20:	0003b763 	.word	0x0003b763
-   1bd24:	0003d8ea 	.word	0x0003d8ea
-   1bd28:	0003d91f 	.word	0x0003d91f
+   1bd1c:	0003d902 	.word	0x0003d902
+   1bd20:	0003b757 	.word	0x0003b757
+   1bd24:	0003d8de 	.word	0x0003d8de
+   1bd28:	0003d913 	.word	0x0003d913
 
 0001bd2c <net_buf_alloc_len>:
 					int line)
@@ -30483,13 +30483,13 @@ static inline void net_buf_destroy(struct net_buf *buf)
 		buf->__buf = NULL;
    1be70:	6125      	str	r5, [r4, #16]
    1be72:	e7f3      	b.n	1be5c <net_buf_alloc_len+0x130>
-   1be74:	0003d8c8 	.word	0x0003d8c8
-   1be78:	0003b763 	.word	0x0003b763
-   1be7c:	0003d8ea 	.word	0x0003d8ea
+   1be74:	0003d8bc 	.word	0x0003d8bc
+   1be78:	0003b757 	.word	0x0003b757
+   1be7c:	0003d8de 	.word	0x0003d8de
    1be80:	200207f8 	.word	0x200207f8
    1be84:	ba2e8ba3 	.word	0xba2e8ba3
-   1be88:	0003d8cd 	.word	0x0003d8cd
-   1be8c:	0003cb6f 	.word	0x0003cb6f
+   1be88:	0003d8c1 	.word	0x0003d8c1
+   1be8c:	0003cb63 	.word	0x0003cb63
 
 0001be90 <net_buf_unref>:
 #if defined(CONFIG_NET_BUF_LOG)
@@ -30590,9 +30590,9 @@ void net_buf_unref(struct net_buf *buf)
    1bf06:	f01c febf 	bl	38c88 <k_queue_prepend>
    1bf0a:	e7e6      	b.n	1beda <net_buf_unref+0x4a>
    1bf0c:	200207f8 	.word	0x200207f8
-   1bf10:	0003d970 	.word	0x0003d970
-   1bf14:	0003b763 	.word	0x0003b763
-   1bf18:	0003d8ea 	.word	0x0003d8ea
+   1bf10:	0003d964 	.word	0x0003d964
+   1bf14:	0003b757 	.word	0x0003b757
+   1bf18:	0003d8de 	.word	0x0003d8de
 
 0001bf1c <net_buf_frag_last>:
 
@@ -30627,9 +30627,9 @@ struct net_buf *net_buf_frag_last(struct net_buf *buf)
    1bf42:	461c      	mov	r4, r3
    1bf44:	e7f9      	b.n	1bf3a <net_buf_frag_last+0x1e>
    1bf46:	bf00      	nop
-   1bf48:	0003d970 	.word	0x0003d970
-   1bf4c:	0003b763 	.word	0x0003b763
-   1bf50:	0003d8ea 	.word	0x0003d8ea
+   1bf48:	0003d964 	.word	0x0003d964
+   1bf4c:	0003b757 	.word	0x0003b757
+   1bf50:	0003d8de 	.word	0x0003d8de
 
 0001bf54 <net_buf_frag_insert>:
 
@@ -30673,10 +30673,10 @@ void net_buf_frag_insert(struct net_buf *parent, struct net_buf *frag)
    1bf9c:	6025      	str	r5, [r4, #0]
 }
    1bf9e:	bd38      	pop	{r3, r4, r5, pc}
-   1bfa0:	0003d8de 	.word	0x0003d8de
-   1bfa4:	0003b763 	.word	0x0003b763
-   1bfa8:	0003d8ea 	.word	0x0003d8ea
-   1bfac:	0003d8e5 	.word	0x0003d8e5
+   1bfa0:	0003d8d2 	.word	0x0003d8d2
+   1bfa4:	0003b757 	.word	0x0003b757
+   1bfa8:	0003d8de 	.word	0x0003d8de
+   1bfac:	0003d8d9 	.word	0x0003d8d9
 
 0001bfb0 <net_buf_simple_add>:
 {
@@ -30720,9 +30720,9 @@ void *net_buf_simple_add(struct net_buf_simple *buf, size_t len)
 }
    1bfe4:	bd70      	pop	{r4, r5, r6, pc}
    1bfe6:	bf00      	nop
-   1bfe8:	0003d939 	.word	0x0003d939
-   1bfec:	0003b763 	.word	0x0003b763
-   1bff0:	0003d8ea 	.word	0x0003d8ea
+   1bfe8:	0003d92d 	.word	0x0003d92d
+   1bfec:	0003b757 	.word	0x0003b757
+   1bff0:	0003d8de 	.word	0x0003d8de
 
 0001bff4 <net_ipv4_is_ll_addr>:
  *
@@ -30782,10 +30782,10 @@ static inline bool atomic_test_bit(const atomic_t *target, int bit)
    1c03c:	f000 0001 	and.w	r0, r0, #1
    1c040:	bd38      	pop	{r3, r4, r5, pc}
    1c042:	bf00      	nop
-   1c044:	0003d99c 	.word	0x0003d99c
-   1c048:	0003d974 	.word	0x0003d974
-   1c04c:	0003b763 	.word	0x0003b763
-   1c050:	0003cb6f 	.word	0x0003cb6f
+   1c044:	0003d990 	.word	0x0003d990
+   1c048:	0003d968 	.word	0x0003d968
+   1c04c:	0003b757 	.word	0x0003b757
+   1c050:	0003cb63 	.word	0x0003cb63
 
 0001c054 <iface_router_run_timer>:
 	}
@@ -30894,10 +30894,10 @@ static inline void net_if_flag_set(struct net_if *iface,
 }
    1c100:	bd10      	pop	{r4, pc}
    1c102:	bf00      	nop
-   1c104:	0003d99c 	.word	0x0003d99c
-   1c108:	0003d974 	.word	0x0003d974
-   1c10c:	0003b763 	.word	0x0003b763
-   1c110:	0003cb6f 	.word	0x0003cb6f
+   1c104:	0003d990 	.word	0x0003d990
+   1c108:	0003d968 	.word	0x0003d968
+   1c10c:	0003b757 	.word	0x0003b757
+   1c110:	0003cb63 	.word	0x0003cb63
 
 0001c114 <net_if_ipv4_get_best_match.isra.17>:
 	}
@@ -31708,10 +31708,10 @@ exit:
 }
    1c520:	bd38      	pop	{r3, r4, r5, pc}
    1c522:	bf00      	nop
-   1c524:	0003d9a2 	.word	0x0003d9a2
-   1c528:	0003d9d3 	.word	0x0003d9d3
-   1c52c:	0003b763 	.word	0x0003b763
-   1c530:	0003cb6f 	.word	0x0003cb6f
+   1c524:	0003d996 	.word	0x0003d996
+   1c528:	0003d9c7 	.word	0x0003d9c7
+   1c52c:	0003b757 	.word	0x0003b757
+   1c530:	0003cb63 	.word	0x0003cb63
 
 0001c534 <net_if_init>:
 	k_fifo_put(&tx_ts_queue, pkt);
@@ -31866,10 +31866,10 @@ const struct in_addr *net_ipv4_broadcast_address(void)
    1c5f0:	f000 0001 	and.w	r0, r0, #1
    1c5f4:	bd10      	pop	{r4, pc}
    1c5f6:	bf00      	nop
-   1c5f8:	0003cb67 	.word	0x0003cb67
-   1c5fc:	0003cb3a 	.word	0x0003cb3a
-   1c600:	0003b763 	.word	0x0003b763
-   1c604:	0003cb6f 	.word	0x0003cb6f
+   1c5f8:	0003cb5b 	.word	0x0003cb5b
+   1c5fc:	0003cb2e 	.word	0x0003cb2e
+   1c600:	0003b757 	.word	0x0003b757
+   1c604:	0003cb63 	.word	0x0003cb63
 
 0001c608 <check_used_port>:
 #if defined(CONFIG_NET_UDP) || defined(CONFIG_NET_TCP)
@@ -31957,10 +31957,10 @@ static int check_used_port(enum net_ip_protocol ip_proto,
    1c67c:	f3c0 0041 	ubfx	r0, r0, #1, #2
    1c680:	bd10      	pop	{r4, pc}
    1c682:	bf00      	nop
-   1c684:	0003cb67 	.word	0x0003cb67
-   1c688:	0003cb3a 	.word	0x0003cb3a
-   1c68c:	0003b763 	.word	0x0003b763
-   1c690:	0003cb6f 	.word	0x0003cb6f
+   1c684:	0003cb5b 	.word	0x0003cb5b
+   1c688:	0003cb2e 	.word	0x0003cb2e
+   1c68c:	0003b757 	.word	0x0003b757
+   1c690:	0003cb63 	.word	0x0003cb63
 
 0001c694 <net_context_get_family>:
 {
@@ -31984,10 +31984,10 @@ static int check_used_port(enum net_ip_protocol ip_proto,
    1c6bc:	f3c0 00c2 	ubfx	r0, r0, #3, #3
    1c6c0:	bd10      	pop	{r4, pc}
    1c6c2:	bf00      	nop
-   1c6c4:	0003cb67 	.word	0x0003cb67
-   1c6c8:	0003cb3a 	.word	0x0003cb3a
-   1c6cc:	0003b763 	.word	0x0003b763
-   1c6d0:	0003cb6f 	.word	0x0003cb6f
+   1c6c4:	0003cb5b 	.word	0x0003cb5b
+   1c6c8:	0003cb2e 	.word	0x0003cb2e
+   1c6cc:	0003b757 	.word	0x0003b757
+   1c6d0:	0003cb63 	.word	0x0003cb63
 
 0001c6d4 <net_context_get_type>:
 {
@@ -32011,10 +32011,10 @@ static int check_used_port(enum net_ip_protocol ip_proto,
    1c6fc:	f3c0 1081 	ubfx	r0, r0, #6, #2
    1c700:	bd10      	pop	{r4, pc}
    1c702:	bf00      	nop
-   1c704:	0003cb67 	.word	0x0003cb67
-   1c708:	0003cb3a 	.word	0x0003cb3a
-   1c70c:	0003b763 	.word	0x0003b763
-   1c710:	0003cb6f 	.word	0x0003cb6f
+   1c704:	0003cb5b 	.word	0x0003cb5b
+   1c708:	0003cb2e 	.word	0x0003cb2e
+   1c70c:	0003b757 	.word	0x0003b757
+   1c710:	0003cb63 	.word	0x0003cb63
 
 0001c714 <find_available_port>:
 
@@ -32083,10 +32083,10 @@ static inline void net_context_set_iface(struct net_context *context,
    1c76c:	7028      	strb	r0, [r5, #0]
 }
    1c76e:	bd38      	pop	{r3, r4, r5, pc}
-   1c770:	0003d99c 	.word	0x0003d99c
-   1c774:	0003cb3a 	.word	0x0003cb3a
-   1c778:	0003b763 	.word	0x0003b763
-   1c77c:	0003cb6f 	.word	0x0003cb6f
+   1c770:	0003d990 	.word	0x0003d990
+   1c774:	0003cb2e 	.word	0x0003cb2e
+   1c778:	0003b757 	.word	0x0003b757
+   1c77c:	0003cb63 	.word	0x0003cb63
 
 0001c780 <net_context_packet_received>:
 enum net_verdict net_context_packet_received(struct net_conn *conn,
@@ -32203,11 +32203,11 @@ unlock:
    1c834:	2502      	movs	r5, #2
    1c836:	e7f6      	b.n	1c826 <net_context_packet_received+0xa6>
    1c838:	200217f8 	.word	0x200217f8
-   1c83c:	0003db7b 	.word	0x0003db7b
-   1c840:	0003cb67 	.word	0x0003cb67
-   1c844:	0003b763 	.word	0x0003b763
-   1c848:	0003cb6f 	.word	0x0003cb6f
-   1c84c:	0003dbaa 	.word	0x0003dbaa
+   1c83c:	0003db6f 	.word	0x0003db6f
+   1c840:	0003cb5b 	.word	0x0003cb5b
+   1c844:	0003b757 	.word	0x0003b757
+   1c848:	0003cb63 	.word	0x0003cb63
+   1c84c:	0003db9e 	.word	0x0003db9e
 
 0001c850 <net_context_get>:
 		if (!IS_ENABLED(CONFIG_NET_IPV6) && family == AF_INET6) {
@@ -32438,10 +32438,10 @@ __ssp_bos_icheck3(memset, void *, int)
    1ca2c:	4620      	mov	r0, r4
 }
    1ca2e:	bd70      	pop	{r4, r5, r6, pc}
-   1ca30:	0003cb67 	.word	0x0003cb67
-   1ca34:	0003db7b 	.word	0x0003db7b
-   1ca38:	0003b763 	.word	0x0003b763
-   1ca3c:	0003cb6f 	.word	0x0003cb6f
+   1ca30:	0003cb5b 	.word	0x0003cb5b
+   1ca34:	0003db6f 	.word	0x0003db6f
+   1ca38:	0003b757 	.word	0x0003b757
+   1ca3c:	0003cb63 	.word	0x0003cb63
    1ca40:	200217f8 	.word	0x200217f8
 
 0001ca44 <net_context_bind>:
@@ -32579,12 +32579,12 @@ __ssp_bos_icheck3(memset, void *, int)
    1cb38:	f06f 0415 	mvn.w	r4, #21
    1cb3c:	e7c2      	b.n	1cac4 <net_context_bind+0x80>
    1cb3e:	bf00      	nop
-   1cb40:	0003db76 	.word	0x0003db76
-   1cb44:	0003db7b 	.word	0x0003db7b
-   1cb48:	0003b763 	.word	0x0003b763
-   1cb4c:	0003cb6f 	.word	0x0003cb6f
+   1cb40:	0003db6a 	.word	0x0003db6a
+   1cb44:	0003db6f 	.word	0x0003db6f
+   1cb48:	0003b757 	.word	0x0003b757
+   1cb4c:	0003cb63 	.word	0x0003cb63
    1cb50:	200217f8 	.word	0x200217f8
-   1cb54:	0003d9fd 	.word	0x0003d9fd
+   1cb54:	0003d9f1 	.word	0x0003d9f1
 
 0001cb58 <net_context_listen>:
 {
@@ -32639,10 +32639,10 @@ __ssp_bos_icheck3(memset, void *, int)
    1cbba:	f06f 0008 	mvn.w	r0, #8
    1cbbe:	e7f6      	b.n	1cbae <net_context_listen+0x56>
    1cbc0:	200217f8 	.word	0x200217f8
-   1cbc4:	0003d9fd 	.word	0x0003d9fd
-   1cbc8:	0003db7b 	.word	0x0003db7b
-   1cbcc:	0003b763 	.word	0x0003b763
-   1cbd0:	0003cb6f 	.word	0x0003cb6f
+   1cbc4:	0003d9f1 	.word	0x0003d9f1
+   1cbc8:	0003db6f 	.word	0x0003db6f
+   1cbcc:	0003b757 	.word	0x0003b757
+   1cbd0:	0003cb63 	.word	0x0003cb63
 
 0001cbd4 <net_context_create_ipv4_new>:
 {
@@ -32698,10 +32698,10 @@ __ssp_bos_icheck3(memset, void *, int)
 }
    1cc32:	f06f 0015 	mvn.w	r0, #21
    1cc36:	bd70      	pop	{r4, r5, r6, pc}
-   1cc38:	0003db44 	.word	0x0003db44
-   1cc3c:	0003db7b 	.word	0x0003db7b
-   1cc40:	0003b763 	.word	0x0003b763
-   1cc44:	0003cb6f 	.word	0x0003cb6f
+   1cc38:	0003db38 	.word	0x0003db38
+   1cc3c:	0003db6f 	.word	0x0003db6f
+   1cc40:	0003b757 	.word	0x0003b757
+   1cc44:	0003cb63 	.word	0x0003cb63
 
 0001cc48 <context_sendto.isra.21>:
 static int context_sendto(struct net_context *context,
@@ -32964,12 +32964,12 @@ static int context_sendto(struct net_context *context,
    1ce44:	e734      	b.n	1ccb0 <context_sendto.isra.21+0x68>
    1ce46:	bf00      	nop
    1ce48:	200217f8 	.word	0x200217f8
-   1ce4c:	0003d9fd 	.word	0x0003d9fd
-   1ce50:	0003db7b 	.word	0x0003db7b
-   1ce54:	0003b763 	.word	0x0003b763
-   1ce58:	0003cb6f 	.word	0x0003cb6f
-   1ce5c:	0003cb67 	.word	0x0003cb67
-   1ce60:	0003cb3a 	.word	0x0003cb3a
+   1ce4c:	0003d9f1 	.word	0x0003d9f1
+   1ce50:	0003db6f 	.word	0x0003db6f
+   1ce54:	0003b757 	.word	0x0003b757
+   1ce58:	0003cb63 	.word	0x0003cb63
+   1ce5c:	0003cb5b 	.word	0x0003cb5b
+   1ce60:	0003cb2e 	.word	0x0003cb2e
 
 0001ce64 <net_context_connect>:
 {
@@ -33159,14 +33159,14 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
    1cfe4:	f06f 0585 	mvn.w	r5, #133	; 0x85
    1cfe8:	e784      	b.n	1cef4 <net_context_connect+0x90>
    1cfea:	bf00      	nop
-   1cfec:	0003db76 	.word	0x0003db76
-   1cff0:	0003db7b 	.word	0x0003db7b
-   1cff4:	0003b763 	.word	0x0003b763
-   1cff8:	0003cb6f 	.word	0x0003cb6f
+   1cfec:	0003db6a 	.word	0x0003db6a
+   1cff0:	0003db6f 	.word	0x0003db6f
+   1cff4:	0003b757 	.word	0x0003b757
+   1cff8:	0003cb63 	.word	0x0003cb63
    1cffc:	200217f8 	.word	0x200217f8
-   1d000:	0003d9fd 	.word	0x0003d9fd
-   1d004:	0003daef 	.word	0x0003daef
-   1d008:	0003db22 	.word	0x0003db22
+   1d000:	0003d9f1 	.word	0x0003d9f1
+   1d004:	0003dae3 	.word	0x0003dae3
+   1d008:	0003db16 	.word	0x0003db16
 
 0001d00c <net_context_accept>:
 {
@@ -33239,10 +33239,10 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
    1d094:	e7eb      	b.n	1d06e <net_context_accept+0x62>
    1d096:	bf00      	nop
    1d098:	200217f8 	.word	0x200217f8
-   1d09c:	0003d9fd 	.word	0x0003d9fd
-   1d0a0:	0003db7b 	.word	0x0003db7b
-   1d0a4:	0003b763 	.word	0x0003b763
-   1d0a8:	0003cb6f 	.word	0x0003cb6f
+   1d09c:	0003d9f1 	.word	0x0003d9f1
+   1d0a0:	0003db6f 	.word	0x0003db6f
+   1d0a4:	0003b757 	.word	0x0003b757
+   1d0a8:	0003cb63 	.word	0x0003cb63
 
 0001d0ac <net_context_recv>:
 
@@ -33439,10 +33439,10 @@ unlock:
    1d1c8:	f06f 0508 	mvn.w	r5, #8
    1d1cc:	e7eb      	b.n	1d1a6 <net_context_recv+0xfa>
    1d1ce:	bf00      	nop
-   1d1d0:	0003cb67 	.word	0x0003cb67
-   1d1d4:	0003db7b 	.word	0x0003db7b
-   1d1d8:	0003b763 	.word	0x0003b763
-   1d1dc:	0003cb6f 	.word	0x0003cb6f
+   1d1d0:	0003cb5b 	.word	0x0003cb5b
+   1d1d4:	0003db6f 	.word	0x0003db6f
+   1d1d8:	0003b757 	.word	0x0003b757
+   1d1dc:	0003cb63 	.word	0x0003cb63
    1d1e0:	0001c781 	.word	0x0001c781
 
 0001d1e4 <net_context_init>:
@@ -33793,7 +33793,7 @@ int net_tx_priority2tc(enum net_priority prio)
    1d3c2:	4b01      	ldr	r3, [pc, #4]	; (1d3c8 <net_tx_priority2tc+0xc>)
    1d3c4:	5c18      	ldrb	r0, [r3, r0]
    1d3c6:	4770      	bx	lr
-   1d3c8:	0003dbcf 	.word	0x0003dbcf
+   1d3c8:	0003dbc3 	.word	0x0003dbc3
 
 0001d3cc <net_tc_tx_init>:
 
@@ -33834,7 +33834,7 @@ int net_tx_priority2tc(enum net_priority prio)
    1d3f0:	f01b bc9c 	b.w	38d2c <z_impl_k_thread_name_set>
    1d3f4:	20021bec 	.word	0x20021bec
    1d3f8:	20031608 	.word	0x20031608
-   1d3fc:	0003dbc6 	.word	0x0003dbc6
+   1d3fc:	0003dbba 	.word	0x0003dbba
 
 0001d400 <net_tc_rx_init>:
 
@@ -33874,7 +33874,7 @@ int net_tx_priority2tc(enum net_priority prio)
    1d424:	f01b bc82 	b.w	38d2c <z_impl_k_thread_name_set>
    1d428:	20021b10 	.word	0x20021b10
    1d42c:	20031ab8 	.word	0x20031ab8
-   1d430:	0003dbbd 	.word	0x0003dbbd
+   1d430:	0003dbb1 	.word	0x0003dbb1
 
 0001d434 <net_icmpv4_register_handler>:
 Z_GENLIST_PREPEND(slist, snode)
@@ -34824,10 +34824,10 @@ static inline bool net_ipv4_is_my_addr(const struct in_addr *addr)
    1d920:	f3c0 00c2 	ubfx	r0, r0, #3, #3
    1d924:	bd10      	pop	{r4, pc}
    1d926:	bf00      	nop
-   1d928:	0003cb67 	.word	0x0003cb67
-   1d92c:	0003cb3a 	.word	0x0003cb3a
-   1d930:	0003b763 	.word	0x0003b763
-   1d934:	0003cb6f 	.word	0x0003cb6f
+   1d928:	0003cb5b 	.word	0x0003cb5b
+   1d92c:	0003cb2e 	.word	0x0003cb2e
+   1d930:	0003b757 	.word	0x0003b757
+   1d934:	0003cb63 	.word	0x0003cb63
 
 0001d938 <net_context_get_state>:
 {
@@ -34851,10 +34851,10 @@ static inline bool net_ipv4_is_my_addr(const struct in_addr *addr)
    1d960:	f3c0 0041 	ubfx	r0, r0, #1, #2
    1d964:	bd10      	pop	{r4, pc}
    1d966:	bf00      	nop
-   1d968:	0003cb67 	.word	0x0003cb67
-   1d96c:	0003cb3a 	.word	0x0003cb3a
-   1d970:	0003b763 	.word	0x0003b763
-   1d974:	0003cb6f 	.word	0x0003cb6f
+   1d968:	0003cb5b 	.word	0x0003cb5b
+   1d96c:	0003cb2e 	.word	0x0003cb2e
+   1d970:	0003b757 	.word	0x0003b757
+   1d974:	0003cb63 	.word	0x0003cb63
 
 0001d978 <net_context_set_state>:
 {
@@ -34881,10 +34881,10 @@ static inline bool net_ipv4_is_my_addr(const struct in_addr *addr)
    1d9aa:	f8a4 107a 	strh.w	r1, [r4, #122]	; 0x7a
 }
    1d9ae:	bd38      	pop	{r3, r4, r5, pc}
-   1d9b0:	0003cb67 	.word	0x0003cb67
-   1d9b4:	0003cb3a 	.word	0x0003cb3a
-   1d9b8:	0003b763 	.word	0x0003b763
-   1d9bc:	0003cb6f 	.word	0x0003cb6f
+   1d9b0:	0003cb5b 	.word	0x0003cb5b
+   1d9b4:	0003cb2e 	.word	0x0003cb2e
+   1d9b8:	0003b757 	.word	0x0003b757
+   1d9bc:	0003cb63 	.word	0x0003cb63
 
 0001d9c0 <net_context_get_iface>:
 {
@@ -34908,10 +34908,10 @@ static inline bool net_ipv4_is_my_addr(const struct in_addr *addr)
    1d9e8:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
 	return net_if_get_by_index(context->iface);
    1d9ec:	f7fe bd42 	b.w	1c474 <net_if_get_by_index>
-   1d9f0:	0003cb67 	.word	0x0003cb67
-   1d9f4:	0003cb3a 	.word	0x0003cb3a
-   1d9f8:	0003b763 	.word	0x0003b763
-   1d9fc:	0003cb6f 	.word	0x0003cb6f
+   1d9f0:	0003cb5b 	.word	0x0003cb5b
+   1d9f4:	0003cb2e 	.word	0x0003cb2e
+   1d9f8:	0003b757 	.word	0x0003b757
+   1d9fc:	0003cb63 	.word	0x0003cb63
 
 0001da00 <net_context_set_iface.isra.25>:
 static inline void net_context_set_iface(struct net_context *context,
@@ -34936,10 +34936,10 @@ static inline void net_context_set_iface(struct net_context *context,
    1da2c:	7028      	strb	r0, [r5, #0]
 }
    1da2e:	bd38      	pop	{r3, r4, r5, pc}
-   1da30:	0003d99c 	.word	0x0003d99c
-   1da34:	0003cb3a 	.word	0x0003cb3a
-   1da38:	0003b763 	.word	0x0003b763
-   1da3c:	0003cb6f 	.word	0x0003cb6f
+   1da30:	0003d990 	.word	0x0003d990
+   1da34:	0003cb2e 	.word	0x0003cb2e
+   1da38:	0003b757 	.word	0x0003b757
+   1da3c:	0003cb63 	.word	0x0003cb63
 
 0001da40 <tcp_backlog_find.isra.26>:
 		addr6->sin6_port = port;
@@ -35284,10 +35284,10 @@ static inline void sys_put_be32(u32_t val, u8_t dst[4])
 			return -ENOMEM;
    1dc76:	f06f 070b 	mvn.w	r7, #11
    1dc7a:	e7f2      	b.n	1dc62 <prepare_segment.isra.21+0x1d2>
-   1dc7c:	0003cb67 	.word	0x0003cb67
-   1dc80:	0003dc31 	.word	0x0003dc31
-   1dc84:	0003b763 	.word	0x0003b763
-   1dc88:	0003cb6f 	.word	0x0003cb6f
+   1dc7c:	0003cb5b 	.word	0x0003cb5b
+   1dc80:	0003dc25 	.word	0x0003dc25
+   1dc84:	0003b757 	.word	0x0003b757
+   1dc88:	0003cb63 	.word	0x0003cb63
 
 0001dc8c <net_tcp_alloc>:
 {
@@ -35458,11 +35458,11 @@ static inline enum net_tcp_state net_tcp_get_state(const struct net_tcp *tcp)
    1ddd6:	b003      	add	sp, #12
    1ddd8:	bd30      	pop	{r4, r5, pc}
    1ddda:	bf00      	nop
-   1dddc:	0003dc6c 	.word	0x0003dc6c
-   1dde0:	0003dc31 	.word	0x0003dc31
-   1dde4:	0003b763 	.word	0x0003b763
-   1dde8:	0003cb6f 	.word	0x0003cb6f
-   1ddec:	0003dbd7 	.word	0x0003dbd7
+   1dddc:	0003dc60 	.word	0x0003dc60
+   1dde0:	0003dc25 	.word	0x0003dc25
+   1dde4:	0003b757 	.word	0x0003b757
+   1dde8:	0003cb63 	.word	0x0003cb63
+   1ddec:	0003dbcb 	.word	0x0003dbcb
 
 0001ddf0 <net_tcp_release>:
 {
@@ -35673,10 +35673,10 @@ static inline size_t net_buf_frags_len(struct net_buf *buf)
    1df78:	f06f 006d 	mvn.w	r0, #109	; 0x6d
    1df7c:	e7f3      	b.n	1df66 <net_tcp_queue_data+0x76>
    1df7e:	bf00      	nop
-   1df80:	0003dc63 	.word	0x0003dc63
-   1df84:	0003dc31 	.word	0x0003dc31
-   1df88:	0003b763 	.word	0x0003b763
-   1df8c:	0003cb6f 	.word	0x0003cb6f
+   1df80:	0003dc57 	.word	0x0003dc57
+   1df84:	0003dc25 	.word	0x0003dc25
+   1df88:	0003b757 	.word	0x0003b757
+   1df8c:	0003cb63 	.word	0x0003cb63
 
 0001df90 <tcp_established>:
  *				    union net_ip_header *ip_hdr,
@@ -36020,10 +36020,10 @@ clean_up:
    1e1aa:	3501      	adds	r5, #1
    1e1ac:	e7ee      	b.n	1e18c <tcp_established+0x1fc>
    1e1ae:	bf00      	nop
-   1e1b0:	0003dc58 	.word	0x0003dc58
-   1e1b4:	0003dc31 	.word	0x0003dc31
-   1e1b8:	0003b763 	.word	0x0003b763
-   1e1bc:	0003cb6f 	.word	0x0003cb6f
+   1e1b0:	0003dc4c 	.word	0x0003dc4c
+   1e1b4:	0003dc25 	.word	0x0003dc25
+   1e1b8:	0003b757 	.word	0x0003b757
+   1e1bc:	0003cb63 	.word	0x0003cb63
 
 0001e1c0 <tcp_synack_received>:
  *					struct net_pkt *pkt,
@@ -36245,11 +36245,11 @@ NET_CONN_CB(tcp_synack_received)
    1e33a:	6822      	ldr	r2, [r4, #0]
    1e33c:	2100      	movs	r1, #0
    1e33e:	e78e      	b.n	1e25e <tcp_synack_received+0x9e>
-   1e340:	0003dc58 	.word	0x0003dc58
-   1e344:	0003dc31 	.word	0x0003dc31
-   1e348:	0003b763 	.word	0x0003b763
-   1e34c:	0003cb6f 	.word	0x0003cb6f
-   1e350:	0003dbaa 	.word	0x0003dbaa
+   1e340:	0003dc4c 	.word	0x0003dc4c
+   1e344:	0003dc25 	.word	0x0003dc25
+   1e348:	0003b757 	.word	0x0003b757
+   1e34c:	0003cb63 	.word	0x0003cb63
+   1e350:	0003db9e 	.word	0x0003db9e
    1e354:	0001df91 	.word	0x0001df91
 
 0001e358 <tcp_syn_rcvd>:
@@ -36656,11 +36656,11 @@ __ssp_bos_icheck3(memset, void *, int)
 			goto conndrop;
    1e64c:	e7a5      	b.n	1e59a <tcp_syn_rcvd+0x242>
    1e64e:	bf00      	nop
-   1e650:	0003dc58 	.word	0x0003dc58
-   1e654:	0003dc31 	.word	0x0003dc31
-   1e658:	0003b763 	.word	0x0003b763
-   1e65c:	0003cb6f 	.word	0x0003cb6f
-   1e660:	0003dbaa 	.word	0x0003dbaa
+   1e650:	0003dc4c 	.word	0x0003dc4c
+   1e654:	0003dc25 	.word	0x0003dc25
+   1e658:	0003b757 	.word	0x0003b757
+   1e65c:	0003cb63 	.word	0x0003cb63
+   1e660:	0003db9e 	.word	0x0003db9e
    1e664:	20021d60 	.word	0x20021d60
    1e668:	000367e3 	.word	0x000367e3
 		new_context->flags |= NET_CONTEXT_REMOTE_ADDR_SET;
@@ -36780,13 +36780,13 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
    1e75c:	2218      	movs	r2, #24
    1e75e:	e7f0      	b.n	1e742 <tcp_syn_rcvd+0x3ea>
    1e760:	0001df91 	.word	0x0001df91
-   1e764:	0003cb67 	.word	0x0003cb67
-   1e768:	0003cb3a 	.word	0x0003cb3a
-   1e76c:	0003b763 	.word	0x0003b763
-   1e770:	0003cb6f 	.word	0x0003cb6f
-   1e774:	0003dc31 	.word	0x0003dc31
-   1e778:	0003fd1f 	.word	0x0003fd1f
-   1e77c:	0003dc70 	.word	0x0003dc70
+   1e764:	0003cb5b 	.word	0x0003cb5b
+   1e768:	0003cb2e 	.word	0x0003cb2e
+   1e76c:	0003b757 	.word	0x0003b757
+   1e770:	0003cb63 	.word	0x0003cb63
+   1e774:	0003dc25 	.word	0x0003dc25
+   1e778:	0003fd13 	.word	0x0003fd13
+   1e77c:	0003dc64 	.word	0x0003dc64
 
 0001e780 <net_tcp_recv>:
 {
@@ -36837,10 +36837,10 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
    1e7d4:	f06f 007f 	mvn.w	r0, #127	; 0x7f
    1e7d8:	e7f8      	b.n	1e7cc <net_tcp_recv+0x4c>
    1e7da:	bf00      	nop
-   1e7dc:	0003dc63 	.word	0x0003dc63
-   1e7e0:	0003dc31 	.word	0x0003dc31
-   1e7e4:	0003b763 	.word	0x0003b763
-   1e7e8:	0003cb6f 	.word	0x0003cb6f
+   1e7dc:	0003dc57 	.word	0x0003dc57
+   1e7e0:	0003dc25 	.word	0x0003dc25
+   1e7e4:	0003b757 	.word	0x0003b757
+   1e7e8:	0003cb63 	.word	0x0003cb63
 
 0001e7ec <net_tcp_get>:
 {
@@ -36883,10 +36883,10 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
 	return 0;
    1e838:	2000      	movs	r0, #0
    1e83a:	e7ee      	b.n	1e81a <net_tcp_get+0x2e>
-   1e83c:	0003dc31 	.word	0x0003dc31
-   1e840:	0003dc63 	.word	0x0003dc63
-   1e844:	0003b763 	.word	0x0003b763
-   1e848:	0003dc13 	.word	0x0003dc13
+   1e83c:	0003dc25 	.word	0x0003dc25
+   1e840:	0003dc57 	.word	0x0003dc57
+   1e844:	0003b757 	.word	0x0003b757
+   1e848:	0003dc07 	.word	0x0003dc07
    1e84c:	00036db5 	.word	0x00036db5
    1e850:	00036649 	.word	0x00036649
    1e854:	00036d75 	.word	0x00036d75
@@ -37060,10 +37060,10 @@ int net_tcp_accept(struct net_context *context,
    1e964:	b008      	add	sp, #32
    1e966:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
    1e96a:	bf00      	nop
-   1e96c:	0003dc63 	.word	0x0003dc63
-   1e970:	0003dc31 	.word	0x0003dc31
-   1e974:	0003b763 	.word	0x0003b763
-   1e978:	0003cb6f 	.word	0x0003cb6f
+   1e96c:	0003dc57 	.word	0x0003dc57
+   1e970:	0003dc25 	.word	0x0003dc25
+   1e974:	0003b757 	.word	0x0003b757
+   1e978:	0003cb63 	.word	0x0003cb63
    1e97c:	0001e359 	.word	0x0001e359
 
 0001e980 <net_tcp_connect>:
@@ -37196,10 +37196,10 @@ int net_tcp_accept(struct net_context *context,
 		return -ETIMEDOUT;
    1ea3a:	f06f 0073 	mvn.w	r0, #115	; 0x73
    1ea3e:	e7f9      	b.n	1ea34 <net_tcp_connect+0xb4>
-   1ea40:	0003dc63 	.word	0x0003dc63
-   1ea44:	0003dc31 	.word	0x0003dc31
-   1ea48:	0003b763 	.word	0x0003b763
-   1ea4c:	0003cb6f 	.word	0x0003cb6f
+   1ea40:	0003dc57 	.word	0x0003dc57
+   1ea44:	0003dc25 	.word	0x0003dc25
+   1ea48:	0003b757 	.word	0x0003b757
+   1ea4c:	0003cb63 	.word	0x0003cb63
    1ea50:	0001e1c1 	.word	0x0001e1c1
 
 0001ea54 <connect_request_encode>:
@@ -37408,7 +37408,7 @@ int disconnect_encode(struct buf_ctx *buf)
    1eb6e:	f06f 000b 	mvnls.w	r0, #11
 }
    1eb72:	4770      	bx	lr
-   1eb74:	0003dc8d 	.word	0x0003dc8d
+   1eb74:	0003dc81 	.word	0x0003dc81
 
 0001eb78 <ping_request_encode>:
 	return mqtt_encode_fixed_header(message_type, start, buf);
@@ -37440,7 +37440,7 @@ int ping_request_encode(struct buf_ctx *buf)
    1eb92:	f06f 000b 	mvnls.w	r0, #11
 }
    1eb96:	4770      	bx	lr
-   1eb98:	0003dc8f 	.word	0x0003dc8f
+   1eb98:	0003dc83 	.word	0x0003dc83
 
 0001eb9c <mqtt_transport_connect>:
 #endif /* CONFIG_MQTT_LIB_WEBSOCKET */
@@ -37586,10 +37586,10 @@ static inline void mqtt_mutex_unlock(struct mqtt_client *client)
    1ec54:	e7ec      	b.n	1ec30 <mqtt_mutex_unlock+0x1c>
    1ec56:	bf00      	nop
    1ec58:	200274dc 	.word	0x200274dc
-   1ec5c:	0003dcbd 	.word	0x0003dcbd
-   1ec60:	0003dcee 	.word	0x0003dcee
-   1ec64:	0003b763 	.word	0x0003b763
-   1ec68:	0003dcf7 	.word	0x0003dcf7
+   1ec5c:	0003dcb1 	.word	0x0003dcb1
+   1ec60:	0003dce2 	.word	0x0003dce2
+   1ec64:	0003b757 	.word	0x0003b757
+   1ec68:	0003dceb 	.word	0x0003dceb
 
 0001ec6c <mqtt_mutex_lock>:
 {
@@ -37616,10 +37616,10 @@ static inline void mqtt_mutex_unlock(struct mqtt_client *client)
    1ec96:	f014 bf85 	b.w	33ba4 <assert_post_action>
 }
    1ec9a:	bd10      	pop	{r4, pc}
-   1ec9c:	0003dcbd 	.word	0x0003dcbd
-   1eca0:	0003dcee 	.word	0x0003dcee
-   1eca4:	0003b763 	.word	0x0003b763
-   1eca8:	0003dc9d 	.word	0x0003dc9d
+   1ec9c:	0003dcb1 	.word	0x0003dcb1
+   1eca0:	0003dce2 	.word	0x0003dce2
+   1eca4:	0003b757 	.word	0x0003b757
+   1eca8:	0003dc91 	.word	0x0003dc91
 
 0001ecac <z_impl_entropy_get_entropy>:
 				  u16_t length);
@@ -37662,10 +37662,10 @@ static inline int z_impl_entropy_get_entropy(struct device *dev,
    1ecde:	e8bd 41f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, lr}
 	return api->get_entropy(dev, buffer, length);
    1ece2:	4718      	bx	r3
-   1ece4:	0003de05 	.word	0x0003de05
-   1ece8:	0003ddd8 	.word	0x0003ddd8
-   1ecec:	0003b763 	.word	0x0003b763
-   1ecf0:	0003de25 	.word	0x0003de25
+   1ece4:	0003ddf9 	.word	0x0003ddf9
+   1ece8:	0003ddcc 	.word	0x0003ddcc
+   1ecec:	0003b757 	.word	0x0003b757
+   1ecf0:	0003de19 	.word	0x0003de19
 
 0001ecf4 <sys_rand32_get>:
 
@@ -37747,11 +37747,11 @@ static inline u32_t arch_k_cycle_get_32(void)
    1ed3c:	b003      	add	sp, #12
    1ed3e:	bd30      	pop	{r4, r5, pc}
    1ed40:	20022218 	.word	0x20022218
-   1ed44:	0003dd19 	.word	0x0003dd19
-   1ed48:	0003dd27 	.word	0x0003dd27
-   1ed4c:	0003dd60 	.word	0x0003dd60
-   1ed50:	0003b763 	.word	0x0003b763
-   1ed54:	0003dd75 	.word	0x0003dd75
+   1ed44:	0003dd0d 	.word	0x0003dd0d
+   1ed48:	0003dd1b 	.word	0x0003dd1b
+   1ed4c:	0003dd54 	.word	0x0003dd54
+   1ed50:	0003b757 	.word	0x0003b757
+   1ed54:	0003dd69 	.word	0x0003dd69
 
 0001ed58 <default_CSPRNG>:
 
@@ -37911,7 +37911,7 @@ int jwt_sign(struct jwt_builder *builder,
    1ee3c:	20027fb8 	.word	0x20027fb8
    1ee40:	0001ed59 	.word	0x0001ed59
    1ee44:	0003a554 	.word	0x0003a554
-   1ee48:	0003de4b 	.word	0x0003de4b
+   1ee48:	0003de3f 	.word	0x0003de3f
    1ee4c:	20020920 	.word	0x20020920
 
 0001ee50 <jwt_init_builder>:
@@ -38077,12 +38077,12 @@ Z_GENLIST_PREPEND(slist, snode)
    1ef16:	f06f 0015 	mvn.w	r0, #21
 	return gpio_manage_callback(&get_port_data(port)->callbacks,
    1ef1a:	e7e6      	b.n	1eeea <gpio_nrfx_manage_callback+0x62>
-   1ef1c:	0003deab 	.word	0x0003deab
-   1ef20:	0003de7e 	.word	0x0003de7e
-   1ef24:	0003b763 	.word	0x0003b763
-   1ef28:	0003deb4 	.word	0x0003deb4
-   1ef2c:	0003dec3 	.word	0x0003dec3
-   1ef30:	0003ded5 	.word	0x0003ded5
+   1ef1c:	0003de9f 	.word	0x0003de9f
+   1ef20:	0003de72 	.word	0x0003de72
+   1ef24:	0003b757 	.word	0x0003b757
+   1ef28:	0003dea8 	.word	0x0003dea8
+   1ef2c:	0003deb7 	.word	0x0003deb7
+   1ef30:	0003dec9 	.word	0x0003dec9
 
 0001ef34 <nrf_gpio_pin_port_decode.isra.9.part.10>:
  *
@@ -38111,9 +38111,9 @@ NRF_STATIC_INLINE NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin)
     NRFX_ASSERT(nrf_gpio_pin_present_check(*p_pin));
    1ef4c:	f240 210d 	movw	r1, #525	; 0x20d
    1ef50:	f014 be28 	b.w	33ba4 <assert_post_action>
-   1ef54:	0003df18 	.word	0x0003df18
-   1ef58:	0003df4b 	.word	0x0003df4b
-   1ef5c:	0003b763 	.word	0x0003b763
+   1ef54:	0003df0c 	.word	0x0003df0c
+   1ef58:	0003df3f 	.word	0x0003df3f
+   1ef5c:	0003b757 	.word	0x0003b757
 
 0001ef60 <gpio_nrfx_init>:
 }
@@ -38754,10 +38754,10 @@ Z_GENLIST_PEEK_NEXT_NO_CHECK(slist, snode)
    1f3c4:	20020564 	.word	0x20020564
    1f3c8:	40031000 	.word	0x40031000
    1f3cc:	40031100 	.word	0x40031100
-   1f3d0:	0003b763 	.word	0x0003b763
-   1f3d4:	0003ded5 	.word	0x0003ded5
-   1f3d8:	0003deec 	.word	0x0003deec
-   1f3dc:	0003f55b 	.word	0x0003f55b
+   1f3d0:	0003b757 	.word	0x0003b757
+   1f3d4:	0003dec9 	.word	0x0003dec9
+   1f3d8:	0003dee0 	.word	0x0003dee0
+   1f3dc:	0003f54f 	.word	0x0003f54f
 
 0001f3e0 <twim_2_init>:
 #ifdef CONFIG_I2C_1_NRF_TWIM
@@ -38807,7 +38807,7 @@ I2C_NRFX_TWIM_DEVICE(2);
    1f430:	0bad0000 	.word	0x0bad0000
    1f434:	00039f38 	.word	0x00039f38
    1f438:	00039f88 	.word	0x00039f88
-   1f43c:	0003dfb6 	.word	0x0003dfb6
+   1f43c:	0003dfaa 	.word	0x0003dfaa
 
 0001f440 <i2c_nrfx_twim_configure>:
 	if (I2C_ADDR_10_BITS & dev_config) {
@@ -38862,7 +38862,7 @@ NRF_STATIC_INLINE void nrf_twim_frequency_set(NRF_TWIM_Type * p_reg,
    1f48e:	e7f5      	b.n	1f47c <i2c_nrfx_twim_configure+0x3c>
    1f490:	00039f38 	.word	0x00039f38
    1f494:	00039f88 	.word	0x00039f88
-   1f498:	0003df75 	.word	0x0003df75
+   1f498:	0003df69 	.word	0x0003df69
 
 0001f49c <i2c_nrfx_twim_transfer>:
 {
@@ -38983,7 +38983,7 @@ NRF_STATIC_INLINE void nrf_twim_frequency_set(NRF_TWIM_Type * p_reg,
    1f570:	0bad000b 	.word	0x0bad000b
    1f574:	00039f88 	.word	0x00039f88
    1f578:	00039f38 	.word	0x00039f38
-   1f57c:	0003df87 	.word	0x0003df87
+   1f57c:	0003df7b 	.word	0x0003df7b
    1f580:	0bad0000 	.word	0x0bad0000
 
 0001f584 <event_handler>:
@@ -39103,10 +39103,10 @@ static inline int gpio_pin_set(struct device *port, gpio_pin_t pin, int value)
    1f636:	691b      	ldr	r3, [r3, #16]
    1f638:	e7f7      	b.n	1f62a <gpio_pin_set+0x6e>
    1f63a:	bf00      	nop
-   1f63c:	0003e01e 	.word	0x0003e01e
-   1f640:	0003dff4 	.word	0x0003dff4
-   1f644:	0003b763 	.word	0x0003b763
-   1f648:	0003e05c 	.word	0x0003e05c
+   1f63c:	0003e012 	.word	0x0003e012
+   1f640:	0003dfe8 	.word	0x0003dfe8
+   1f644:	0003b757 	.word	0x0003b757
+   1f648:	0003e050 	.word	0x0003e050
 
 0001f64c <spi_3_init>:
 #ifdef CONFIG_SPI_2_NRF_SPIM
@@ -39158,7 +39158,7 @@ SPI_NRFX_SPIM_DEVICE(3);
    1f6a0:	0bad0000 	.word	0x0bad0000
    1f6a4:	00039f38 	.word	0x00039f38
    1f6a8:	00039fe8 	.word	0x00039fe8
-   1f6ac:	0003dfb6 	.word	0x0003dfb6
+   1f6ac:	0003dfaa 	.word	0x0003dfaa
 
 0001f6b0 <transfer_next_chunk>:
 {
@@ -39619,22 +39619,22 @@ static inline size_t spi_context_longest_current_buf(struct spi_context *ctx)
    1f9ca:	bf00      	nop
    1f9cc:	00039f38 	.word	0x00039f38
    1f9d0:	00039fe8 	.word	0x00039fe8
-   1f9d4:	0003e06e 	.word	0x0003e06e
-   1f9d8:	0003e090 	.word	0x0003e090
-   1f9dc:	0003e0af 	.word	0x0003e0af
-   1f9e0:	0003e0d2 	.word	0x0003e0d2
+   1f9d4:	0003e062 	.word	0x0003e062
+   1f9d8:	0003e084 	.word	0x0003e084
+   1f9dc:	0003e0a3 	.word	0x0003e0a3
+   1f9e0:	0003e0c6 	.word	0x0003e0c6
    1f9e4:	0001e847 	.word	0x0001e847
-   1f9e8:	0003e101 	.word	0x0003e101
-   1f9ec:	0003e01e 	.word	0x0003e01e
-   1f9f0:	0003dff4 	.word	0x0003dff4
-   1f9f4:	0003b763 	.word	0x0003b763
-   1f9f8:	0003e05c 	.word	0x0003e05c
+   1f9e8:	0003e0f5 	.word	0x0003e0f5
+   1f9ec:	0003e012 	.word	0x0003e012
+   1f9f0:	0003dfe8 	.word	0x0003dfe8
+   1f9f4:	0003b757 	.word	0x0003b757
+   1f9f8:	0003e050 	.word	0x0003e050
    1f9fc:	0003d08f 	.word	0x0003d08f
    1fa00:	0007a11f 	.word	0x0007a11f
    1fa04:	000f423f 	.word	0x000f423f
    1fa08:	001e847f 	.word	0x001e847f
    1fa0c:	003d08ff 	.word	0x003d08ff
-   1fa10:	0003e132 	.word	0x0003e132
+   1fa10:	0003e126 	.word	0x0003e126
 
 0001fa14 <event_handler>:
 {
@@ -39760,7 +39760,7 @@ static inline size_t spi_context_longest_current_buf(struct spi_context *ctx)
    1face:	bd38      	pop	{r3, r4, r5, pc}
    1fad0:	00039f38 	.word	0x00039f38
    1fad4:	00039fe8 	.word	0x00039fe8
-   1fad8:	0003dfd6 	.word	0x0003dfd6
+   1fad8:	0003dfca 	.word	0x0003dfca
 
 0001fadc <uarte_nrfx_configure>:
 	return 0;
@@ -40014,9 +40014,9 @@ NRF_STATIC_INLINE NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin)
     NRFX_ASSERT(nrf_gpio_pin_present_check(*p_pin));
    1fc5c:	f240 210d 	movw	r1, #525	; 0x20d
    1fc60:	f013 bfa0 	b.w	33ba4 <assert_post_action>
-   1fc64:	0003df18 	.word	0x0003df18
-   1fc68:	0003df4b 	.word	0x0003df4b
-   1fc6c:	0003b763 	.word	0x0003b763
+   1fc64:	0003df0c 	.word	0x0003df0c
+   1fc68:	0003df3f 	.word	0x0003df3f
+   1fc6c:	0003b757 	.word	0x0003b757
 
 0001fc70 <nrf_gpio_pin_set>:
 {
@@ -40317,10 +40317,10 @@ static int entropy_cc310_rng_get_entropy(struct device *dev, u8_t *buffer,
    1fe1a:	b003      	add	sp, #12
    1fe1c:	bd30      	pop	{r4, r5, pc}
    1fe1e:	bf00      	nop
-   1fe20:	0003e1b3 	.word	0x0003e1b3
-   1fe24:	0003b763 	.word	0x0003b763
-   1fe28:	0003e183 	.word	0x0003e183
-   1fe2c:	0003e1c6 	.word	0x0003e1c6
+   1fe20:	0003e1a7 	.word	0x0003e1a7
+   1fe24:	0003b757 	.word	0x0003b757
+   1fe28:	0003e177 	.word	0x0003e177
+   1fe2c:	0003e1ba 	.word	0x0003e1ba
 
 0001fe30 <_bsdlib_init>:
 extern void ipc_proxy_irq_handler(void);
@@ -40885,13 +40885,13 @@ Z_GENLIST_FIND_AND_REMOVE(slist, snode)
    20204:	f015 f95d 	bl	354c2 <__errno>
    20208:	237a      	movs	r3, #122	; 0x7a
    2020a:	e7ae      	b.n	2016a <bsd_os_errno_set+0x12e>
-   2020c:	0003e1dc 	.word	0x0003e1dc
-   20210:	0003fd1f 	.word	0x0003fd1f
-   20214:	0003b763 	.word	0x0003b763
-   20218:	0003e200 	.word	0x0003e200
+   2020c:	0003e1d0 	.word	0x0003e1d0
+   20210:	0003fd13 	.word	0x0003fd13
+   20214:	0003b757 	.word	0x0003b757
+   20218:	0003e1f4 	.word	0x0003e1f4
    2021c:	00039f38 	.word	0x00039f38
    20220:	00039f50 	.word	0x00039f50
-   20224:	0003e227 	.word	0x0003e227
+   20224:	0003e21b 	.word	0x0003e21b
    20228:	baadbaad 	.word	0xbaadbaad
 
 0002022c <bsd_os_application_irq_set>:
@@ -41777,9 +41777,9 @@ static inline int at_write(const char *const cmd, enum at_cmd_state *state)
    207ac:	200222a0 	.word	0x200222a0
    207b0:	00039f38 	.word	0x00039f38
    207b4:	00039f38 	.word	0x00039f38
-   207b8:	0003e2ab 	.word	0x0003e2ab
+   207b8:	0003e29f 	.word	0x0003e29f
    207bc:	200207cc 	.word	0x200207cc
-   207c0:	0003e2ce 	.word	0x0003e2ce
+   207c0:	0003e2c2 	.word	0x0003e2c2
 
 000207c4 <at_cmd_driver_init>:
 
@@ -41850,7 +41850,7 @@ static int at_cmd_driver_init(struct device *dev)
    20820:	2002807a 	.word	0x2002807a
    20824:	00039f38 	.word	0x00039f38
    20828:	00039f38 	.word	0x00039f38
-   2082c:	0003e260 	.word	0x0003e260
+   2082c:	0003e254 	.word	0x0003e254
    20830:	0002083d 	.word	0x0002083d
    20834:	20032098 	.word	0x20032098
    20838:	200222b4 	.word	0x200222b4
@@ -42143,19 +42143,19 @@ static int at_cmd_driver_init(struct device *dev)
    20a68:	00039f38 	.word	0x00039f38
    20a6c:	00039f38 	.word	0x00039f38
    20a70:	200206a0 	.word	0x200206a0
-   20a74:	0003e300 	.word	0x0003e300
-   20a78:	0003e322 	.word	0x0003e322
+   20a74:	0003e2f4 	.word	0x0003e2f4
+   20a78:	0003e316 	.word	0x0003e316
    20a7c:	200206ec 	.word	0x200206ec
    20a80:	200222a4 	.word	0x200222a4
    20a84:	200207cc 	.word	0x200207cc
-   20a88:	0003e336 	.word	0x0003e336
+   20a88:	0003e32a 	.word	0x0003e32a
    20a8c:	200222a0 	.word	0x200222a0
-   20a90:	0003e36d 	.word	0x0003e36d
-   20a94:	0003d7f5 	.word	0x0003d7f5
-   20a98:	0003e3b8 	.word	0x0003e3b8
-   20a9c:	0003e3c4 	.word	0x0003e3c4
-   20aa0:	0003e3d0 	.word	0x0003e3d0
-   20aa4:	0003e3d6 	.word	0x0003e3d6
+   20a90:	0003e361 	.word	0x0003e361
+   20a94:	0003d7e9 	.word	0x0003d7e9
+   20a98:	0003e3ac 	.word	0x0003e3ac
+   20a9c:	0003e3b8 	.word	0x0003e3b8
+   20aa0:	0003e3c4 	.word	0x0003e3c4
+   20aa4:	0003e3ca 	.word	0x0003e3ca
    20aa8:	000206cd 	.word	0x000206cd
    20aac:	20027524 	.word	0x20027524
    20ab0:	200222a8 	.word	0x200222a8
@@ -42236,7 +42236,7 @@ static int at_cmd_driver_init(struct device *dev)
    20b40:	200222a8 	.word	0x200222a8
    20b44:	00039f38 	.word	0x00039f38
    20b48:	00039f38 	.word	0x00039f38
-   20b4c:	0003e282 	.word	0x0003e282
+   20b4c:	0003e276 	.word	0x0003e276
    20b50:	200206ec 	.word	0x200206ec
 
 00020b54 <find_node>:
@@ -42333,7 +42333,7 @@ Z_GENLIST_PEEK_NEXT_NO_CHECK(slist, snode)
    20bc4:	2002807b 	.word	0x2002807b
    20bc8:	00039f38 	.word	0x00039f38
    20bcc:	00039f40 	.word	0x00039f40
-   20bd0:	0003e42f 	.word	0x0003e42f
+   20bd0:	0003e423 	.word	0x0003e423
    20bd4:	2002236c 	.word	0x2002236c
    20bd8:	00020be9 	.word	0x00020be9
 
@@ -42460,7 +42460,7 @@ Z_GENLIST_APPEND(slist, snode)
    20ca2:	e7e1      	b.n	20c68 <at_notif_register_handler+0x48>
    20ca4:	00039f38 	.word	0x00039f38
    20ca8:	00039f40 	.word	0x00039f40
-   20cac:	0003e3fe 	.word	0x0003e3fe
+   20cac:	0003e3f2 	.word	0x0003e3f2
    20cb0:	20020770 	.word	0x20020770
    20cb4:	2002236c 	.word	0x2002236c
 
@@ -42491,7 +42491,7 @@ static inline bool is_valid_notification_char(char chr)
    20cce:	2000      	movhi	r0, #0
    20cd0:	2001      	movls	r0, #1
    20cd2:	4770      	bx	lr
-   20cd4:	0004016c 	.word	0x0004016c
+   20cd4:	00040160 	.word	0x00040160
 
 00020cd8 <at_parse_process_element>:
 	return 0;
@@ -42795,7 +42795,7 @@ static inline bool is_array_stop(char chr)
    20e86:	bf00      	nop
    20e88:	2002807c 	.word	0x2002807c
    20e8c:	00024001 	.word	0x00024001
-   20e90:	0004016c 	.word	0x0004016c
+   20e90:	00040160 	.word	0x00040160
 
 00020e94 <is_command>:
  *
@@ -42867,7 +42867,7 @@ static inline bool is_command(const char *str)
    20eea:	2001      	movs	r0, #1
    20eec:	e7fa      	b.n	20ee4 <is_command+0x50>
    20eee:	bf00      	nop
-   20ef0:	0004016c 	.word	0x0004016c
+   20ef0:	00040160 	.word	0x00040160
 
 00020ef4 <at_parse_detect_type>:
 {
@@ -42989,7 +42989,7 @@ static inline bool is_command(const char *str)
    20fa6:	bf00      	nop
    20fa8:	2002807c 	.word	0x2002807c
    20fac:	00024001 	.word	0x00024001
-   20fb0:	0004016c 	.word	0x0004016c
+   20fb0:	00040160 	.word	0x00040160
 
 00020fb4 <at_parser_max_params_from_str>:
 
@@ -43175,7 +43175,7 @@ int at_parser_max_params_from_str(const char *at_params_str,
    210c2:	f06f 0015 	mvn.w	r0, #21
    210c6:	e7ef      	b.n	210a8 <at_parser_max_params_from_str+0xf4>
    210c8:	2002807c 	.word	0x2002807c
-   210cc:	0004016c 	.word	0x0004016c
+   210cc:	00040160 	.word	0x00040160
    210d0:	00024001 	.word	0x00024001
 
 000210d4 <at_params_get>:
@@ -43219,10 +43219,10 @@ static struct at_param *at_params_get(const struct at_param_list *list,
    21102:	fb03 0004 	mlahi	r0, r3, r4, r0
 }
    21106:	bd38      	pop	{r3, r4, r5, pc}
-   21108:	0003e4ba 	.word	0x0003e4ba
-   2110c:	0003e48c 	.word	0x0003e48c
-   21110:	0003b763 	.word	0x0003b763
-   21114:	0003e4ce 	.word	0x0003e4ce
+   21108:	0003e4ae 	.word	0x0003e4ae
+   2110c:	0003e480 	.word	0x0003e480
+   21110:	0003b757 	.word	0x0003b757
+   21114:	0003e4c2 	.word	0x0003e4c2
 
 00021118 <at_param_size>:
 
@@ -43274,10 +43274,10 @@ static size_t at_param_size(const struct at_param *param)
 	return 0;
    21154:	2000      	movs	r0, #0
    21156:	e7f8      	b.n	2114a <at_param_size+0x32>
-   21158:	0003e45b 	.word	0x0003e45b
-   2115c:	0003e48c 	.word	0x0003e48c
-   21160:	0003b763 	.word	0x0003b763
-   21164:	0003e470 	.word	0x0003e470
+   21158:	0003e44f 	.word	0x0003e44f
+   2115c:	0003e480 	.word	0x0003e480
+   21160:	0003b757 	.word	0x0003b757
+   21164:	0003e464 	.word	0x0003e464
 
 00021168 <at_param_clear>:
 {
@@ -43308,10 +43308,10 @@ static size_t at_param_size(const struct at_param *param)
    21198:	60a3      	str	r3, [r4, #8]
 }
    2119a:	bd10      	pop	{r4, pc}
-   2119c:	0003e45b 	.word	0x0003e45b
-   211a0:	0003e48c 	.word	0x0003e48c
-   211a4:	0003b763 	.word	0x0003b763
-   211a8:	0003e470 	.word	0x0003e470
+   2119c:	0003e44f 	.word	0x0003e44f
+   211a0:	0003e480 	.word	0x0003e480
+   211a4:	0003b757 	.word	0x0003b757
+   211a8:	0003e464 	.word	0x0003e464
 
 000211ac <at_params_list_clear>:
 	list->param_count = max_params_count;
@@ -43372,10 +43372,10 @@ void at_params_list_clear(struct at_param_list *list)
    21206:	6073      	str	r3, [r6, #4]
    21208:	60b3      	str	r3, [r6, #8]
    2120a:	e7dc      	b.n	211c6 <at_params_list_clear+0x1a>
-   2120c:	0003e470 	.word	0x0003e470
-   21210:	0003e48c 	.word	0x0003e48c
-   21214:	0003e45b 	.word	0x0003e45b
-   21218:	0003b763 	.word	0x0003b763
+   2120c:	0003e464 	.word	0x0003e464
+   21210:	0003e480 	.word	0x0003e480
+   21214:	0003e44f 	.word	0x0003e44f
+   21218:	0003b757 	.word	0x0003b757
 
 0002121c <parse_psm_cfg>:
 	char timer_str[9] = {0};
@@ -43546,13 +43546,13 @@ void at_params_list_clear(struct at_param_list *list)
    2134a:	e7ed      	b.n	21328 <parse_psm_cfg+0x10c>
    2134c:	00039f98 	.word	0x00039f98
    21350:	00039f38 	.word	0x00039f38
-   21354:	0003ebef 	.word	0x0003ebef
-   21358:	0003ec0c 	.word	0x0003ec0c
+   21354:	0003ebe3 	.word	0x0003ebe3
+   21358:	0003ec00 	.word	0x0003ec00
    2135c:	0003a774 	.word	0x0003a774
-   21360:	0003ec30 	.word	0x0003ec30
+   21360:	0003ec24 	.word	0x0003ec24
    21364:	0003a754 	.word	0x0003a754
-   21368:	0003e4fa 	.word	0x0003e4fa
-   2136c:	0003ec53 	.word	0x0003ec53
+   21368:	0003e4ee 	.word	0x0003e4ee
+   2136c:	0003ec47 	.word	0x0003ec47
 
 00021370 <lte_lc_normal>:
 {
@@ -43568,7 +43568,7 @@ void at_params_list_clear(struct at_param_list *list)
    21380:	bf18      	it	ne
    21382:	f06f 0004 	mvnne.w	r0, #4
    21386:	bd08      	pop	{r3, pc}
-   21388:	0003ebe5 	.word	0x0003ebe5
+   21388:	0003ebd9 	.word	0x0003ebd9
 
 0002138c <lte_lc_psm_req>:
 {
@@ -43608,9 +43608,9 @@ void at_params_list_clear(struct at_param_list *list)
    213c4:	e7f2      	b.n	213ac <lte_lc_psm_req+0x20>
    213c6:	bf00      	nop
    213c8:	200204f0 	.word	0x200204f0
-   213cc:	0003ea17 	.word	0x0003ea17
+   213cc:	0003ea0b 	.word	0x0003ea0b
    213d0:	200204f9 	.word	0x200204f9
-   213d4:	0003ec79 	.word	0x0003ec79
+   213d4:	0003ec6d 	.word	0x0003ec6d
 
 000213d8 <lte_lc_system_mode_set>:
 
@@ -43724,13 +43724,13 @@ int lte_lc_system_mode_set(enum lte_lc_system_mode mode)
    2149c:	00039f38 	.word	0x00039f38
    214a0:	00039f98 	.word	0x00039f98
    214a4:	0003a73c 	.word	0x0003a73c
-   214a8:	0003eb57 	.word	0x0003eb57
-   214ac:	0003eb6a 	.word	0x0003eb6a
-   214b0:	0003e513 	.word	0x0003e513
-   214b4:	0003eb22 	.word	0x0003eb22
-   214b8:	0003eb39 	.word	0x0003eb39
-   214bc:	0003eb92 	.word	0x0003eb92
-   214c0:	0003ebc0 	.word	0x0003ebc0
+   214a8:	0003eb4b 	.word	0x0003eb4b
+   214ac:	0003eb5e 	.word	0x0003eb5e
+   214b0:	0003e507 	.word	0x0003e507
+   214b4:	0003eb16 	.word	0x0003eb16
+   214b8:	0003eb2d 	.word	0x0003eb2d
+   214bc:	0003eb86 	.word	0x0003eb86
+   214c0:	0003ebb4 	.word	0x0003ebb4
 
 000214c4 <w_lte_lc_init>:
 {
@@ -43894,18 +43894,18 @@ int lte_lc_system_mode_set(enum lte_lc_system_mode mode)
    2161c:	000128c1 	.word	0x000128c1
    21620:	00039f38 	.word	0x00039f38
    21624:	00039f98 	.word	0x00039f98
-   21628:	0003ed20 	.word	0x0003ed20
-   2162c:	0003ed45 	.word	0x0003ed45
-   21630:	0003e82f 	.word	0x0003e82f
+   21628:	0003ed14 	.word	0x0003ed14
+   2162c:	0003ed39 	.word	0x0003ed39
+   21630:	0003e823 	.word	0x0003e823
    21634:	20020460 	.word	0x20020460
-   21638:	0003ed6a 	.word	0x0003ed6a
+   21638:	0003ed5e 	.word	0x0003ed5e
    2163c:	20020425 	.word	0x20020425
-   21640:	0003ed7a 	.word	0x0003ed7a
-   21644:	0003e83a 	.word	0x0003e83a
-   21648:	0003ed87 	.word	0x0003ed87
-   2164c:	0003edb9 	.word	0x0003edb9
-   21650:	0003ede4 	.word	0x0003ede4
-   21654:	0003edec 	.word	0x0003edec
+   21640:	0003ed6e 	.word	0x0003ed6e
+   21644:	0003e82e 	.word	0x0003e82e
+   21648:	0003ed7b 	.word	0x0003ed7b
+   2164c:	0003edad 	.word	0x0003edad
+   21650:	0003edd8 	.word	0x0003edd8
+   21654:	0003ede0 	.word	0x0003ede0
 
 00021658 <w_lte_lc_connect>:
 	if (!is_initialized) {
@@ -43975,10 +43975,10 @@ int lte_lc_system_mode_set(enum lte_lc_system_mode mode)
    216d4:	2002807d 	.word	0x2002807d
    216d8:	00039f38 	.word	0x00039f38
    216dc:	00039f98 	.word	0x00039f98
-   216e0:	0003ecd0 	.word	0x0003ecd0
+   216e0:	0003ecc4 	.word	0x0003ecc4
    216e4:	20022378 	.word	0x20022378
    216e8:	000927c0 	.word	0x000927c0
-   216ec:	0003ecfb 	.word	0x0003ecfb
+   216ec:	0003ecef 	.word	0x0003ecef
 
 000216f0 <lte_lc_system_mode_get>:
 
@@ -44221,17 +44221,17 @@ clean_exit:
    218a0:	f06f 0415 	mvn.w	r4, #21
    218a4:	e750      	b.n	21748 <lte_lc_system_mode_get+0x58>
    218a6:	bf00      	nop
-   218a8:	0003ea2e 	.word	0x0003ea2e
+   218a8:	0003ea22 	.word	0x0003ea22
    218ac:	00039f38 	.word	0x00039f38
    218b0:	00039f98 	.word	0x00039f98
-   218b4:	0003ea3e 	.word	0x0003ea3e
-   218b8:	0003ea58 	.word	0x0003ea58
-   218bc:	0003ea7d 	.word	0x0003ea7d
-   218c0:	0003e86c 	.word	0x0003e86c
-   218c4:	0003eaa4 	.word	0x0003eaa4
-   218c8:	0003eab1 	.word	0x0003eab1
-   218cc:	0003eace 	.word	0x0003eace
-   218d0:	0003eaf6 	.word	0x0003eaf6
+   218b4:	0003ea32 	.word	0x0003ea32
+   218b8:	0003ea4c 	.word	0x0003ea4c
+   218bc:	0003ea71 	.word	0x0003ea71
+   218c0:	0003e860 	.word	0x0003e860
+   218c4:	0003ea98 	.word	0x0003ea98
+   218c8:	0003eaa5 	.word	0x0003eaa5
+   218cc:	0003eac2 	.word	0x0003eac2
+   218d0:	0003eaea 	.word	0x0003eaea
 
 000218d4 <modem_info_parse>:
 	}
@@ -44298,8 +44298,8 @@ static int modem_info_parse(const struct modem_info_data *modem_data,
    21924:	200223a0 	.word	0x200223a0
    21928:	00039f38 	.word	0x00039f38
    2192c:	00039fa0 	.word	0x00039fa0
-   21930:	0003ee36 	.word	0x0003ee36
-   21934:	0003ee0f 	.word	0x0003ee0f
+   21930:	0003ee2a 	.word	0x0003ee2a
+   21934:	0003ee03 	.word	0x0003ee03
 
 00021938 <modem_info_short_get>:
 
@@ -44695,17 +44695,17 @@ __ssp_bos_icheck2_restrict(strcpy, char *, const char *)
    21bae:	f06f 0b0d 	mvn.w	fp, #13
    21bb2:	e71c      	b.n	219ee <modem_info_string_get+0x56>
    21bb4:	0003a860 	.word	0x0003a860
-   21bb8:	0003f556 	.word	0x0003f556
+   21bb8:	0003f54a 	.word	0x0003f54a
    21bbc:	00039f38 	.word	0x00039f38
    21bc0:	00039fa0 	.word	0x00039fa0
-   21bc4:	0003ee80 	.word	0x0003ee80
-   21bc8:	0003ee5c 	.word	0x0003ee5c
-   21bcc:	0003ee20 	.word	0x0003ee20
+   21bc4:	0003ee74 	.word	0x0003ee74
+   21bc8:	0003ee50 	.word	0x0003ee50
+   21bcc:	0003ee14 	.word	0x0003ee14
    21bd0:	200223a0 	.word	0x200223a0
-   21bd4:	0003ee99 	.word	0x0003ee99
-   21bd8:	0003c645 	.word	0x0003c645
-   21bdc:	0003ca35 	.word	0x0003ca35
-   21be0:	0003eeb4 	.word	0x0003eeb4
+   21bd4:	0003ee8d 	.word	0x0003ee8d
+   21bd8:	0003c639 	.word	0x0003c639
+   21bdc:	0003ca29 	.word	0x0003ca29
+   21be0:	0003eea8 	.word	0x0003eea8
 
 00021be4 <modem_info_init>:
 }
@@ -44757,7 +44757,7 @@ void k_sys_fatal_error_handler(unsigned int reason,
 	CODE_UNREACHABLE;
    21c18:	00039f38 	.word	0x00039f38
    21c1c:	00039f70 	.word	0x00039f70
-   21c20:	0003f011 	.word	0x0003f011
+   21c20:	0003f005 	.word	0x0003f005
 
 00021c24 <write_at_cmd_with_cme_enabled>:
 	return err;
@@ -44833,9 +44833,9 @@ static int write_at_cmd_with_cme_enabled(char *cmd, char *buf, size_t buf_len,
 		return -EFAULT;
    21c82:	f06f 040d 	mvn.w	r4, #13
    21c86:	e7e7      	b.n	21c58 <write_at_cmd_with_cme_enabled+0x34>
-   21c88:	0003f0c0 	.word	0x0003f0c0
-   21c8c:	0003f0c9 	.word	0x0003f0c9
-   21c90:	0003f0d3 	.word	0x0003f0d3
+   21c88:	0003f0b4 	.word	0x0003f0b4
+   21c8c:	0003f0bd 	.word	0x0003f0bd
+   21c90:	0003f0c7 	.word	0x0003f0c7
 
 00021c94 <translate_error>:
 {
@@ -44881,10 +44881,10 @@ static int write_at_cmd_with_cme_enabled(char *cmd, char *buf, size_t buf_len,
 			return -ENOENT;
    21ce6:	f06f 0401 	mvn.w	r4, #1
    21cea:	e7e4      	b.n	21cb6 <translate_error+0x22>
-   21cec:	0003f06f 	.word	0x0003f06f
-   21cf0:	0003fd1f 	.word	0x0003fd1f
-   21cf4:	0003b763 	.word	0x0003b763
-   21cf8:	0003f0a3 	.word	0x0003f0a3
+   21cec:	0003f063 	.word	0x0003f063
+   21cf0:	0003fd13 	.word	0x0003fd13
+   21cf4:	0003b757 	.word	0x0003b757
+   21cf8:	0003f097 	.word	0x0003f097
    21cfc:	baadbaad 	.word	0xbaadbaad
 
 00021d00 <modem_key_mgmt_write>:
@@ -44959,9 +44959,9 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
    21d5a:	f06f 0068 	mvn.w	r0, #104	; 0x68
    21d5e:	e7f7      	b.n	21d50 <modem_key_mgmt_write+0x50>
    21d60:	2002807f 	.word	0x2002807f
-   21d64:	0003f04b 	.word	0x0003f04b
-   21d68:	0003f055 	.word	0x0003f055
-   21d6c:	0003c4fb 	.word	0x0003c4fb
+   21d64:	0003f03f 	.word	0x0003f03f
+   21d68:	0003f049 	.word	0x0003f049
+   21d6c:	0003c4ef 	.word	0x0003c4ef
 
 00021d70 <modem_key_mgmt_delete>:
 	return 0;
@@ -45002,8 +45002,8 @@ int modem_key_mgmt_delete(nrf_sec_tag_t sec_tag,
    21d9c:	b004      	add	sp, #16
    21d9e:	bd10      	pop	{r4, pc}
    21da0:	2002807f 	.word	0x2002807f
-   21da4:	0003f041 	.word	0x0003f041
-   21da8:	0003f038 	.word	0x0003f038
+   21da4:	0003f035 	.word	0x0003f035
+   21da8:	0003f02c 	.word	0x0003f02c
 
 00021dac <new_date_time_get>:
 
@@ -45297,31 +45297,31 @@ static void new_date_time_get(void)
    22056:	bf00      	nop
    22058:	00039f38 	.word	0x00039f38
    2205c:	00039f68 	.word	0x00039f68
-   22060:	0003f125 	.word	0x0003f125
+   22060:	0003f119 	.word	0x0003f119
    22064:	20020704 	.word	0x20020704
    22068:	200209f8 	.word	0x200209f8
-   2206c:	0003f1a5 	.word	0x0003f1a5
-   22070:	0003f112 	.word	0x0003f112
-   22074:	0003f1c3 	.word	0x0003f1c3
-   22078:	0003f218 	.word	0x0003f218
-   2207c:	0003f233 	.word	0x0003f233
-   22080:	0003eed0 	.word	0x0003eed0
-   22084:	0003f0dd 	.word	0x0003f0dd
-   22088:	0003f259 	.word	0x0003f259
-   2208c:	0003f2e9 	.word	0x0003f2e9
-   22090:	0003f30f 	.word	0x0003f30f
+   2206c:	0003f199 	.word	0x0003f199
+   22070:	0003f106 	.word	0x0003f106
+   22074:	0003f1b7 	.word	0x0003f1b7
+   22078:	0003f20c 	.word	0x0003f20c
+   2207c:	0003f227 	.word	0x0003f227
+   22080:	0003eec4 	.word	0x0003eec4
+   22084:	0003f0d1 	.word	0x0003f0d1
+   22088:	0003f24d 	.word	0x0003f24d
+   2208c:	0003f2dd 	.word	0x0003f2dd
+   22090:	0003f303 	.word	0x0003f303
    22094:	200201f8 	.word	0x200201f8
    22098:	20022460 	.word	0x20022460
-   2209c:	0003f32a 	.word	0x0003f32a
-   220a0:	0003f32e 	.word	0x0003f32e
-   220a4:	0003f0fe 	.word	0x0003f0fe
-   220a8:	0003f3a9 	.word	0x0003f3a9
-   220ac:	0003f3db 	.word	0x0003f3db
-   220b0:	0003f444 	.word	0x0003f444
-   220b4:	0003f469 	.word	0x0003f469
+   2209c:	0003f31e 	.word	0x0003f31e
+   220a0:	0003f322 	.word	0x0003f322
+   220a4:	0003f0f2 	.word	0x0003f0f2
+   220a8:	0003f39d 	.word	0x0003f39d
+   220ac:	0003f3cf 	.word	0x0003f3cf
+   220b0:	0003f438 	.word	0x0003f438
+   220b4:	0003f45d 	.word	0x0003f45d
    220b8:	0036ee80 	.word	0x0036ee80
-   220bc:	0003f1db 	.word	0x0003f1db
-   220c0:	0003f1f9 	.word	0x0003f1f9
+   220bc:	0003f1cf 	.word	0x0003f1cf
+   220c0:	0003f1ed 	.word	0x0003f1ed
    220c4:	2002907f 	.word	0x2002907f
 	LOG_DBG("Response from modem: %s", log_strdup(buf));
    220c8:	f8bd 3030 	ldrh.w	r3, [sp, #48]	; 0x30
@@ -45561,20 +45561,20 @@ static void new_date_time_get(void)
    222ea:	4602      	mov	r2, r0
    222ec:	e7a6      	b.n	2223c <new_date_time_get+0x490>
    222ee:	bf00      	nop
-   222f0:	0003f0dd 	.word	0x0003f0dd
-   222f4:	0003f28c 	.word	0x0003f28c
-   222f8:	0003f2a8 	.word	0x0003f2a8
+   222f0:	0003f0d1 	.word	0x0003f0d1
+   222f4:	0003f280 	.word	0x0003f280
+   222f8:	0003f29c 	.word	0x0003f29c
    222fc:	200209f8 	.word	0x200209f8
-   22300:	0003f2c1 	.word	0x0003f2c1
-   22304:	0003f0ec 	.word	0x0003f0ec
-   22308:	0003f345 	.word	0x0003f345
-   2230c:	0003f37e 	.word	0x0003f37e
+   22300:	0003f2b5 	.word	0x0003f2b5
+   22304:	0003f0e0 	.word	0x0003f0e0
+   22308:	0003f339 	.word	0x0003f339
+   2230c:	0003f372 	.word	0x0003f372
    22310:	200201f8 	.word	0x200201f8
-   22314:	0003f0fe 	.word	0x0003f0fe
-   22318:	0003f3f9 	.word	0x0003f3f9
+   22314:	0003f0f2 	.word	0x0003f0f2
+   22318:	0003f3ed 	.word	0x0003f3ed
    2231c:	200209e8 	.word	0x200209e8
-   22320:	0003f422 	.word	0x0003f422
-   22324:	0003f393 	.word	0x0003f393
+   22320:	0003f416 	.word	0x0003f416
+   22324:	0003f387 	.word	0x0003f387
 
 00022328 <date_time_handler>:
 K_THREAD_DEFINE(time_thread, CONFIG_DATE_TIME_THREAD_SIZE,
@@ -45616,8 +45616,8 @@ static void date_time_handler(struct k_work *work)
    22360:	20020704 	.word	0x20020704
    22364:	00039f38 	.word	0x00039f38
    22368:	00039f68 	.word	0x00039f68
-   2236c:	0003f149 	.word	0x0003f149
-   22370:	0003f137 	.word	0x0003f137
+   2236c:	0003f13d 	.word	0x0003f13d
+   22370:	0003f12b 	.word	0x0003f12b
    22374:	0036ee80 	.word	0x0036ee80
    22378:	200224a0 	.word	0x200224a0
    2237c:	20027524 	.word	0x20027524
@@ -45699,7 +45699,7 @@ int date_time_uptime_to_unix_time_ms(s64_t *uptime)
    22404:	2002907f 	.word	0x2002907f
    22408:	00039f38 	.word	0x00039f38
    2240c:	00039f68 	.word	0x00039f68
-   22410:	0003f171 	.word	0x0003f171
+   22410:	0003f165 	.word	0x0003f165
    22414:	20020704 	.word	0x20020704
    22418:	200209f8 	.word	0x200209f8
 
@@ -45822,8 +45822,8 @@ static inline const struct fw_info_ext_api *fw_info_ext_api_check(
    224a6:	bf00      	nop
    224a8:	0000c23c 	.word	0x0000c23c
    224ac:	0003a0f8 	.word	0x0003a0f8
-   224b0:	0003f4fd 	.word	0x0003f4fd
-   224b4:	0003f526 	.word	0x0003f526
+   224b0:	0003f4f1 	.word	0x0003f4f1
+   224b4:	0003f51a 	.word	0x0003f51a
 
 000224b8 <packet_free_cb>:
    224b8:	b510      	push	{r4, lr}
@@ -59541,9 +59541,9 @@ NRF_STATIC_INLINE bool nrf_gpio_pin_present_check(uint32_t pin_number)
 }
    2aa8c:	4803      	ldr	r0, [pc, #12]	; (2aa9c <nrf_gpio_pin_port_decode.isra.0+0x40>)
    2aa8e:	bd08      	pop	{r3, pc}
-   2aa90:	0003df4b 	.word	0x0003df4b
-   2aa94:	0003b763 	.word	0x0003b763
-   2aa98:	0003df18 	.word	0x0003df18
+   2aa90:	0003df3f 	.word	0x0003df3f
+   2aa94:	0003b757 	.word	0x0003b757
+   2aa98:	0003df0c 	.word	0x0003df0c
    2aa9c:	40842500 	.word	0x40842500
 
 0002aaa0 <nrfx_spim_init>:
@@ -59827,9 +59827,9 @@ NRF_STATIC_INLINE IRQn_Type nrfx_get_irq_number(void const * p_reg)
         return err_code;
    2abf8:	4805      	ldr	r0, [pc, #20]	; (2ac10 <nrfx_spim_init+0x170>)
    2abfa:	e7e9      	b.n	2abd0 <nrfx_spim_init+0x130>
-   2abfc:	0003f5a3 	.word	0x0003f5a3
-   2ac00:	0003b763 	.word	0x0003b763
-   2ac04:	0003f567 	.word	0x0003f567
+   2abfc:	0003f597 	.word	0x0003f597
+   2ac00:	0003b757 	.word	0x0003b757
+   2ac04:	0003f55b 	.word	0x0003f55b
    2ac08:	20022aa4 	.word	0x20022aa4
    2ac0c:	0bad0000 	.word	0x0bad0000
    2ac10:	0bad0005 	.word	0x0bad0005
@@ -60110,13 +60110,13 @@ NRF_STATIC_INLINE void nrf_spim_rx_list_disable(NRF_SPIM_Type * p_reg)
    2add4:	480a      	ldr	r0, [pc, #40]	; (2ae00 <nrfx_spim_xfer+0x1ec>)
    2add6:	e7b5      	b.n	2ad44 <nrfx_spim_xfer+0x130>
    2add8:	20022aa4 	.word	0x20022aa4
-   2addc:	0003f5ac 	.word	0x0003f5ac
-   2ade0:	0003b763 	.word	0x0003b763
-   2ade4:	0003f567 	.word	0x0003f567
-   2ade8:	0003f5d8 	.word	0x0003f5d8
-   2adec:	0003f61f 	.word	0x0003f61f
-   2adf0:	0003f666 	.word	0x0003f666
-   2adf4:	0003f70a 	.word	0x0003f70a
+   2addc:	0003f5a0 	.word	0x0003f5a0
+   2ade0:	0003b757 	.word	0x0003b757
+   2ade4:	0003f55b 	.word	0x0003f55b
+   2ade8:	0003f5cc 	.word	0x0003f5cc
+   2adec:	0003f613 	.word	0x0003f613
+   2adf0:	0003f65a 	.word	0x0003f65a
+   2adf4:	0003f6fe 	.word	0x0003f6fe
    2adf8:	0bad000a 	.word	0x0bad000a
    2adfc:	0bad0000 	.word	0x0bad0000
    2ae00:	0bad000b 	.word	0x0bad000b
@@ -60181,9 +60181,9 @@ void nrfx_spim_3_irq_handler(void)
    2ae5a:	bf00      	nop
    2ae5c:	4000b000 	.word	0x4000b000
    2ae60:	20022aa4 	.word	0x20022aa4
-   2ae64:	0003f559 	.word	0x0003f559
-   2ae68:	0003b763 	.word	0x0003b763
-   2ae6c:	0003f567 	.word	0x0003f567
+   2ae64:	0003f54d 	.word	0x0003f54d
+   2ae68:	0003b757 	.word	0x0003b757
+   2ae6c:	0003f55b 	.word	0x0003f55b
    2ae70:	20022aac 	.word	0x20022aac
 
 0002ae74 <nrf_gpio_pin_port_decode.isra.1>:
@@ -60212,9 +60212,9 @@ NRF_STATIC_INLINE NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin)
 }
    2aea4:	4803      	ldr	r0, [pc, #12]	; (2aeb4 <nrf_gpio_pin_port_decode.isra.1+0x40>)
    2aea6:	bd08      	pop	{r3, pc}
-   2aea8:	0003df4b 	.word	0x0003df4b
-   2aeac:	0003b763 	.word	0x0003b763
-   2aeb0:	0003df18 	.word	0x0003df18
+   2aea8:	0003df3f 	.word	0x0003df3f
+   2aeac:	0003b757 	.word	0x0003b757
+   2aeb0:	0003df0c 	.word	0x0003df0c
    2aeb4:	40842500 	.word	0x40842500
 
 0002aeb8 <nrfx_twim_init>:
@@ -60348,10 +60348,10 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
         return err_code;
    2af7c:	4806      	ldr	r0, [pc, #24]	; (2af98 <nrfx_twim_init+0xe0>)
    2af7e:	e7fb      	b.n	2af78 <nrfx_twim_init+0xc0>
-   2af80:	0003f5a3 	.word	0x0003f5a3
-   2af84:	0003b763 	.word	0x0003b763
-   2af88:	0003f764 	.word	0x0003f764
-   2af8c:	0003f7a0 	.word	0x0003f7a0
+   2af80:	0003f597 	.word	0x0003f597
+   2af84:	0003b757 	.word	0x0003b757
+   2af88:	0003f758 	.word	0x0003f758
+   2af8c:	0003f794 	.word	0x0003f794
    2af90:	20022ac8 	.word	0x20022ac8
    2af94:	0bad0000 	.word	0x0bad0000
    2af98:	0bad0005 	.word	0x0bad0005
@@ -60401,9 +60401,9 @@ void nrfx_twim_enable(nrfx_twim_t const * p_instance)
 }
    2afde:	bd70      	pop	{r4, r5, r6, pc}
    2afe0:	20022ac8 	.word	0x20022ac8
-   2afe4:	0003f73a 	.word	0x0003f73a
-   2afe8:	0003b763 	.word	0x0003b763
-   2afec:	0003f764 	.word	0x0003f764
+   2afe4:	0003f72e 	.word	0x0003f72e
+   2afe8:	0003b757 	.word	0x0003b757
+   2afec:	0003f758 	.word	0x0003f758
 
 0002aff0 <nrfx_twim_disable>:
 
@@ -60463,9 +60463,9 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance)
    2b044:	bd70      	pop	{r4, r5, r6, pc}
    2b046:	bf00      	nop
    2b048:	20022ac8 	.word	0x20022ac8
-   2b04c:	0003f5ac 	.word	0x0003f5ac
-   2b050:	0003b763 	.word	0x0003b763
-   2b054:	0003f764 	.word	0x0003f764
+   2b04c:	0003f5a0 	.word	0x0003f5a0
+   2b050:	0003b757 	.word	0x0003b757
+   2b054:	0003f758 	.word	0x0003f758
    2b058:	019c0202 	.word	0x019c0202
 
 0002b05c <nrfx_twim_xfer>:
@@ -60870,18 +60870,18 @@ NRF_STATIC_INLINE void nrf_twim_rx_list_disable(NRF_TWIM_Type * p_reg)
         err_code = NRFX_ERROR_INVALID_PARAM;
    2b33c:	4e0d      	ldr	r6, [pc, #52]	; (2b374 <nrfx_twim_xfer+0x318>)
    2b33e:	e77d      	b.n	2b23c <nrfx_twim_xfer+0x1e0>
-   2b340:	0003f7bf 	.word	0x0003f7bf
-   2b344:	0003b763 	.word	0x0003b763
-   2b348:	0003f764 	.word	0x0003f764
+   2b340:	0003f7b3 	.word	0x0003f7b3
+   2b344:	0003b757 	.word	0x0003b757
+   2b348:	0003f758 	.word	0x0003f758
    2b34c:	20022ac8 	.word	0x20022ac8
-   2b350:	0003f8ba 	.word	0x0003f8ba
-   2b354:	0003f86a 	.word	0x0003f86a
+   2b350:	0003f8ae 	.word	0x0003f8ae
+   2b354:	0003f85e 	.word	0x0003f85e
    2b358:	0bad000a 	.word	0x0bad000a
    2b35c:	019c0202 	.word	0x019c0202
    2b360:	0bad000b 	.word	0x0bad000b
-   2b364:	0003f90a 	.word	0x0003f90a
-   2b368:	0003f920 	.word	0x0003f920
-   2b36c:	0003f936 	.word	0x0003f936
+   2b364:	0003f8fe 	.word	0x0003f8fe
+   2b368:	0003f914 	.word	0x0003f914
+   2b36c:	0003f92a 	.word	0x0003f92a
    2b370:	0bad0000 	.word	0x0bad0000
    2b374:	0bad0004 	.word	0x0bad0004
         if (flags & NRFX_TWIM_FLAG_NO_XFER_EVT_HANDLER)
@@ -61174,9 +61174,9 @@ void nrfx_twim_2_irq_handler(void)
    2b590:	2304      	movs	r3, #4
    2b592:	e7b7      	b.n	2b504 <nrfx_twim_2_irq_handler+0xe8>
    2b594:	20022ac8 	.word	0x20022ac8
-   2b598:	0003f559 	.word	0x0003f559
-   2b59c:	0003b763 	.word	0x0003b763
-   2b5a0:	0003f764 	.word	0x0003f764
+   2b598:	0003f54d 	.word	0x0003f54d
+   2b59c:	0003b757 	.word	0x0003b757
+   2b5a0:	0003f758 	.word	0x0003f758
    2b5a4:	4000a000 	.word	0x4000a000
    2b5a8:	20022ad4 	.word	0x20022ad4
    2b5ac:	019c0202 	.word	0x019c0202
@@ -61295,11 +61295,11 @@ NRF_STATIC_INLINE void nrf_wdt_reload_value_set(NRF_WDT_Type * p_reg, uint32_t r
 }
    2b642:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
    2b646:	bf00      	nop
-   2b648:	0003f5a3 	.word	0x0003f5a3
-   2b64c:	0003b763 	.word	0x0003b763
-   2b650:	0003f9b2 	.word	0x0003f9b2
+   2b648:	0003f597 	.word	0x0003f597
+   2b64c:	0003b757 	.word	0x0003b757
+   2b650:	0003f9a6 	.word	0x0003f9a6
    2b654:	20022afc 	.word	0x20022afc
-   2b658:	0003f9ed 	.word	0x0003f9ed
+   2b658:	0003f9e1 	.word	0x0003f9e1
    2b65c:	0bad0000 	.word	0x0bad0000
    2b660:	0bad0005 	.word	0x0bad0005
 
@@ -61353,10 +61353,10 @@ void nrfx_wdt_enable(nrfx_wdt_t const * p_instance)
    2b6b0:	bd70      	pop	{r4, r5, r6, pc}
    2b6b2:	bf00      	nop
    2b6b4:	20022afc 	.word	0x20022afc
-   2b6b8:	0003f99b 	.word	0x0003f99b
-   2b6bc:	0003b763 	.word	0x0003b763
-   2b6c0:	0003f9b2 	.word	0x0003f9b2
-   2b6c4:	0003f73a 	.word	0x0003f73a
+   2b6b8:	0003f98f 	.word	0x0003f98f
+   2b6bc:	0003b757 	.word	0x0003b757
+   2b6c0:	0003f9a6 	.word	0x0003f9a6
+   2b6c4:	0003f72e 	.word	0x0003f72e
 
 0002b6c8 <nrfx_wdt_channel_alloc>:
         nrf_wdt_reload_request_set(p_instance->p_reg, (nrf_wdt_rr_register_t)(NRF_WDT_RR0 + i));
@@ -61442,11 +61442,11 @@ NRF_STATIC_INLINE void nrf_wdt_reload_request_enable(NRF_WDT_Type *        p_reg
         result = NRFX_ERROR_NO_MEM;
    2b740:	4806      	ldr	r0, [pc, #24]	; (2b75c <nrfx_wdt_channel_alloc+0x94>)
    2b742:	e7f8      	b.n	2b736 <nrfx_wdt_channel_alloc+0x6e>
-   2b744:	0003f94c 	.word	0x0003f94c
-   2b748:	0003b763 	.word	0x0003b763
-   2b74c:	0003f9b2 	.word	0x0003f9b2
+   2b744:	0003f940 	.word	0x0003f940
+   2b748:	0003b757 	.word	0x0003b757
+   2b74c:	0003f9a6 	.word	0x0003f9a6
    2b750:	20022afc 	.word	0x20022afc
-   2b754:	0003f73a 	.word	0x0003f73a
+   2b754:	0003f72e 	.word	0x0003f72e
    2b758:	0bad0000 	.word	0x0bad0000
    2b75c:	0bad0002 	.word	0x0bad0002
 
@@ -61489,9 +61489,9 @@ NRF_STATIC_INLINE void nrf_wdt_reload_request_set(NRF_WDT_Type *        p_reg,
 }
    2b792:	bd38      	pop	{r3, r4, r5, pc}
    2b794:	20022afc 	.word	0x20022afc
-   2b798:	0003f959 	.word	0x0003f959
-   2b79c:	0003b763 	.word	0x0003b763
-   2b7a0:	0003f9b2 	.word	0x0003f9b2
+   2b798:	0003f94d 	.word	0x0003f94d
+   2b79c:	0003b757 	.word	0x0003b757
+   2b7a0:	0003f9a6 	.word	0x0003f9a6
    2b7a4:	6e524635 	.word	0x6e524635
 
 0002b7a8 <nrfx_wdt_0_irq_handler>:
@@ -61777,15 +61777,15 @@ static ALWAYS_INLINE bool arch_is_in_nested_exception(const z_arch_esf_t *esf)
    2b924:	00039fc8 	.word	0x00039fc8
    2b928:	00039f38 	.word	0x00039f38
    2b92c:	0003ac18 	.word	0x0003ac18
-   2b930:	0003fa4d 	.word	0x0003fa4d
-   2b934:	0003fa63 	.word	0x0003fa63
-   2b938:	0003fa8b 	.word	0x0003fa8b
-   2b93c:	0003fa5b 	.word	0x0003fa5b
-   2b940:	0003faac 	.word	0x0003faac
-   2b944:	0003fae6 	.word	0x0003fae6
-   2b948:	0003fac4 	.word	0x0003fac4
-   2b94c:	0003b763 	.word	0x0003b763
-   2b950:	0003fb03 	.word	0x0003fb03
+   2b930:	0003fa41 	.word	0x0003fa41
+   2b934:	0003fa57 	.word	0x0003fa57
+   2b938:	0003fa7f 	.word	0x0003fa7f
+   2b93c:	0003fa4f 	.word	0x0003fa4f
+   2b940:	0003faa0 	.word	0x0003faa0
+   2b944:	0003fada 	.word	0x0003fada
+   2b948:	0003fab8 	.word	0x0003fab8
+   2b94c:	0003b757 	.word	0x0003b757
+   2b950:	0003faf7 	.word	0x0003faf7
 
 0002b954 <idle>:
 #else
@@ -61864,9 +61864,9 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
    2b9b4:	f00d bafd 	b.w	38fb2 <memcpy>
    2b9b8:	20020000 	.word	0x20020000
    2b9bc:	200208fc 	.word	0x200208fc
-   2b9c0:	00040988 	.word	0x00040988
+   2b9c0:	0004097c 	.word	0x0004097c
    2b9c4:	00000000 	.word	0x00000000
-   2b9c8:	00040988 	.word	0x00040988
+   2b9c8:	0004097c 	.word	0x0004097c
    2b9cc:	20020000 	.word	0x20020000
 
 0002b9d0 <bg_thread_main>:
@@ -61932,9 +61932,9 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
    2ba00:	bd08      	pop	{r3, pc}
    2ba02:	bf00      	nop
    2ba04:	2002908d 	.word	0x2002908d
-   2ba08:	0003c504 	.word	0x0003c504
-   2ba0c:	0003fb38 	.word	0x0003fb38
-   2ba10:	0003fb58 	.word	0x0003fb58
+   2ba08:	0003c4f8 	.word	0x0003c4f8
+   2ba0c:	0003fb2c 	.word	0x0003fb2c
+   2ba10:	0003fb4c 	.word	0x0003fb4c
    2ba14:	20022bbc 	.word	0x20022bbc
 
 0002ba18 <z_cstart>:
@@ -62111,7 +62111,7 @@ static inline void sys_dlist_init(sys_dlist_t *list)
    2bb00:	e000ed00 	.word	0xe000ed00
    2bb04:	20022bbc 	.word	0x20022bbc
    2bb08:	200274dc 	.word	0x200274dc
-   2bb0c:	0003fb82 	.word	0x0003fb82
+   2bb0c:	0003fb76 	.word	0x0003fb76
    2bb10:	20022b04 	.word	0x20022b04
    2bb14:	0002b955 	.word	0x0002b955
    2bb18:	20034898 	.word	0x20034898
@@ -62162,10 +62162,10 @@ static int statics_init(struct device *unused)
    2bb62:	bf00      	nop
    2bb64:	200206d4 	.word	0x200206d4
    2bb68:	200206bc 	.word	0x200206bc
-   2bb6c:	0003fbaf 	.word	0x0003fbaf
-   2bb70:	0003fbd1 	.word	0x0003fbd1
-   2bb74:	0003b763 	.word	0x0003b763
-   2bb78:	0003cbed 	.word	0x0003cbed
+   2bb6c:	0003fba3 	.word	0x0003fba3
+   2bb70:	0003fbc5 	.word	0x0003fbc5
+   2bb74:	0003b757 	.word	0x0003b757
+   2bb78:	0003cbe1 	.word	0x0003cbe1
 
 0002bb7c <k_heap_alloc>:
 
@@ -62319,15 +62319,15 @@ void *k_heap_alloc(struct k_heap *h, size_t bytes, k_timeout_t timeout)
    2bcb2:	f002 fc21 	bl	2e4f8 <z_spin_lock_set_owner>
 	return k;
    2bcb6:	e79f      	b.n	2bbf8 <k_heap_alloc+0x7c>
-   2bcb8:	0003c735 	.word	0x0003c735
-   2bcbc:	0003c75b 	.word	0x0003c75b
-   2bcc0:	0003b763 	.word	0x0003b763
-   2bcc4:	0003c770 	.word	0x0003c770
-   2bcc8:	0003fb87 	.word	0x0003fb87
-   2bccc:	0003fbaf 	.word	0x0003fbaf
-   2bcd0:	0003cb6f 	.word	0x0003cb6f
-   2bcd4:	0003c788 	.word	0x0003c788
-   2bcd8:	0003c79f 	.word	0x0003c79f
+   2bcb8:	0003c729 	.word	0x0003c729
+   2bcbc:	0003c74f 	.word	0x0003c74f
+   2bcc0:	0003b757 	.word	0x0003b757
+   2bcc4:	0003c764 	.word	0x0003c764
+   2bcc8:	0003fb7b 	.word	0x0003fb7b
+   2bccc:	0003fba3 	.word	0x0003fba3
+   2bcd0:	0003cb63 	.word	0x0003cb63
+   2bcd4:	0003c77c 	.word	0x0003c77c
+   2bcd8:	0003c793 	.word	0x0003c793
 
 0002bcdc <k_heap_free>:
 
@@ -62400,12 +62400,12 @@ void k_heap_free(struct k_heap *h, void *mem)
    2bd66:	f3bf 8f6f 	isb	sy
 }
    2bd6a:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
-   2bd6c:	0003c735 	.word	0x0003c735
-   2bd70:	0003c75b 	.word	0x0003c75b
-   2bd74:	0003b763 	.word	0x0003b763
-   2bd78:	0003c770 	.word	0x0003c770
-   2bd7c:	0003c788 	.word	0x0003c788
-   2bd80:	0003c79f 	.word	0x0003c79f
+   2bd6c:	0003c729 	.word	0x0003c729
+   2bd70:	0003c74f 	.word	0x0003c74f
+   2bd74:	0003b757 	.word	0x0003b757
+   2bd78:	0003c764 	.word	0x0003c764
+   2bd7c:	0003c77c 	.word	0x0003c77c
+   2bd80:	0003c793 	.word	0x0003c793
 
 0002bd84 <mbox_message_put>:
 	struct k_thread *receiving_thread;
@@ -62597,12 +62597,12 @@ arch_thread_return_value_set(struct k_thread *thread, unsigned int value)
    2beb8:	4642      	mov	r2, r8
    2beba:	e7b1      	b.n	2be20 <mbox_message_put+0x9c>
    2bebc:	200274dc 	.word	0x200274dc
-   2bec0:	0003c735 	.word	0x0003c735
-   2bec4:	0003c75b 	.word	0x0003c75b
-   2bec8:	0003b763 	.word	0x0003b763
-   2becc:	0003c770 	.word	0x0003c770
-   2bed0:	0003c788 	.word	0x0003c788
-   2bed4:	0003c79f 	.word	0x0003c79f
+   2bec0:	0003c729 	.word	0x0003c729
+   2bec4:	0003c74f 	.word	0x0003c74f
+   2bec8:	0003b757 	.word	0x0003b757
+   2becc:	0003c764 	.word	0x0003c764
+   2bed0:	0003c77c 	.word	0x0003c77c
+   2bed4:	0003c793 	.word	0x0003c793
 
 0002bed8 <mbox_message_dispose>:
 	if (rx_msg->_syncing_thread == NULL) {
@@ -62878,12 +62878,12 @@ int k_mbox_get(struct k_mbox *mbox, struct k_mbox_msg *rx_msg, void *buffer,
    2c098:	d1f1      	bne.n	2c07e <k_mbox_get+0xf6>
    2c09a:	e7e8      	b.n	2c06e <k_mbox_get+0xe6>
    2c09c:	200274dc 	.word	0x200274dc
-   2c0a0:	0003c735 	.word	0x0003c735
-   2c0a4:	0003c75b 	.word	0x0003c75b
-   2c0a8:	0003b763 	.word	0x0003b763
-   2c0ac:	0003c770 	.word	0x0003c770
-   2c0b0:	0003c788 	.word	0x0003c788
-   2c0b4:	0003c79f 	.word	0x0003c79f
+   2c0a0:	0003c729 	.word	0x0003c729
+   2c0a4:	0003c74f 	.word	0x0003c74f
+   2c0a8:	0003b757 	.word	0x0003b757
+   2c0ac:	0003c764 	.word	0x0003c764
+   2c0b0:	0003c77c 	.word	0x0003c77c
+   2c0b4:	0003c793 	.word	0x0003c793
 
 0002c0b8 <init_mem_slab_module>:
  * Perform any initialization that wasn't done at build time.
@@ -62957,10 +62957,10 @@ out:
    2c116:	e7e7      	b.n	2c0e8 <init_mem_slab_module+0x30>
    2c118:	200206bc 	.word	0x200206bc
    2c11c:	20020668 	.word	0x20020668
-   2c120:	0003fbe7 	.word	0x0003fbe7
-   2c124:	0003fc0c 	.word	0x0003fc0c
-   2c128:	0003b763 	.word	0x0003b763
-   2c12c:	0003cbed 	.word	0x0003cbed
+   2c120:	0003fbdb 	.word	0x0003fbdb
+   2c124:	0003fc00 	.word	0x0003fc00
+   2c128:	0003b757 	.word	0x0003b757
+   2c12c:	0003cbe1 	.word	0x0003cbe1
 
 0002c130 <k_mem_slab_alloc>:
 out:
@@ -63064,12 +63064,12 @@ int k_mem_slab_alloc(struct k_mem_slab *slab, void **mem, k_timeout_t timeout)
    2c1d4:	4620      	mov	r0, r4
    2c1d6:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
    2c1d8:	20022c74 	.word	0x20022c74
-   2c1dc:	0003c735 	.word	0x0003c735
-   2c1e0:	0003c75b 	.word	0x0003c75b
-   2c1e4:	0003b763 	.word	0x0003b763
-   2c1e8:	0003c770 	.word	0x0003c770
-   2c1ec:	0003c788 	.word	0x0003c788
-   2c1f0:	0003c79f 	.word	0x0003c79f
+   2c1dc:	0003c729 	.word	0x0003c729
+   2c1e0:	0003c74f 	.word	0x0003c74f
+   2c1e4:	0003b757 	.word	0x0003b757
+   2c1e8:	0003c764 	.word	0x0003c764
+   2c1ec:	0003c77c 	.word	0x0003c77c
+   2c1f0:	0003c793 	.word	0x0003c793
    2c1f4:	200274dc 	.word	0x200274dc
 
 0002c1f8 <k_mem_slab_free>:
@@ -63167,12 +63167,12 @@ z_thread_return_value_set_with_data(struct k_thread *thread,
    2c294:	bd70      	pop	{r4, r5, r6, pc}
    2c296:	bf00      	nop
    2c298:	20022c74 	.word	0x20022c74
-   2c29c:	0003c735 	.word	0x0003c735
-   2c2a0:	0003c75b 	.word	0x0003c75b
-   2c2a4:	0003b763 	.word	0x0003b763
-   2c2a8:	0003c770 	.word	0x0003c770
-   2c2ac:	0003c788 	.word	0x0003c788
-   2c2b0:	0003c79f 	.word	0x0003c79f
+   2c29c:	0003c729 	.word	0x0003c729
+   2c2a0:	0003c74f 	.word	0x0003c74f
+   2c2a4:	0003b757 	.word	0x0003b757
+   2c2a8:	0003c764 	.word	0x0003c764
+   2c2ac:	0003c77c 	.word	0x0003c77c
+   2c2b0:	0003c793 	.word	0x0003c793
 
 0002c2b4 <k_malloc>:
 		  CONFIG_HEAP_MEM_POOL_SIZE, 1, 4);
@@ -63389,15 +63389,15 @@ int z_impl_k_msgq_put(struct k_msgq *msgq, void *data, k_timeout_t timeout)
 		result = -ENOMSG;
    2c3f2:	f06f 0422 	mvn.w	r4, #34	; 0x22
    2c3f6:	e7d8      	b.n	2c3aa <z_impl_k_msgq_put+0xbe>
-   2c3f8:	0003fb87 	.word	0x0003fb87
-   2c3fc:	0003fc29 	.word	0x0003fc29
-   2c400:	0003b763 	.word	0x0003b763
-   2c404:	0003cb6f 	.word	0x0003cb6f
-   2c408:	0003c735 	.word	0x0003c735
-   2c40c:	0003c75b 	.word	0x0003c75b
-   2c410:	0003c770 	.word	0x0003c770
-   2c414:	0003c788 	.word	0x0003c788
-   2c418:	0003c79f 	.word	0x0003c79f
+   2c3f8:	0003fb7b 	.word	0x0003fb7b
+   2c3fc:	0003fc1d 	.word	0x0003fc1d
+   2c400:	0003b757 	.word	0x0003b757
+   2c404:	0003cb63 	.word	0x0003cb63
+   2c408:	0003c729 	.word	0x0003c729
+   2c40c:	0003c74f 	.word	0x0003c74f
+   2c410:	0003c764 	.word	0x0003c764
+   2c414:	0003c77c 	.word	0x0003c77c
+   2c418:	0003c793 	.word	0x0003c793
    2c41c:	200274dc 	.word	0x200274dc
 
 0002c420 <z_impl_k_msgq_get>:
@@ -63589,16 +63589,16 @@ int z_impl_k_msgq_get(struct k_msgq *msgq, void *data, k_timeout_t timeout)
    2c53e:	f3bf 8f6f 	isb	sy
 	return result;
    2c542:	e7d6      	b.n	2c4f2 <z_impl_k_msgq_get+0xd2>
-   2c544:	0003fb87 	.word	0x0003fb87
-   2c548:	0003fc29 	.word	0x0003fc29
-   2c54c:	0003b763 	.word	0x0003b763
-   2c550:	0003cb6f 	.word	0x0003cb6f
-   2c554:	0003c735 	.word	0x0003c735
-   2c558:	0003c75b 	.word	0x0003c75b
-   2c55c:	0003c770 	.word	0x0003c770
+   2c544:	0003fb7b 	.word	0x0003fb7b
+   2c548:	0003fc1d 	.word	0x0003fc1d
+   2c54c:	0003b757 	.word	0x0003b757
+   2c550:	0003cb63 	.word	0x0003cb63
+   2c554:	0003c729 	.word	0x0003c729
+   2c558:	0003c74f 	.word	0x0003c74f
+   2c55c:	0003c764 	.word	0x0003c764
    2c560:	200274dc 	.word	0x200274dc
-   2c564:	0003c788 	.word	0x0003c788
-   2c568:	0003c79f 	.word	0x0003c79f
+   2c564:	0003c77c 	.word	0x0003c77c
+   2c568:	0003c793 	.word	0x0003c793
 
 0002c56c <z_impl_k_msgq_purge>:
 }
@@ -63669,10 +63669,10 @@ void z_impl_k_msgq_purge(struct k_msgq *msgq)
    2c5d0:	f000 fe2a 	bl	2d228 <z_ready_thread>
    2c5d4:	e7ed      	b.n	2c5b2 <z_impl_k_msgq_purge+0x46>
    2c5d6:	bf00      	nop
-   2c5d8:	0003c735 	.word	0x0003c735
-   2c5dc:	0003c75b 	.word	0x0003c75b
-   2c5e0:	0003b763 	.word	0x0003b763
-   2c5e4:	0003c770 	.word	0x0003c770
+   2c5d8:	0003c729 	.word	0x0003c729
+   2c5dc:	0003c74f 	.word	0x0003c74f
+   2c5e0:	0003b757 	.word	0x0003b757
+   2c5e4:	0003c764 	.word	0x0003c764
 
 0002c5e8 <z_impl_k_mutex_lock>:
 	}
@@ -63892,13 +63892,13 @@ int z_impl_k_mutex_lock(struct k_mutex *mutex, k_timeout_t timeout)
    2c77e:	f3bf 8f6f 	isb	sy
    2c782:	e7de      	b.n	2c742 <z_impl_k_mutex_lock+0x15a>
    2c784:	200274d8 	.word	0x200274d8
-   2c788:	0003c735 	.word	0x0003c735
-   2c78c:	0003c75b 	.word	0x0003c75b
-   2c790:	0003b763 	.word	0x0003b763
-   2c794:	0003c770 	.word	0x0003c770
+   2c788:	0003c729 	.word	0x0003c729
+   2c78c:	0003c74f 	.word	0x0003c74f
+   2c790:	0003b757 	.word	0x0003b757
+   2c794:	0003c764 	.word	0x0003c764
    2c798:	200274dc 	.word	0x200274dc
-   2c79c:	0003c788 	.word	0x0003c788
-   2c7a0:	0003c79f 	.word	0x0003c79f
+   2c79c:	0003c77c 	.word	0x0003c77c
+   2c7a0:	0003c793 	.word	0x0003c793
 
 0002c7a4 <z_impl_k_mutex_unlock>:
 }
@@ -64087,19 +64087,19 @@ k_mutex_unlock_return:
    2c8dc:	e7aa      	b.n	2c834 <z_impl_k_mutex_unlock+0x90>
    2c8de:	bf00      	nop
    2c8e0:	200274dc 	.word	0x200274dc
-   2c8e4:	0003fc6d 	.word	0x0003fc6d
-   2c8e8:	0003b763 	.word	0x0003b763
-   2c8ec:	0003fc4b 	.word	0x0003fc4b
-   2c8f0:	0003fcaf 	.word	0x0003fcaf
-   2c8f4:	0003fc84 	.word	0x0003fc84
-   2c8f8:	0003cb6f 	.word	0x0003cb6f
-   2c8fc:	0003fcc1 	.word	0x0003fcc1
+   2c8e4:	0003fc61 	.word	0x0003fc61
+   2c8e8:	0003b757 	.word	0x0003b757
+   2c8ec:	0003fc3f 	.word	0x0003fc3f
+   2c8f0:	0003fca3 	.word	0x0003fca3
+   2c8f4:	0003fc78 	.word	0x0003fc78
+   2c8f8:	0003cb63 	.word	0x0003cb63
+   2c8fc:	0003fcb5 	.word	0x0003fcb5
    2c900:	200274d8 	.word	0x200274d8
-   2c904:	0003c735 	.word	0x0003c735
-   2c908:	0003c75b 	.word	0x0003c75b
-   2c90c:	0003c770 	.word	0x0003c770
-   2c910:	0003c788 	.word	0x0003c788
-   2c914:	0003c79f 	.word	0x0003c79f
+   2c904:	0003c729 	.word	0x0003c729
+   2c908:	0003c74f 	.word	0x0003c74f
+   2c90c:	0003c764 	.word	0x0003c764
+   2c910:	0003c77c 	.word	0x0003c77c
+   2c914:	0003c793 	.word	0x0003c793
 
 0002c918 <queue_insert>:
 #include <syscalls/k_queue_cancel_wait_mrsh.c>
@@ -64263,12 +64263,12 @@ Z_GENLIST_APPEND(sflist, sfnode)
    2ca22:	4318      	orrs	r0, r3
    2ca24:	6030      	str	r0, [r6, #0]
    2ca26:	e7eb      	b.n	2ca00 <queue_insert+0xe8>
-   2ca28:	0003c735 	.word	0x0003c735
-   2ca2c:	0003c75b 	.word	0x0003c75b
-   2ca30:	0003b763 	.word	0x0003b763
-   2ca34:	0003c770 	.word	0x0003c770
-   2ca38:	0003c788 	.word	0x0003c788
-   2ca3c:	0003c79f 	.word	0x0003c79f
+   2ca28:	0003c729 	.word	0x0003c729
+   2ca2c:	0003c74f 	.word	0x0003c74f
+   2ca30:	0003b757 	.word	0x0003b757
+   2ca34:	0003c764 	.word	0x0003c764
+   2ca38:	0003c77c 	.word	0x0003c77c
+   2ca3c:	0003c793 	.word	0x0003c793
 
 0002ca40 <z_impl_k_queue_cancel_wait>:
 {
@@ -64320,10 +64320,10 @@ Z_GENLIST_APPEND(sflist, sfnode)
    2caa4:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
 	z_reschedule(&queue->lock, key);
    2caa8:	f000 b99c 	b.w	2cde4 <z_reschedule>
-   2caac:	0003c735 	.word	0x0003c735
-   2cab0:	0003c75b 	.word	0x0003c75b
-   2cab4:	0003b763 	.word	0x0003b763
-   2cab8:	0003c770 	.word	0x0003c770
+   2caac:	0003c729 	.word	0x0003c729
+   2cab0:	0003c74f 	.word	0x0003c74f
+   2cab4:	0003b757 	.word	0x0003b757
+   2cab8:	0003c764 	.word	0x0003c764
 
 0002cabc <z_impl_k_queue_get>:
 
@@ -64434,12 +64434,12 @@ Z_GENLIST_GET_NOT_EMPTY(sflist, sfnode)
    2cb6e:	695d      	ldr	r5, [r3, #20]
    2cb70:	e7ec      	b.n	2cb4c <z_impl_k_queue_get+0x90>
    2cb72:	bf00      	nop
-   2cb74:	0003c735 	.word	0x0003c735
-   2cb78:	0003c75b 	.word	0x0003c75b
-   2cb7c:	0003b763 	.word	0x0003b763
-   2cb80:	0003c770 	.word	0x0003c770
-   2cb84:	0003c788 	.word	0x0003c788
-   2cb88:	0003c79f 	.word	0x0003c79f
+   2cb74:	0003c729 	.word	0x0003c729
+   2cb78:	0003c74f 	.word	0x0003c74f
+   2cb7c:	0003b757 	.word	0x0003b757
+   2cb80:	0003c764 	.word	0x0003c764
+   2cb84:	0003c77c 	.word	0x0003c77c
+   2cb88:	0003c793 	.word	0x0003c793
    2cb8c:	200274dc 	.word	0x200274dc
 
 0002cb90 <pended_on.isra.18>:
@@ -64468,9 +64468,9 @@ static _wait_q_t *pended_on(struct k_thread *thread)
 }
    2cbb0:	6820      	ldr	r0, [r4, #0]
    2cbb2:	bd10      	pop	{r4, pc}
-   2cbb4:	0003fd43 	.word	0x0003fd43
-   2cbb8:	0003b763 	.word	0x0003b763
-   2cbbc:	0003fd21 	.word	0x0003fd21
+   2cbb4:	0003fd37 	.word	0x0003fd37
+   2cbb8:	0003b757 	.word	0x0003b757
+   2cbbc:	0003fd15 	.word	0x0003fd15
 
 0002cbc0 <z_reset_time_slice>:
 {
@@ -64566,15 +64566,15 @@ static _wait_q_t *pended_on(struct k_thread *thread)
 }
    2cc82:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
    2cc84:	20027514 	.word	0x20027514
-   2cc88:	0003c735 	.word	0x0003c735
-   2cc8c:	0003c75b 	.word	0x0003c75b
-   2cc90:	0003b763 	.word	0x0003b763
-   2cc94:	0003c770 	.word	0x0003c770
+   2cc88:	0003c729 	.word	0x0003c729
+   2cc8c:	0003c74f 	.word	0x0003c74f
+   2cc90:	0003b757 	.word	0x0003b757
+   2cc94:	0003c764 	.word	0x0003c764
    2cc98:	200274dc 	.word	0x200274dc
    2cc9c:	2002751c 	.word	0x2002751c
    2cca0:	20027518 	.word	0x20027518
-   2cca4:	0003c788 	.word	0x0003c788
-   2cca8:	0003c79f 	.word	0x0003c79f
+   2cca4:	0003c77c 	.word	0x0003c77c
+   2cca8:	0003c793 	.word	0x0003c793
 
 0002ccac <z_find_first_thread_to_unpend>:
 	pend(thread, wait_q, timeout);
@@ -64643,12 +64643,12 @@ ALWAYS_INLINE struct k_thread *z_find_first_thread_to_unpend(_wait_q_t *wait_q,
    2cd20:	bd38      	pop	{r3, r4, r5, pc}
    2cd22:	bf00      	nop
    2cd24:	20027514 	.word	0x20027514
-   2cd28:	0003c735 	.word	0x0003c735
-   2cd2c:	0003c75b 	.word	0x0003c75b
-   2cd30:	0003b763 	.word	0x0003b763
-   2cd34:	0003c770 	.word	0x0003c770
-   2cd38:	0003c788 	.word	0x0003c788
-   2cd3c:	0003c79f 	.word	0x0003c79f
+   2cd28:	0003c729 	.word	0x0003c729
+   2cd2c:	0003c74f 	.word	0x0003c74f
+   2cd30:	0003b757 	.word	0x0003b757
+   2cd34:	0003c764 	.word	0x0003c764
+   2cd38:	0003c77c 	.word	0x0003c77c
+   2cd3c:	0003c793 	.word	0x0003c793
 
 0002cd40 <z_unpend_thread_no_timeout>:
 
@@ -64716,12 +64716,12 @@ ALWAYS_INLINE void z_unpend_thread_no_timeout(struct k_thread *thread)
    2cdc4:	bd38      	pop	{r3, r4, r5, pc}
    2cdc6:	bf00      	nop
    2cdc8:	20027514 	.word	0x20027514
-   2cdcc:	0003c735 	.word	0x0003c735
-   2cdd0:	0003c75b 	.word	0x0003c75b
-   2cdd4:	0003b763 	.word	0x0003b763
-   2cdd8:	0003c770 	.word	0x0003c770
-   2cddc:	0003c788 	.word	0x0003c788
-   2cde0:	0003c79f 	.word	0x0003c79f
+   2cdcc:	0003c729 	.word	0x0003c729
+   2cdd0:	0003c74f 	.word	0x0003c74f
+   2cdd4:	0003b757 	.word	0x0003b757
+   2cdd8:	0003c764 	.word	0x0003c764
+   2cddc:	0003c77c 	.word	0x0003c77c
+   2cde0:	0003c793 	.word	0x0003c793
 
 0002cde4 <z_reschedule>:
 
@@ -64784,10 +64784,10 @@ static ALWAYS_INLINE void k_spin_release(struct k_spinlock *l)
    2ce42:	f385 8811 	msr	BASEPRI, r5
    2ce46:	f3bf 8f6f 	isb	sy
    2ce4a:	bd38      	pop	{r3, r4, r5, pc}
-   2ce4c:	0003c735 	.word	0x0003c735
-   2ce50:	0003c788 	.word	0x0003c788
-   2ce54:	0003b763 	.word	0x0003b763
-   2ce58:	0003c79f 	.word	0x0003c79f
+   2ce4c:	0003c729 	.word	0x0003c729
+   2ce50:	0003c77c 	.word	0x0003c77c
+   2ce54:	0003b757 	.word	0x0003b757
+   2ce58:	0003c793 	.word	0x0003c793
 
 0002ce5c <k_sched_lock>:
 		irq_unlock(key);
@@ -64879,17 +64879,17 @@ void k_sched_lock(void)
    2cf18:	bd38      	pop	{r3, r4, r5, pc}
    2cf1a:	bf00      	nop
    2cf1c:	20027514 	.word	0x20027514
-   2cf20:	0003c735 	.word	0x0003c735
-   2cf24:	0003c75b 	.word	0x0003c75b
-   2cf28:	0003b763 	.word	0x0003b763
-   2cf2c:	0003c770 	.word	0x0003c770
-   2cf30:	0003fcaf 	.word	0x0003fcaf
-   2cf34:	0003fc84 	.word	0x0003fc84
-   2cf38:	0003cb6f 	.word	0x0003cb6f
+   2cf20:	0003c729 	.word	0x0003c729
+   2cf24:	0003c74f 	.word	0x0003c74f
+   2cf28:	0003b757 	.word	0x0003b757
+   2cf2c:	0003c764 	.word	0x0003c764
+   2cf30:	0003fca3 	.word	0x0003fca3
+   2cf34:	0003fc78 	.word	0x0003fc78
+   2cf38:	0003cb63 	.word	0x0003cb63
    2cf3c:	200274dc 	.word	0x200274dc
-   2cf40:	0003fcc1 	.word	0x0003fcc1
-   2cf44:	0003c788 	.word	0x0003c788
-   2cf48:	0003c79f 	.word	0x0003c79f
+   2cf40:	0003fcb5 	.word	0x0003fcb5
+   2cf44:	0003c77c 	.word	0x0003c77c
+   2cf48:	0003c793 	.word	0x0003c793
 
 0002cf4c <z_priq_dumb_remove>:
 }
@@ -64951,9 +64951,9 @@ static inline void sys_dlist_remove(sys_dnode_t *node)
    2cf92:	bd10      	pop	{r4, pc}
    2cf94:	200274dc 	.word	0x200274dc
    2cf98:	20022b04 	.word	0x20022b04
-   2cf9c:	0003fd97 	.word	0x0003fd97
-   2cfa0:	0003b763 	.word	0x0003b763
-   2cfa4:	0003fd21 	.word	0x0003fd21
+   2cf9c:	0003fd8b 	.word	0x0003fd8b
+   2cfa0:	0003b757 	.word	0x0003b757
+   2cfa4:	0003fd15 	.word	0x0003fd15
 
 0002cfa8 <z_unpend_thread>:
 {
@@ -65023,12 +65023,12 @@ static inline int z_abort_thread_timeout(struct k_thread *thread)
    2d030:	e8bd 4038 	ldmia.w	sp!, {r3, r4, r5, lr}
    2d034:	f001 bc6e 	b.w	2e914 <z_abort_timeout>
    2d038:	20027514 	.word	0x20027514
-   2d03c:	0003c735 	.word	0x0003c735
-   2d040:	0003c75b 	.word	0x0003c75b
-   2d044:	0003b763 	.word	0x0003b763
-   2d048:	0003c770 	.word	0x0003c770
-   2d04c:	0003c788 	.word	0x0003c788
-   2d050:	0003c79f 	.word	0x0003c79f
+   2d03c:	0003c729 	.word	0x0003c729
+   2d040:	0003c74f 	.word	0x0003c74f
+   2d044:	0003b757 	.word	0x0003b757
+   2d048:	0003c764 	.word	0x0003c764
+   2d04c:	0003c77c 	.word	0x0003c77c
+   2d050:	0003c793 	.word	0x0003c793
 
 0002d054 <update_cache>:
 {
@@ -65167,17 +65167,17 @@ static inline int z_abort_thread_timeout(struct k_thread *thread)
 	z_reschedule_unlocked();
    2d160:	f00b bdac 	b.w	38cbc <z_reschedule_unlocked>
    2d164:	20027514 	.word	0x20027514
-   2d168:	0003c735 	.word	0x0003c735
-   2d16c:	0003c75b 	.word	0x0003c75b
-   2d170:	0003b763 	.word	0x0003b763
-   2d174:	0003c770 	.word	0x0003c770
+   2d168:	0003c729 	.word	0x0003c729
+   2d16c:	0003c74f 	.word	0x0003c74f
+   2d170:	0003b757 	.word	0x0003b757
+   2d174:	0003c764 	.word	0x0003c764
    2d178:	200274dc 	.word	0x200274dc
-   2d17c:	0003fcf1 	.word	0x0003fcf1
-   2d180:	0003fd21 	.word	0x0003fd21
-   2d184:	0003cb6f 	.word	0x0003cb6f
-   2d188:	0003fcaf 	.word	0x0003fcaf
-   2d18c:	0003c788 	.word	0x0003c788
-   2d190:	0003c79f 	.word	0x0003c79f
+   2d17c:	0003fce5 	.word	0x0003fce5
+   2d180:	0003fd15 	.word	0x0003fd15
+   2d184:	0003cb63 	.word	0x0003cb63
+   2d188:	0003fca3 	.word	0x0003fca3
+   2d18c:	0003c77c 	.word	0x0003c77c
+   2d190:	0003c793 	.word	0x0003c793
 
 0002d194 <ready_thread>:
 {
@@ -65254,9 +65254,9 @@ static inline int z_abort_thread_timeout(struct k_thread *thread)
    2d210:	bd70      	pop	{r4, r5, r6, pc}
    2d212:	bf00      	nop
    2d214:	20022b04 	.word	0x20022b04
-   2d218:	0003fd97 	.word	0x0003fd97
-   2d21c:	0003b763 	.word	0x0003b763
-   2d220:	0003fd21 	.word	0x0003fd21
+   2d218:	0003fd8b 	.word	0x0003fd8b
+   2d21c:	0003b757 	.word	0x0003b757
+   2d220:	0003fd15 	.word	0x0003fd15
    2d224:	200274dc 	.word	0x200274dc
 
 0002d228 <z_ready_thread>:
@@ -65311,12 +65311,12 @@ static inline int z_abort_thread_timeout(struct k_thread *thread)
    2d298:	bd38      	pop	{r3, r4, r5, pc}
    2d29a:	bf00      	nop
    2d29c:	20027514 	.word	0x20027514
-   2d2a0:	0003c735 	.word	0x0003c735
-   2d2a4:	0003c75b 	.word	0x0003c75b
-   2d2a8:	0003b763 	.word	0x0003b763
-   2d2ac:	0003c770 	.word	0x0003c770
-   2d2b0:	0003c788 	.word	0x0003c788
-   2d2b4:	0003c79f 	.word	0x0003c79f
+   2d2a0:	0003c729 	.word	0x0003c729
+   2d2a4:	0003c74f 	.word	0x0003c74f
+   2d2a8:	0003b757 	.word	0x0003b757
+   2d2ac:	0003c764 	.word	0x0003c764
+   2d2b0:	0003c77c 	.word	0x0003c77c
+   2d2b4:	0003c793 	.word	0x0003c793
 
 0002d2b8 <z_thread_timeout>:
 	if (thread->base.pended_on != NULL) {
@@ -65393,12 +65393,12 @@ static inline int z_abort_thread_timeout(struct k_thread *thread)
 	z_ready_thread(thread);
    2d360:	f7ff bf62 	b.w	2d228 <z_ready_thread>
    2d364:	20027514 	.word	0x20027514
-   2d368:	0003c735 	.word	0x0003c735
-   2d36c:	0003c75b 	.word	0x0003c75b
-   2d370:	0003b763 	.word	0x0003b763
-   2d374:	0003c770 	.word	0x0003c770
-   2d378:	0003c788 	.word	0x0003c788
-   2d37c:	0003c79f 	.word	0x0003c79f
+   2d368:	0003c729 	.word	0x0003c729
+   2d36c:	0003c74f 	.word	0x0003c74f
+   2d370:	0003b757 	.word	0x0003b757
+   2d374:	0003c764 	.word	0x0003c764
+   2d378:	0003c77c 	.word	0x0003c77c
+   2d37c:	0003c793 	.word	0x0003c793
 
 0002d380 <z_sched_start>:
 {
@@ -65466,12 +65466,12 @@ static inline int z_abort_thread_timeout(struct k_thread *thread)
    2d406:	f7ff bced 	b.w	2cde4 <z_reschedule>
    2d40a:	bf00      	nop
    2d40c:	20027514 	.word	0x20027514
-   2d410:	0003c735 	.word	0x0003c735
-   2d414:	0003c75b 	.word	0x0003c75b
-   2d418:	0003b763 	.word	0x0003b763
-   2d41c:	0003c770 	.word	0x0003c770
-   2d420:	0003c788 	.word	0x0003c788
-   2d424:	0003c79f 	.word	0x0003c79f
+   2d410:	0003c729 	.word	0x0003c729
+   2d414:	0003c74f 	.word	0x0003c74f
+   2d418:	0003b757 	.word	0x0003b757
+   2d41c:	0003c764 	.word	0x0003c764
+   2d420:	0003c77c 	.word	0x0003c77c
+   2d424:	0003c793 	.word	0x0003c793
 
 0002d428 <z_move_thread_to_end_of_prio_q>:
 {
@@ -65589,17 +65589,17 @@ static inline int z_abort_thread_timeout(struct k_thread *thread)
    2d510:	62d4      	str	r4, [r2, #44]	; 0x2c
    2d512:	e7d3      	b.n	2d4bc <z_move_thread_to_end_of_prio_q+0x94>
    2d514:	20027514 	.word	0x20027514
-   2d518:	0003c735 	.word	0x0003c735
-   2d51c:	0003c75b 	.word	0x0003c75b
-   2d520:	0003b763 	.word	0x0003b763
-   2d524:	0003c770 	.word	0x0003c770
+   2d518:	0003c729 	.word	0x0003c729
+   2d51c:	0003c74f 	.word	0x0003c74f
+   2d520:	0003b757 	.word	0x0003b757
+   2d524:	0003c764 	.word	0x0003c764
    2d528:	20027504 	.word	0x20027504
    2d52c:	20022b04 	.word	0x20022b04
-   2d530:	0003fd97 	.word	0x0003fd97
-   2d534:	0003fd21 	.word	0x0003fd21
+   2d530:	0003fd8b 	.word	0x0003fd8b
+   2d534:	0003fd15 	.word	0x0003fd15
    2d538:	200274dc 	.word	0x200274dc
-   2d53c:	0003c788 	.word	0x0003c788
-   2d540:	0003c79f 	.word	0x0003c79f
+   2d53c:	0003c77c 	.word	0x0003c77c
+   2d540:	0003c793 	.word	0x0003c793
 
 0002d544 <z_time_slice>:
 	if (pending_current == _current) {
@@ -65746,14 +65746,14 @@ static inline int z_abort_thread_timeout(struct k_thread *thread)
    2d65c:	bd70      	pop	{r4, r5, r6, pc}
    2d65e:	bf00      	nop
    2d660:	20027514 	.word	0x20027514
-   2d664:	0003c735 	.word	0x0003c735
-   2d668:	0003c75b 	.word	0x0003c75b
-   2d66c:	0003b763 	.word	0x0003b763
-   2d670:	0003c770 	.word	0x0003c770
+   2d664:	0003c729 	.word	0x0003c729
+   2d668:	0003c74f 	.word	0x0003c74f
+   2d66c:	0003b757 	.word	0x0003b757
+   2d670:	0003c764 	.word	0x0003c764
    2d674:	20027504 	.word	0x20027504
    2d678:	200274dc 	.word	0x200274dc
-   2d67c:	0003c788 	.word	0x0003c788
-   2d680:	0003c79f 	.word	0x0003c79f
+   2d67c:	0003c77c 	.word	0x0003c77c
+   2d680:	0003c793 	.word	0x0003c793
 
 0002d684 <z_thread_single_abort>:
 	if (thread->fn_abort != NULL) {
@@ -65890,14 +65890,14 @@ static inline struct k_thread *z_waitq_head(_wait_q_t *w)
    2d78a:	f7ff fd03 	bl	2d194 <ready_thread>
    2d78e:	e7be      	b.n	2d70e <z_thread_single_abort+0x8a>
    2d790:	20027514 	.word	0x20027514
-   2d794:	0003c735 	.word	0x0003c735
-   2d798:	0003c75b 	.word	0x0003c75b
-   2d79c:	0003b763 	.word	0x0003b763
-   2d7a0:	0003c770 	.word	0x0003c770
+   2d794:	0003c729 	.word	0x0003c729
+   2d798:	0003c74f 	.word	0x0003c74f
+   2d79c:	0003b757 	.word	0x0003b757
+   2d7a0:	0003c764 	.word	0x0003c764
    2d7a4:	20027504 	.word	0x20027504
    2d7a8:	200274dc 	.word	0x200274dc
-   2d7ac:	0003c788 	.word	0x0003c788
-   2d7b0:	0003c79f 	.word	0x0003c79f
+   2d7ac:	0003c77c 	.word	0x0003c77c
+   2d7b0:	0003c793 	.word	0x0003c793
 
 0002d7b4 <unready_thread>:
 {
@@ -65983,12 +65983,12 @@ static inline struct k_thread *z_waitq_head(_wait_q_t *w)
    2d85c:	bd38      	pop	{r3, r4, r5, pc}
    2d85e:	bf00      	nop
    2d860:	20027514 	.word	0x20027514
-   2d864:	0003c735 	.word	0x0003c735
-   2d868:	0003c75b 	.word	0x0003c75b
-   2d86c:	0003b763 	.word	0x0003b763
-   2d870:	0003c770 	.word	0x0003c770
-   2d874:	0003c788 	.word	0x0003c788
-   2d878:	0003c79f 	.word	0x0003c79f
+   2d864:	0003c729 	.word	0x0003c729
+   2d868:	0003c74f 	.word	0x0003c74f
+   2d86c:	0003b757 	.word	0x0003b757
+   2d870:	0003c764 	.word	0x0003c764
+   2d874:	0003c77c 	.word	0x0003c77c
+   2d878:	0003c793 	.word	0x0003c793
 
 0002d87c <add_to_waitq_locked>:
 {
@@ -66063,9 +66063,9 @@ static inline struct k_thread *z_waitq_head(_wait_q_t *w)
    2d8e8:	e7f1      	b.n	2d8ce <add_to_waitq_locked+0x52>
    2d8ea:	bf00      	nop
    2d8ec:	20022b04 	.word	0x20022b04
-   2d8f0:	0003fd97 	.word	0x0003fd97
-   2d8f4:	0003b763 	.word	0x0003b763
-   2d8f8:	0003fd21 	.word	0x0003fd21
+   2d8f0:	0003fd8b 	.word	0x0003fd8b
+   2d8f4:	0003b757 	.word	0x0003b757
+   2d8f8:	0003fd15 	.word	0x0003fd15
 
 0002d8fc <pend>:
 {
@@ -66137,12 +66137,12 @@ static inline struct k_thread *z_waitq_head(_wait_q_t *w)
    2d99a:	f000 bf13 	b.w	2e7c4 <z_add_timeout>
    2d99e:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
    2d9a0:	20027514 	.word	0x20027514
-   2d9a4:	0003c735 	.word	0x0003c735
-   2d9a8:	0003c75b 	.word	0x0003c75b
-   2d9ac:	0003b763 	.word	0x0003b763
-   2d9b0:	0003c770 	.word	0x0003c770
-   2d9b4:	0003c788 	.word	0x0003c788
-   2d9b8:	0003c79f 	.word	0x0003c79f
+   2d9a4:	0003c729 	.word	0x0003c729
+   2d9a8:	0003c74f 	.word	0x0003c74f
+   2d9ac:	0003b757 	.word	0x0003b757
+   2d9b0:	0003c764 	.word	0x0003c764
+   2d9b4:	0003c77c 	.word	0x0003c77c
+   2d9b8:	0003c793 	.word	0x0003c793
    2d9bc:	0002d2b9 	.word	0x0002d2b9
 
 0002d9c0 <z_pend_thread>:
@@ -66181,9 +66181,9 @@ static inline struct k_thread *z_waitq_head(_wait_q_t *w)
 	pend(thread, wait_q, timeout);
    2d9f8:	f7ff bf80 	b.w	2d8fc <pend>
    2d9fc:	200274dc 	.word	0x200274dc
-   2da00:	0003fd5a 	.word	0x0003fd5a
-   2da04:	0003b763 	.word	0x0003b763
-   2da08:	0003fd21 	.word	0x0003fd21
+   2da00:	0003fd4e 	.word	0x0003fd4e
+   2da04:	0003b757 	.word	0x0003b757
+   2da08:	0003fd15 	.word	0x0003fd15
 
 0002da0c <z_pend_curr>:
 {
@@ -66220,10 +66220,10 @@ static inline struct k_thread *z_waitq_head(_wait_q_t *w)
    2da4c:	f7ed b83c 	b.w	1aac8 <arch_swap>
    2da50:	200274dc 	.word	0x200274dc
    2da54:	20027510 	.word	0x20027510
-   2da58:	0003c735 	.word	0x0003c735
-   2da5c:	0003c788 	.word	0x0003c788
-   2da60:	0003b763 	.word	0x0003b763
-   2da64:	0003c79f 	.word	0x0003c79f
+   2da58:	0003c729 	.word	0x0003c729
+   2da5c:	0003c77c 	.word	0x0003c77c
+   2da60:	0003b757 	.word	0x0003b757
+   2da64:	0003c793 	.word	0x0003c793
 
 0002da68 <z_set_prio>:
 {
@@ -66348,17 +66348,17 @@ static inline struct k_thread *z_waitq_head(_wait_q_t *w)
    2db54:	2400      	movs	r4, #0
    2db56:	e7d9      	b.n	2db0c <z_set_prio+0xa4>
    2db58:	20027514 	.word	0x20027514
-   2db5c:	0003c735 	.word	0x0003c735
-   2db60:	0003c75b 	.word	0x0003c75b
-   2db64:	0003b763 	.word	0x0003b763
-   2db68:	0003c770 	.word	0x0003c770
+   2db5c:	0003c729 	.word	0x0003c729
+   2db60:	0003c74f 	.word	0x0003c74f
+   2db64:	0003b757 	.word	0x0003b757
+   2db68:	0003c764 	.word	0x0003c764
    2db6c:	20027504 	.word	0x20027504
    2db70:	20022b04 	.word	0x20022b04
-   2db74:	0003fd97 	.word	0x0003fd97
-   2db78:	0003fd21 	.word	0x0003fd21
+   2db74:	0003fd8b 	.word	0x0003fd8b
+   2db78:	0003fd15 	.word	0x0003fd15
    2db7c:	200274dc 	.word	0x200274dc
-   2db80:	0003c788 	.word	0x0003c788
-   2db84:	0003c79f 	.word	0x0003c79f
+   2db80:	0003c77c 	.word	0x0003c77c
+   2db84:	0003c793 	.word	0x0003c793
 
 0002db88 <z_unpend_first_thread>:
 {
@@ -66478,12 +66478,12 @@ static inline struct k_thread *z_unpend1_no_timeout(_wait_q_t *wait_q)
    2dc88:	bd38      	pop	{r3, r4, r5, pc}
    2dc8a:	bf00      	nop
    2dc8c:	20027514 	.word	0x20027514
-   2dc90:	0003c735 	.word	0x0003c735
-   2dc94:	0003c75b 	.word	0x0003c75b
-   2dc98:	0003b763 	.word	0x0003b763
-   2dc9c:	0003c770 	.word	0x0003c770
-   2dca0:	0003c788 	.word	0x0003c788
-   2dca4:	0003c79f 	.word	0x0003c79f
+   2dc90:	0003c729 	.word	0x0003c729
+   2dc94:	0003c74f 	.word	0x0003c74f
+   2dc98:	0003b757 	.word	0x0003b757
+   2dc9c:	0003c764 	.word	0x0003c764
+   2dca0:	0003c77c 	.word	0x0003c77c
+   2dca4:	0003c793 	.word	0x0003c793
 
 0002dca8 <z_sched_init>:
 		sys_dlist_init(&_kernel.ready_q.runq.queues[i]);
@@ -66652,20 +66652,20 @@ void z_impl_k_yield(void)
    2ddda:	62e5      	str	r5, [r4, #44]	; 0x2c
    2dddc:	e7ca      	b.n	2dd74 <z_impl_k_yield+0xb4>
    2ddde:	bf00      	nop
-   2dde0:	0003fcaf 	.word	0x0003fcaf
-   2dde4:	0003fd21 	.word	0x0003fd21
-   2dde8:	0003b763 	.word	0x0003b763
-   2ddec:	0003cb6f 	.word	0x0003cb6f
+   2dde0:	0003fca3 	.word	0x0003fca3
+   2dde4:	0003fd15 	.word	0x0003fd15
+   2dde8:	0003b757 	.word	0x0003b757
+   2ddec:	0003cb63 	.word	0x0003cb63
    2ddf0:	200274dc 	.word	0x200274dc
    2ddf4:	20022b04 	.word	0x20022b04
    2ddf8:	20027514 	.word	0x20027514
-   2ddfc:	0003c735 	.word	0x0003c735
-   2de00:	0003c75b 	.word	0x0003c75b
-   2de04:	0003c770 	.word	0x0003c770
+   2ddfc:	0003c729 	.word	0x0003c729
+   2de00:	0003c74f 	.word	0x0003c74f
+   2de04:	0003c764 	.word	0x0003c764
    2de08:	20027504 	.word	0x20027504
-   2de0c:	0003fd97 	.word	0x0003fd97
-   2de10:	0003c788 	.word	0x0003c788
-   2de14:	0003c79f 	.word	0x0003c79f
+   2de0c:	0003fd8b 	.word	0x0003fd8b
+   2de10:	0003c77c 	.word	0x0003c77c
+   2de14:	0003c793 	.word	0x0003c793
 
 0002de18 <z_tick_sleep>:
 }
@@ -66797,19 +66797,19 @@ static s32_t z_tick_sleep(s32_t ticks)
    2df08:	1a24      	subs	r4, r4, r0
    2df0a:	ea24 74e4 	bic.w	r4, r4, r4, asr #31
    2df0e:	e79a      	b.n	2de46 <z_tick_sleep+0x2e>
-   2df10:	0003fcaf 	.word	0x0003fcaf
-   2df14:	0003fd21 	.word	0x0003fd21
-   2df18:	0003b763 	.word	0x0003b763
-   2df1c:	0003cb6f 	.word	0x0003cb6f
-   2df20:	0003c735 	.word	0x0003c735
-   2df24:	0003c75b 	.word	0x0003c75b
-   2df28:	0003c770 	.word	0x0003c770
+   2df10:	0003fca3 	.word	0x0003fca3
+   2df14:	0003fd15 	.word	0x0003fd15
+   2df18:	0003b757 	.word	0x0003b757
+   2df1c:	0003cb63 	.word	0x0003cb63
+   2df20:	0003c729 	.word	0x0003c729
+   2df24:	0003c74f 	.word	0x0003c74f
+   2df28:	0003c764 	.word	0x0003c764
    2df2c:	200274dc 	.word	0x200274dc
    2df30:	20027510 	.word	0x20027510
    2df34:	0002d2b9 	.word	0x0002d2b9
-   2df38:	0003c788 	.word	0x0003c788
-   2df3c:	0003c79f 	.word	0x0003c79f
-   2df40:	0003fdb8 	.word	0x0003fdb8
+   2df38:	0003c77c 	.word	0x0003c77c
+   2df3c:	0003c793 	.word	0x0003c793
+   2df40:	0003fdac 	.word	0x0003fdac
 
 0002df44 <z_impl_k_sleep>:
 
@@ -66865,10 +66865,10 @@ s32_t z_impl_k_sleep(k_timeout_t timeout)
    2dfa2:	ea44 4441 	orr.w	r4, r4, r1, lsl #17
 	return k_ticks_to_ms_floor64(ticks);
    2dfa6:	e7e7      	b.n	2df78 <z_impl_k_sleep+0x34>
-   2dfa8:	0003fcaf 	.word	0x0003fcaf
-   2dfac:	0003fd21 	.word	0x0003fd21
-   2dfb0:	0003b763 	.word	0x0003b763
-   2dfb4:	0003cb6f 	.word	0x0003cb6f
+   2dfa8:	0003fca3 	.word	0x0003fca3
+   2dfac:	0003fd15 	.word	0x0003fd15
+   2dfb0:	0003b757 	.word	0x0003b757
+   2dfb4:	0003cb63 	.word	0x0003cb63
    2dfb8:	200274dc 	.word	0x200274dc
 
 0002dfbc <z_impl_k_current_get>:
@@ -66956,10 +66956,10 @@ void z_impl_k_sem_give(struct k_sem *sem)
    2e038:	e7ed      	b.n	2e016 <z_impl_k_sem_give+0x4e>
    2e03a:	bf00      	nop
    2e03c:	20027520 	.word	0x20027520
-   2e040:	0003c735 	.word	0x0003c735
-   2e044:	0003c75b 	.word	0x0003c75b
-   2e048:	0003b763 	.word	0x0003b763
-   2e04c:	0003c770 	.word	0x0003c770
+   2e040:	0003c729 	.word	0x0003c729
+   2e044:	0003c74f 	.word	0x0003c74f
+   2e048:	0003b757 	.word	0x0003b757
+   2e04c:	0003c764 	.word	0x0003c764
 
 0002e050 <z_impl_k_sem_take>:
 }
@@ -67080,16 +67080,16 @@ out:
    2e128:	4805      	ldr	r0, [pc, #20]	; (2e140 <z_impl_k_sem_take+0xf0>)
    2e12a:	f7ff bc6f 	b.w	2da0c <z_pend_curr>
    2e12e:	bf00      	nop
-   2e130:	0003fe18 	.word	0x0003fe18
-   2e134:	0003fdf8 	.word	0x0003fdf8
-   2e138:	0003b763 	.word	0x0003b763
-   2e13c:	0003cb6f 	.word	0x0003cb6f
+   2e130:	0003fe0c 	.word	0x0003fe0c
+   2e134:	0003fdec 	.word	0x0003fdec
+   2e138:	0003b757 	.word	0x0003b757
+   2e13c:	0003cb63 	.word	0x0003cb63
    2e140:	20027520 	.word	0x20027520
-   2e144:	0003c735 	.word	0x0003c735
-   2e148:	0003c75b 	.word	0x0003c75b
-   2e14c:	0003c770 	.word	0x0003c770
-   2e150:	0003c788 	.word	0x0003c788
-   2e154:	0003c79f 	.word	0x0003c79f
+   2e144:	0003c729 	.word	0x0003c729
+   2e148:	0003c74f 	.word	0x0003c74f
+   2e14c:	0003c764 	.word	0x0003c764
+   2e150:	0003c77c 	.word	0x0003c77c
+   2e154:	0003c793 	.word	0x0003c793
 
 0002e158 <z_impl_k_stack_push>:
 int z_impl_k_stack_push(struct k_stack *stack, stack_data_t data)
@@ -67190,12 +67190,12 @@ int z_impl_k_stack_push(struct k_stack *stack, stack_data_t data)
 		return -ENOMEM;
    2e202:	f06f 000b 	mvn.w	r0, #11
    2e206:	e7df      	b.n	2e1c8 <z_impl_k_stack_push+0x70>
-   2e208:	0003c735 	.word	0x0003c735
-   2e20c:	0003c75b 	.word	0x0003c75b
-   2e210:	0003b763 	.word	0x0003b763
-   2e214:	0003c770 	.word	0x0003c770
-   2e218:	0003c788 	.word	0x0003c788
-   2e21c:	0003c79f 	.word	0x0003c79f
+   2e208:	0003c729 	.word	0x0003c729
+   2e20c:	0003c74f 	.word	0x0003c74f
+   2e210:	0003b757 	.word	0x0003b757
+   2e214:	0003c764 	.word	0x0003c764
+   2e218:	0003c77c 	.word	0x0003c77c
+   2e21c:	0003c793 	.word	0x0003c793
 
 0002e220 <k_sys_work_q_init>:
 K_THREAD_STACK_DEFINE(sys_work_q_stack, CONFIG_SYSTEM_WORKQUEUE_STACK_SIZE);
@@ -67229,7 +67229,7 @@ static int k_sys_work_q_init(struct device *dev)
    2e242:	bf00      	nop
    2e244:	20027524 	.word	0x20027524
    2e248:	200351d8 	.word	0x200351d8
-   2e24c:	0003fe48 	.word	0x0003fe48
+   2e24c:	0003fe3c 	.word	0x0003fe3c
 
 0002e250 <z_setup_new_thread>:
 void z_setup_new_thread(struct k_thread *new_thread,
@@ -67329,10 +67329,10 @@ void z_setup_new_thread(struct k_thread *new_thread,
    2e2e6:	bf00      	nop
    2e2e8:	0002b955 	.word	0x0002b955
    2e2ec:	200274dc 	.word	0x200274dc
-   2e2f0:	0003fea3 	.word	0x0003fea3
-   2e2f4:	0003fec6 	.word	0x0003fec6
-   2e2f8:	0003b763 	.word	0x0003b763
-   2e2fc:	0003ff46 	.word	0x0003ff46
+   2e2f0:	0003fe97 	.word	0x0003fe97
+   2e2f4:	0003feba 	.word	0x0003feba
+   2e2f8:	0003b757 	.word	0x0003b757
+   2e2fc:	0003ff3a 	.word	0x0003ff3a
 
 0002e300 <z_impl_k_thread_create>:
 {
@@ -67400,10 +67400,10 @@ void z_setup_new_thread(struct k_thread *new_thread,
    2e38c:	f000 fa1a 	bl	2e7c4 <z_add_timeout>
    2e390:	e7e8      	b.n	2e364 <z_impl_k_thread_create+0x64>
    2e392:	bf00      	nop
-   2e394:	0003fcaf 	.word	0x0003fcaf
-   2e398:	0003fea3 	.word	0x0003fea3
-   2e39c:	0003b763 	.word	0x0003b763
-   2e3a0:	0003fe51 	.word	0x0003fe51
+   2e394:	0003fca3 	.word	0x0003fca3
+   2e398:	0003fe97 	.word	0x0003fe97
+   2e39c:	0003b757 	.word	0x0003b757
+   2e3a0:	0003fe45 	.word	0x0003fe45
    2e3a4:	0002d2b9 	.word	0x0002d2b9
 
 0002e3a8 <z_init_static_threads>:
@@ -67509,10 +67509,10 @@ void z_setup_new_thread(struct k_thread *new_thread,
    2e49e:	bf00      	nop
    2e4a0:	200205e4 	.word	0x200205e4
    2e4a4:	200205b4 	.word	0x200205b4
-   2e4a8:	0003fe76 	.word	0x0003fe76
-   2e4ac:	0003b763 	.word	0x0003b763
-   2e4b0:	0003cbed 	.word	0x0003cbed
-   2e4b4:	0003fea3 	.word	0x0003fea3
+   2e4a8:	0003fe6a 	.word	0x0003fe6a
+   2e4ac:	0003b757 	.word	0x0003b757
+   2e4b0:	0003cbe1 	.word	0x0003cbe1
+   2e4b4:	0003fe97 	.word	0x0003fe97
    2e4b8:	0002d2b9 	.word	0x0002d2b9
 
 0002e4bc <z_spin_lock_valid>:
@@ -67623,7 +67623,7 @@ void k_work_q_start(struct k_work_q *work_q, k_thread_stack_t *stack,
    2e542:	f00a bbf3 	b.w	38d2c <z_impl_k_thread_name_set>
    2e546:	bf00      	nop
    2e548:	00033613 	.word	0x00033613
-   2e54c:	0003ff77 	.word	0x0003ff77
+   2e54c:	0003ff6b 	.word	0x0003ff6b
 
 0002e550 <k_delayed_work_submit_to_queue>:
 }
@@ -67767,12 +67767,12 @@ done:
    2e650:	e7ad      	b.n	2e5ae <k_delayed_work_submit_to_queue+0x5e>
    2e652:	bf00      	nop
    2e654:	200275f8 	.word	0x200275f8
-   2e658:	0003c735 	.word	0x0003c735
-   2e65c:	0003c75b 	.word	0x0003c75b
-   2e660:	0003b763 	.word	0x0003b763
-   2e664:	0003c770 	.word	0x0003c770
-   2e668:	0003c788 	.word	0x0003c788
-   2e66c:	0003c79f 	.word	0x0003c79f
+   2e658:	0003c729 	.word	0x0003c729
+   2e65c:	0003c74f 	.word	0x0003c74f
+   2e660:	0003b757 	.word	0x0003b757
+   2e664:	0003c764 	.word	0x0003c764
+   2e668:	0003c77c 	.word	0x0003c77c
+   2e66c:	0003c793 	.word	0x0003c793
    2e670:	00038d6f 	.word	0x00038d6f
 
 0002e674 <k_delayed_work_cancel>:
@@ -67847,12 +67847,12 @@ int k_delayed_work_cancel(struct k_delayed_work *work)
    2e6f4:	e7fa      	b.n	2e6ec <k_delayed_work_cancel+0x78>
    2e6f6:	bf00      	nop
    2e6f8:	200275f8 	.word	0x200275f8
-   2e6fc:	0003c735 	.word	0x0003c735
-   2e700:	0003c75b 	.word	0x0003c75b
-   2e704:	0003b763 	.word	0x0003b763
-   2e708:	0003c770 	.word	0x0003c770
-   2e70c:	0003c788 	.word	0x0003c788
-   2e710:	0003c79f 	.word	0x0003c79f
+   2e6fc:	0003c729 	.word	0x0003c729
+   2e700:	0003c74f 	.word	0x0003c74f
+   2e704:	0003b757 	.word	0x0003b757
+   2e708:	0003c764 	.word	0x0003c764
+   2e70c:	0003c77c 	.word	0x0003c77c
+   2e710:	0003c793 	.word	0x0003c793
 
 0002e714 <elapsed>:
 	sys_dlist_remove(&t->node);
@@ -68153,18 +68153,18 @@ static k_ticks_t timeout_rem(struct _timeout *timeout)
    2e8de:	d0b6      	beq.n	2e84e <z_add_timeout+0x8a>
    2e8e0:	6836      	ldr	r6, [r6, #0]
    2e8e2:	e7b3      	b.n	2e84c <z_add_timeout+0x88>
-   2e8e4:	0003ffa5 	.word	0x0003ffa5
-   2e8e8:	0003ff81 	.word	0x0003ff81
-   2e8ec:	0003b763 	.word	0x0003b763
-   2e8f0:	0003cb6f 	.word	0x0003cb6f
+   2e8e4:	0003ff99 	.word	0x0003ff99
+   2e8e8:	0003ff75 	.word	0x0003ff75
+   2e8ec:	0003b757 	.word	0x0003b757
+   2e8f0:	0003cb63 	.word	0x0003cb63
    2e8f4:	20027600 	.word	0x20027600
-   2e8f8:	0003c735 	.word	0x0003c735
-   2e8fc:	0003c75b 	.word	0x0003c75b
-   2e900:	0003c770 	.word	0x0003c770
+   2e8f8:	0003c729 	.word	0x0003c729
+   2e8fc:	0003c74f 	.word	0x0003c74f
+   2e900:	0003c764 	.word	0x0003c764
    2e904:	2002022c 	.word	0x2002022c
-   2e908:	0003c788 	.word	0x0003c788
-   2e90c:	0003c79f 	.word	0x0003c79f
-   2e910:	0003ffc5 	.word	0x0003ffc5
+   2e908:	0003c77c 	.word	0x0003c77c
+   2e90c:	0003c793 	.word	0x0003c793
+   2e910:	0003ffb9 	.word	0x0003ffb9
 
 0002e914 <z_abort_timeout>:
 {
@@ -68226,12 +68226,12 @@ static k_ticks_t timeout_rem(struct _timeout *timeout)
    2e98e:	f06f 0415 	mvn.w	r4, #21
    2e992:	e7e4      	b.n	2e95e <z_abort_timeout+0x4a>
    2e994:	20027600 	.word	0x20027600
-   2e998:	0003c735 	.word	0x0003c735
-   2e99c:	0003c75b 	.word	0x0003c75b
-   2e9a0:	0003b763 	.word	0x0003b763
-   2e9a4:	0003c770 	.word	0x0003c770
-   2e9a8:	0003c788 	.word	0x0003c788
-   2e9ac:	0003c79f 	.word	0x0003c79f
+   2e998:	0003c729 	.word	0x0003c729
+   2e99c:	0003c74f 	.word	0x0003c74f
+   2e9a0:	0003b757 	.word	0x0003b757
+   2e9a4:	0003c764 	.word	0x0003c764
+   2e9a8:	0003c77c 	.word	0x0003c77c
+   2e9ac:	0003c793 	.word	0x0003c793
 
 0002e9b0 <z_timeout_remaining>:
 
@@ -68295,12 +68295,12 @@ k_ticks_t z_timeout_remaining(struct _timeout *timeout)
    2ea24:	bd38      	pop	{r3, r4, r5, pc}
    2ea26:	bf00      	nop
    2ea28:	20027600 	.word	0x20027600
-   2ea2c:	0003c735 	.word	0x0003c735
-   2ea30:	0003c75b 	.word	0x0003c75b
-   2ea34:	0003b763 	.word	0x0003b763
-   2ea38:	0003c770 	.word	0x0003c770
-   2ea3c:	0003c788 	.word	0x0003c788
-   2ea40:	0003c79f 	.word	0x0003c79f
+   2ea2c:	0003c729 	.word	0x0003c729
+   2ea30:	0003c74f 	.word	0x0003c74f
+   2ea34:	0003b757 	.word	0x0003b757
+   2ea38:	0003c764 	.word	0x0003c764
+   2ea3c:	0003c77c 	.word	0x0003c77c
+   2ea40:	0003c793 	.word	0x0003c793
 
 0002ea44 <z_get_next_timeout_expiry>:
 
@@ -68364,12 +68364,12 @@ s32_t z_get_next_timeout_expiry(void)
    2eab4:	bd38      	pop	{r3, r4, r5, pc}
    2eab6:	bf00      	nop
    2eab8:	20027600 	.word	0x20027600
-   2eabc:	0003c735 	.word	0x0003c735
-   2eac0:	0003c75b 	.word	0x0003c75b
-   2eac4:	0003b763 	.word	0x0003b763
-   2eac8:	0003c770 	.word	0x0003c770
-   2eacc:	0003c788 	.word	0x0003c788
-   2ead0:	0003c79f 	.word	0x0003c79f
+   2eabc:	0003c729 	.word	0x0003c729
+   2eac0:	0003c74f 	.word	0x0003c74f
+   2eac4:	0003b757 	.word	0x0003b757
+   2eac8:	0003c764 	.word	0x0003c764
+   2eacc:	0003c77c 	.word	0x0003c77c
+   2ead0:	0003c793 	.word	0x0003c793
 
 0002ead4 <z_set_timeout_expiry>:
 
@@ -68442,12 +68442,12 @@ void z_set_timeout_expiry(s32_t ticks, bool idle)
    2eb54:	bd70      	pop	{r4, r5, r6, pc}
    2eb56:	bf00      	nop
    2eb58:	20027600 	.word	0x20027600
-   2eb5c:	0003c735 	.word	0x0003c735
-   2eb60:	0003c75b 	.word	0x0003c75b
-   2eb64:	0003b763 	.word	0x0003b763
-   2eb68:	0003c770 	.word	0x0003c770
-   2eb6c:	0003c788 	.word	0x0003c788
-   2eb70:	0003c79f 	.word	0x0003c79f
+   2eb5c:	0003c729 	.word	0x0003c729
+   2eb60:	0003c74f 	.word	0x0003c74f
+   2eb64:	0003b757 	.word	0x0003b757
+   2eb68:	0003c764 	.word	0x0003c764
+   2eb6c:	0003c77c 	.word	0x0003c77c
+   2eb70:	0003c793 	.word	0x0003c793
 
 0002eb74 <z_clock_announce>:
 
@@ -68611,14 +68611,14 @@ void z_clock_announce(s32_t ticks)
 	return k;
    2ecae:	e789      	b.n	2ebc4 <z_clock_announce+0x50>
    2ecb0:	20027600 	.word	0x20027600
-   2ecb4:	0003c735 	.word	0x0003c735
-   2ecb8:	0003c75b 	.word	0x0003c75b
-   2ecbc:	0003b763 	.word	0x0003b763
-   2ecc0:	0003c770 	.word	0x0003c770
+   2ecb4:	0003c729 	.word	0x0003c729
+   2ecb8:	0003c74f 	.word	0x0003c74f
+   2ecbc:	0003b757 	.word	0x0003b757
+   2ecc0:	0003c764 	.word	0x0003c764
    2ecc4:	20020a08 	.word	0x20020a08
    2ecc8:	200275fc 	.word	0x200275fc
-   2eccc:	0003c788 	.word	0x0003c788
-   2ecd0:	0003c79f 	.word	0x0003c79f
+   2eccc:	0003c77c 	.word	0x0003c77c
+   2ecd0:	0003c793 	.word	0x0003c793
    2ecd4:	2002022c 	.word	0x2002022c
 
 0002ecd8 <z_tick_get>:
@@ -68683,13 +68683,13 @@ s64_t z_tick_get(void)
    2ed56:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
    2ed5a:	bf00      	nop
    2ed5c:	20027600 	.word	0x20027600
-   2ed60:	0003c735 	.word	0x0003c735
-   2ed64:	0003c75b 	.word	0x0003c75b
-   2ed68:	0003b763 	.word	0x0003b763
-   2ed6c:	0003c770 	.word	0x0003c770
+   2ed60:	0003c729 	.word	0x0003c729
+   2ed64:	0003c74f 	.word	0x0003c74f
+   2ed68:	0003b757 	.word	0x0003b757
+   2ed6c:	0003c764 	.word	0x0003c764
    2ed70:	20020a08 	.word	0x20020a08
-   2ed74:	0003c788 	.word	0x0003c788
-   2ed78:	0003c79f 	.word	0x0003c79f
+   2ed74:	0003c77c 	.word	0x0003c77c
+   2ed78:	0003c793 	.word	0x0003c793
 
 0002ed7c <z_timer_expiration_handler>:
 
@@ -68885,10 +68885,10 @@ static int k_poll_poller_cb(struct k_poll_event *event, u32_t state)
 		return -EAGAIN;
    2ee72:	f06f 000a 	mvn.w	r0, #10
    2ee76:	e7e5      	b.n	2ee44 <k_poll_poller_cb+0x2c>
-   2ee78:	0004009b 	.word	0x0004009b
-   2ee7c:	0004007a 	.word	0x0004007a
-   2ee80:	0003b763 	.word	0x0003b763
-   2ee84:	000400b1 	.word	0x000400b1
+   2ee78:	0004008f 	.word	0x0004008f
+   2ee7c:	0004006e 	.word	0x0004006e
+   2ee80:	0003b757 	.word	0x0003b757
+   2ee84:	000400a5 	.word	0x000400a5
 
 0002ee88 <clear_event_registrations>:
 {
@@ -69025,22 +69025,22 @@ static int k_poll_poller_cb(struct k_poll_event *event, u32_t state)
 	return k;
    2efb4:	3c14      	subs	r4, #20
    2efb6:	e772      	b.n	2ee9e <clear_event_registrations+0x16>
-   2efb8:	0004007a 	.word	0x0004007a
-   2efbc:	0003b763 	.word	0x0003b763
-   2efc0:	0003ffd4 	.word	0x0003ffd4
-   2efc4:	0003ffee 	.word	0x0003ffee
-   2efc8:	00040003 	.word	0x00040003
-   2efcc:	0004001f 	.word	0x0004001f
-   2efd0:	00040030 	.word	0x00040030
-   2efd4:	0004004d 	.word	0x0004004d
-   2efd8:	00040064 	.word	0x00040064
+   2efb8:	0004006e 	.word	0x0004006e
+   2efbc:	0003b757 	.word	0x0003b757
+   2efc0:	0003ffc8 	.word	0x0003ffc8
+   2efc4:	0003ffe2 	.word	0x0003ffe2
+   2efc8:	0003fff7 	.word	0x0003fff7
+   2efcc:	00040013 	.word	0x00040013
+   2efd0:	00040024 	.word	0x00040024
+   2efd4:	00040041 	.word	0x00040041
+   2efd8:	00040058 	.word	0x00040058
    2efdc:	20027604 	.word	0x20027604
-   2efe0:	0003c735 	.word	0x0003c735
-   2efe4:	0003c788 	.word	0x0003c788
-   2efe8:	0003c79f 	.word	0x0003c79f
-   2efec:	0003c75b 	.word	0x0003c75b
-   2eff0:	0003c770 	.word	0x0003c770
-   2eff4:	0003fd1f 	.word	0x0003fd1f
+   2efe0:	0003c729 	.word	0x0003c729
+   2efe4:	0003c77c 	.word	0x0003c77c
+   2efe8:	0003c793 	.word	0x0003c793
+   2efec:	0003c74f 	.word	0x0003c74f
+   2eff0:	0003c764 	.word	0x0003c764
+   2eff4:	0003fd13 	.word	0x0003fd13
 
 0002eff8 <register_events>:
 {
@@ -69261,22 +69261,22 @@ static int k_poll_poller_cb(struct k_poll_event *event, u32_t state)
    2f1a8:	e7c6      	b.n	2f138 <register_events+0x140>
    2f1aa:	bf00      	nop
    2f1ac:	20027604 	.word	0x20027604
-   2f1b0:	0003c75b 	.word	0x0003c75b
-   2f1b4:	0003b763 	.word	0x0003b763
-   2f1b8:	0003c770 	.word	0x0003c770
-   2f1bc:	0003c788 	.word	0x0003c788
-   2f1c0:	0003c79f 	.word	0x0003c79f
-   2f1c4:	0004007a 	.word	0x0004007a
-   2f1c8:	0003fd1f 	.word	0x0003fd1f
-   2f1cc:	000400d0 	.word	0x000400d0
-   2f1d0:	0003ffd4 	.word	0x0003ffd4
-   2f1d4:	0003ffee 	.word	0x0003ffee
-   2f1d8:	00040003 	.word	0x00040003
-   2f1dc:	0004001f 	.word	0x0004001f
-   2f1e0:	00040030 	.word	0x00040030
-   2f1e4:	0004004d 	.word	0x0004004d
-   2f1e8:	00040064 	.word	0x00040064
-   2f1ec:	0003c735 	.word	0x0003c735
+   2f1b0:	0003c74f 	.word	0x0003c74f
+   2f1b4:	0003b757 	.word	0x0003b757
+   2f1b8:	0003c764 	.word	0x0003c764
+   2f1bc:	0003c77c 	.word	0x0003c77c
+   2f1c0:	0003c793 	.word	0x0003c793
+   2f1c4:	0004006e 	.word	0x0004006e
+   2f1c8:	0003fd13 	.word	0x0003fd13
+   2f1cc:	000400c4 	.word	0x000400c4
+   2f1d0:	0003ffc8 	.word	0x0003ffc8
+   2f1d4:	0003ffe2 	.word	0x0003ffe2
+   2f1d8:	0003fff7 	.word	0x0003fff7
+   2f1dc:	00040013 	.word	0x00040013
+   2f1e0:	00040024 	.word	0x00040024
+   2f1e4:	00040041 	.word	0x00040041
+   2f1e8:	00040058 	.word	0x00040058
+   2f1ec:	0003c729 	.word	0x0003c729
 
 0002f1f0 <z_impl_k_poll>:
 int z_impl_k_poll(struct k_poll_event *events, int num_events,
@@ -69507,20 +69507,20 @@ int z_impl_k_poll(struct k_poll_event *events, int num_events,
    2f3be:	bf00      	nop
    2f3c0:	200274dc 	.word	0x200274dc
    2f3c4:	0002ee19 	.word	0x0002ee19
-   2f3c8:	0003fcaf 	.word	0x0003fcaf
-   2f3cc:	0004007a 	.word	0x0004007a
-   2f3d0:	0003b763 	.word	0x0003b763
-   2f3d4:	0003cb6f 	.word	0x0003cb6f
-   2f3d8:	000400ed 	.word	0x000400ed
-   2f3dc:	00040103 	.word	0x00040103
-   2f3e0:	00040112 	.word	0x00040112
-   2f3e4:	00040122 	.word	0x00040122
+   2f3c8:	0003fca3 	.word	0x0003fca3
+   2f3cc:	0004006e 	.word	0x0004006e
+   2f3d0:	0003b757 	.word	0x0003b757
+   2f3d4:	0003cb63 	.word	0x0003cb63
+   2f3d8:	000400e1 	.word	0x000400e1
+   2f3dc:	000400f7 	.word	0x000400f7
+   2f3e0:	00040106 	.word	0x00040106
+   2f3e4:	00040116 	.word	0x00040116
    2f3e8:	20027604 	.word	0x20027604
-   2f3ec:	0003c735 	.word	0x0003c735
-   2f3f0:	0003c75b 	.word	0x0003c75b
-   2f3f4:	0003c770 	.word	0x0003c770
-   2f3f8:	0003c788 	.word	0x0003c788
-   2f3fc:	0003c79f 	.word	0x0003c79f
+   2f3ec:	0003c729 	.word	0x0003c729
+   2f3f0:	0003c74f 	.word	0x0003c74f
+   2f3f4:	0003c764 	.word	0x0003c764
+   2f3f8:	0003c77c 	.word	0x0003c77c
+   2f3fc:	0003c793 	.word	0x0003c793
 
 0002f400 <fabs>:
    2f400:	ec51 0b10 	vmov	r0, r1, d0
@@ -71949,9 +71949,9 @@ int z_impl_k_poll(struct k_poll_event *events, int num_events,
    311b8:	e7f2      	b.n	311a0 <__assert_func+0x10>
    311ba:	bf00      	nop
    311bc:	20020234 	.word	0x20020234
-   311c0:	0004012f 	.word	0x0004012f
-   311c4:	0004013c 	.word	0x0004013c
-   311c8:	0003c504 	.word	0x0003c504
+   311c0:	00040123 	.word	0x00040123
+   311c4:	00040130 	.word	0x00040130
+   311c8:	0003c4f8 	.word	0x0003c4f8
 
 000311cc <calloc>:
    311cc:	4b02      	ldr	r3, [pc, #8]	; (311d8 <calloc+0xc>)
@@ -72390,9 +72390,9 @@ int z_impl_k_poll(struct k_poll_event *events, int num_events,
    315a0:	0003b384 	.word	0x0003b384
    315a4:	0003b3a4 	.word	0x0003b3a4
    315a8:	0003b364 	.word	0x0003b364
-   315ac:	0004026c 	.word	0x0004026c
-   315b0:	00040272 	.word	0x00040272
-   315b4:	00040276 	.word	0x00040276
+   315ac:	00040260 	.word	0x00040260
+   315b0:	00040266 	.word	0x00040266
+   315b4:	0004026a 	.word	0x0004026a
    315b8:	000315c1 	.word	0x000315c1
    315bc:	00039081 	.word	0x00039081
 
@@ -72701,11 +72701,11 @@ int z_impl_k_poll(struct k_poll_event *events, int num_events,
    318b4:	9304      	str	r3, [sp, #16]
    318b6:	e015      	b.n	318e4 <_printf_float+0x324>
    318b8:	7fefffff 	.word	0x7fefffff
-   318bc:	0004027d 	.word	0x0004027d
-   318c0:	0003cacf 	.word	0x0003cacf
-   318c4:	00040281 	.word	0x00040281
-   318c8:	00040285 	.word	0x00040285
-   318cc:	0003fd1f 	.word	0x0003fd1f
+   318bc:	00040271 	.word	0x00040271
+   318c0:	0003cac3 	.word	0x0003cac3
+   318c4:	00040275 	.word	0x00040275
+   318c8:	00040279 	.word	0x00040279
+   318cc:	0003fd13 	.word	0x0003fd13
    318d0:	2301      	movs	r3, #1
    318d2:	9a04      	ldr	r2, [sp, #16]
    318d4:	4631      	mov	r1, r6
@@ -73062,8 +73062,8 @@ int z_impl_k_poll(struct k_poll_event *events, int num_events,
    31c2c:	2500      	movs	r5, #0
    31c2e:	f104 0919 	add.w	r9, r4, #25
    31c32:	e7f5      	b.n	31c20 <_printf_i+0x20c>
-   31c34:	00040289 	.word	0x00040289
-   31c38:	0004029a 	.word	0x0004029a
+   31c34:	0004027d 	.word	0x0004027d
+   31c38:	0004028e 	.word	0x0004028e
 
 00031c3c <_sbrk_r>:
    31c3c:	b538      	push	{r3, r4, r5, lr}
@@ -73405,87 +73405,87 @@ int z_impl_k_poll(struct k_poll_event *events, int num_events,
    31f86:	4851      	ldr	r0, [pc, #324]	; (320cc <_strerror_r+0x3c8>)
    31f88:	e755      	b.n	31e36 <_strerror_r+0x132>
    31f8a:	bf00      	nop
-   31f8c:	000402ab 	.word	0x000402ab
-   31f90:	000402b5 	.word	0x000402b5
-   31f94:	000402cf 	.word	0x000402cf
-   31f98:	000402df 	.word	0x000402df
-   31f9c:	000402f7 	.word	0x000402f7
-   31fa0:	00040301 	.word	0x00040301
-   31fa4:	0004031b 	.word	0x0004031b
-   31fa8:	0004032d 	.word	0x0004032d
-   31fac:	0004033f 	.word	0x0004033f
-   31fb0:	00040358 	.word	0x00040358
-   31fb4:	00040368 	.word	0x00040368
-   31fb8:	00040374 	.word	0x00040374
-   31fbc:	00040391 	.word	0x00040391
-   31fc0:	000403a3 	.word	0x000403a3
-   31fc4:	000403b4 	.word	0x000403b4
-   31fc8:	000403c6 	.word	0x000403c6
-   31fcc:	000403d2 	.word	0x000403d2
-   31fd0:	000403ea 	.word	0x000403ea
-   31fd4:	000403f6 	.word	0x000403f6
-   31fd8:	00040408 	.word	0x00040408
-   31fdc:	00040417 	.word	0x00040417
-   31fe0:	00040427 	.word	0x00040427
-   31fe4:	00040434 	.word	0x00040434
-   31fe8:	00040453 	.word	0x00040453
-   31fec:	00040462 	.word	0x00040462
-   31ff0:	00040473 	.word	0x00040473
-   31ff4:	00040497 	.word	0x00040497
-   31ff8:	000404b5 	.word	0x000404b5
-   31ffc:	000404d3 	.word	0x000404d3
-   32000:	000404f3 	.word	0x000404f3
-   32004:	0004050a 	.word	0x0004050a
-   32008:	00040519 	.word	0x00040519
-   3200c:	00040528 	.word	0x00040528
-   32010:	0004053c 	.word	0x0004053c
-   32014:	00040554 	.word	0x00040554
-   32018:	00040562 	.word	0x00040562
-   3201c:	0004056f 	.word	0x0004056f
-   32020:	00040585 	.word	0x00040585
-   32024:	00040594 	.word	0x00040594
-   32028:	000405a0 	.word	0x000405a0
-   3202c:	000405cf 	.word	0x000405cf
-   32030:	000405e0 	.word	0x000405e0
-   32034:	000405fb 	.word	0x000405fb
-   32038:	0004060e 	.word	0x0004060e
-   3203c:	00040624 	.word	0x00040624
-   32040:	0004062d 	.word	0x0004062d
-   32044:	00040644 	.word	0x00040644
-   32048:	0004064c 	.word	0x0004064c
-   3204c:	00040659 	.word	0x00040659
-   32050:	0004066e 	.word	0x0004066e
-   32054:	00040682 	.word	0x00040682
-   32058:	0004069a 	.word	0x0004069a
-   3205c:	000406a9 	.word	0x000406a9
-   32060:	000406ba 	.word	0x000406ba
-   32064:	000406cd 	.word	0x000406cd
-   32068:	000406d9 	.word	0x000406d9
-   3206c:	000406f2 	.word	0x000406f2
-   32070:	00040706 	.word	0x00040706
-   32074:	00040721 	.word	0x00040721
-   32078:	00040739 	.word	0x00040739
-   3207c:	00040753 	.word	0x00040753
-   32080:	0004075b 	.word	0x0004075b
-   32084:	0004078b 	.word	0x0004078b
-   32088:	000407aa 	.word	0x000407aa
-   3208c:	000407c9 	.word	0x000407c9
-   32090:	000407e0 	.word	0x000407e0
-   32094:	000407f3 	.word	0x000407f3
-   32098:	0004080c 	.word	0x0004080c
-   3209c:	00040823 	.word	0x00040823
-   320a0:	00040839 	.word	0x00040839
-   320a4:	0004085a 	.word	0x0004085a
-   320a8:	00040872 	.word	0x00040872
-   320ac:	0004088e 	.word	0x0004088e
-   320b0:	000408a1 	.word	0x000408a1
-   320b4:	000408b7 	.word	0x000408b7
-   320b8:	000408cb 	.word	0x000408cb
-   320bc:	000408ed 	.word	0x000408ed
-   320c0:	00040913 	.word	0x00040913
-   320c4:	00040924 	.word	0x00040924
-   320c8:	0003c504 	.word	0x0003c504
-   320cc:	00040939 	.word	0x00040939
+   31f8c:	0004029f 	.word	0x0004029f
+   31f90:	000402a9 	.word	0x000402a9
+   31f94:	000402c3 	.word	0x000402c3
+   31f98:	000402d3 	.word	0x000402d3
+   31f9c:	000402eb 	.word	0x000402eb
+   31fa0:	000402f5 	.word	0x000402f5
+   31fa4:	0004030f 	.word	0x0004030f
+   31fa8:	00040321 	.word	0x00040321
+   31fac:	00040333 	.word	0x00040333
+   31fb0:	0004034c 	.word	0x0004034c
+   31fb4:	0004035c 	.word	0x0004035c
+   31fb8:	00040368 	.word	0x00040368
+   31fbc:	00040385 	.word	0x00040385
+   31fc0:	00040397 	.word	0x00040397
+   31fc4:	000403a8 	.word	0x000403a8
+   31fc8:	000403ba 	.word	0x000403ba
+   31fcc:	000403c6 	.word	0x000403c6
+   31fd0:	000403de 	.word	0x000403de
+   31fd4:	000403ea 	.word	0x000403ea
+   31fd8:	000403fc 	.word	0x000403fc
+   31fdc:	0004040b 	.word	0x0004040b
+   31fe0:	0004041b 	.word	0x0004041b
+   31fe4:	00040428 	.word	0x00040428
+   31fe8:	00040447 	.word	0x00040447
+   31fec:	00040456 	.word	0x00040456
+   31ff0:	00040467 	.word	0x00040467
+   31ff4:	0004048b 	.word	0x0004048b
+   31ff8:	000404a9 	.word	0x000404a9
+   31ffc:	000404c7 	.word	0x000404c7
+   32000:	000404e7 	.word	0x000404e7
+   32004:	000404fe 	.word	0x000404fe
+   32008:	0004050d 	.word	0x0004050d
+   3200c:	0004051c 	.word	0x0004051c
+   32010:	00040530 	.word	0x00040530
+   32014:	00040548 	.word	0x00040548
+   32018:	00040556 	.word	0x00040556
+   3201c:	00040563 	.word	0x00040563
+   32020:	00040579 	.word	0x00040579
+   32024:	00040588 	.word	0x00040588
+   32028:	00040594 	.word	0x00040594
+   3202c:	000405c3 	.word	0x000405c3
+   32030:	000405d4 	.word	0x000405d4
+   32034:	000405ef 	.word	0x000405ef
+   32038:	00040602 	.word	0x00040602
+   3203c:	00040618 	.word	0x00040618
+   32040:	00040621 	.word	0x00040621
+   32044:	00040638 	.word	0x00040638
+   32048:	00040640 	.word	0x00040640
+   3204c:	0004064d 	.word	0x0004064d
+   32050:	00040662 	.word	0x00040662
+   32054:	00040676 	.word	0x00040676
+   32058:	0004068e 	.word	0x0004068e
+   3205c:	0004069d 	.word	0x0004069d
+   32060:	000406ae 	.word	0x000406ae
+   32064:	000406c1 	.word	0x000406c1
+   32068:	000406cd 	.word	0x000406cd
+   3206c:	000406e6 	.word	0x000406e6
+   32070:	000406fa 	.word	0x000406fa
+   32074:	00040715 	.word	0x00040715
+   32078:	0004072d 	.word	0x0004072d
+   3207c:	00040747 	.word	0x00040747
+   32080:	0004074f 	.word	0x0004074f
+   32084:	0004077f 	.word	0x0004077f
+   32088:	0004079e 	.word	0x0004079e
+   3208c:	000407bd 	.word	0x000407bd
+   32090:	000407d4 	.word	0x000407d4
+   32094:	000407e7 	.word	0x000407e7
+   32098:	00040800 	.word	0x00040800
+   3209c:	00040817 	.word	0x00040817
+   320a0:	0004082d 	.word	0x0004082d
+   320a4:	0004084e 	.word	0x0004084e
+   320a8:	00040866 	.word	0x00040866
+   320ac:	00040882 	.word	0x00040882
+   320b0:	00040895 	.word	0x00040895
+   320b4:	000408ab 	.word	0x000408ab
+   320b8:	000408bf 	.word	0x000408bf
+   320bc:	000408e1 	.word	0x000408e1
+   320c0:	00040907 	.word	0x00040907
+   320c4:	00040918 	.word	0x00040918
+   320c8:	0003c4f8 	.word	0x0003c4f8
+   320cc:	0004092d 	.word	0x0004092d
 
 000320d0 <strerror>:
    320d0:	2300      	movs	r3, #0
@@ -73596,7 +73596,7 @@ int z_impl_k_poll(struct k_poll_event *events, int num_events,
    321ca:	230a      	movs	r3, #10
    321cc:	e7aa      	b.n	32124 <_strtol_l.isra.0+0x40>
    321ce:	bf00      	nop
-   321d0:	0004016c 	.word	0x0004016c
+   321d0:	00040160 	.word	0x00040160
 
 000321d4 <strtol>:
    321d4:	4613      	mov	r3, r2
@@ -73704,7 +73704,7 @@ int z_impl_k_poll(struct k_poll_event *events, int num_events,
    322c6:	d0a7      	beq.n	32218 <_strtoul_l.isra.0+0x30>
    322c8:	230a      	movs	r3, #10
    322ca:	e7ad      	b.n	32228 <_strtoul_l.isra.0+0x40>
-   322cc:	0004016c 	.word	0x0004016c
+   322cc:	00040160 	.word	0x00040160
 
 000322d0 <strtoul>:
    322d0:	4613      	mov	r3, r2
@@ -73915,7 +73915,7 @@ int z_impl_k_poll(struct k_poll_event *events, int num_events,
    3249e:	f000 fb1b 	bl	32ad8 <raise>
    324a2:	207f      	movs	r0, #127	; 0x7f
    324a4:	f7e9 fae0 	bl	1ba68 <_exit>
-   324a8:	00040941 	.word	0x00040941
+   324a8:	00040935 	.word	0x00040935
 
 000324ac <__sflush_r>:
    324ac:	898a      	ldrh	r2, [r1, #12]
@@ -74589,9 +74589,9 @@ int z_impl_k_poll(struct k_poll_event *events, int num_events,
    32abc:	f7fe ffaa 	bl	31a14 <_printf_i>
    32ac0:	e7ea      	b.n	32a98 <_svfiprintf_r+0x1b0>
    32ac2:	bf00      	nop
-   32ac4:	0004026c 	.word	0x0004026c
-   32ac8:	00040272 	.word	0x00040272
-   32acc:	00040276 	.word	0x00040276
+   32ac4:	00040260 	.word	0x00040260
+   32ac8:	00040266 	.word	0x00040266
+   32acc:	0004026a 	.word	0x0004026a
    32ad0:	000315c1 	.word	0x000315c1
    32ad4:	00039a77 	.word	0x00039a77
 
@@ -80948,7 +80948,7 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
 				temp[i] ^= providedData[i];
    3529a:	f802 1b01 	strb.w	r1, [r2], #1
 			for (i = 0U; i < sizeof temp; i++) {
-   3529e:	d1f7      	bne.n	35290 <_flash_used+0xc>
+   3529e:	d1f7      	bne.n	35290 <_flash_used+0x18>
 			}
 		}
 
@@ -80966,7 +80966,7 @@ __ssp_bos_icheck3_restrict(memcpy, void *, const void *)
    352b4:	6061      	str	r1, [r4, #4]
    352b6:	461a      	mov	r2, r3
    352b8:	f104 0408 	add.w	r4, r4, #8
-   352bc:	d1f6      	bne.n	352ac <_flash_used+0x28>
+   352bc:	d1f6      	bne.n	352ac <_flash_used+0x34>
     
 		/* 10.2.1.2 step 6 */
 		memcpy(ctx->V, &(temp[TC_AES_KEY_SIZE]), TC_AES_BLOCK_SIZE);
