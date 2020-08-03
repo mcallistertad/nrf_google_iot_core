@@ -83,6 +83,7 @@ struct ag_data_t {
     s32_t max;
     s32_t min;
     s32_t avg;
+    s32_t cnt;
 } ag_d;
 
 /* Packed struct */
@@ -121,7 +122,7 @@ static void env_data_ready(void);
 
 
 /* Get average value of array */
-s32_t calculate_avg_val(s32_t a[], s32_t sz, bool is_qual)
+s32_t calculate_avg_val(s32_t a[], s32_t sz, bool is_qual, s32_t * val_cnt)
 {
     s32_t sum = 0;
     s32_t excl_cnt = 0;
@@ -135,10 +136,12 @@ s32_t calculate_avg_val(s32_t a[], s32_t sz, bool is_qual)
             excl_cnt += 1;
         }
     }
+    *val_cnt = sz-excl_cnt;
+    
     if (excl_cnt == sz) {
         return (EXCLUDE);
     } else {
-        return (sum/(sz-excl_cnt));
+        return (sum/(*val_cnt));
     }
 }
 
@@ -348,10 +351,10 @@ void process_env_data(void)
 
         /* Calculate data mean */
         LOG_INF("Calculating environmental data type avg");
-        pac_data.ag_temp.avg = calculate_avg_val(tempArray, DATA_ARRAY_SIZE, false);
-        pac_data.ag_humi.avg = calculate_avg_val(humiArray, DATA_ARRAY_SIZE, false);
-        pac_data.ag_pres.avg = calculate_avg_val(presArray, DATA_ARRAY_SIZE, false);
-        pac_data.ag_qual.avg = calculate_avg_val(qualArray, DATA_ARRAY_SIZE, true);
+        pac_data.ag_temp.avg = calculate_avg_val(tempArray, DATA_ARRAY_SIZE, false, NULL);
+        pac_data.ag_humi.avg = calculate_avg_val(humiArray, DATA_ARRAY_SIZE, false, NULL);
+        pac_data.ag_pres.avg = calculate_avg_val(presArray, DATA_ARRAY_SIZE, false, NULL);
+        pac_data.ag_qual.avg = calculate_avg_val(qualArray, DATA_ARRAY_SIZE, true, &pac_data.ag_qual.cnt);
         LOG_INF("Mean temp: %d", (s32_t)pac_data.ag_temp.avg);
         LOG_INF("Mean humi: %d", (s32_t)pac_data.ag_humi.avg);
         LOG_INF("Mean pres: %d", (s32_t)pac_data.ag_pres.avg);
@@ -565,8 +568,11 @@ void app_gc_iot(void)
 
         const char * jSampSzString = "sampleSz";
         const char * jSampFrqString = "sampleFrq";
+        const char * jQualCntString = "qualCnt";
+
         cJSON *jSampSz = NULL;
         cJSON *jSampFrq = NULL;
+        cJSON *jQualCnt = NULL;
 
         const char * jQualCalString = "calibrated";
         cJSON *jQualCal = NULL;
@@ -600,6 +606,7 @@ void app_gc_iot(void)
         
         jSampSz = cJSON_CreateNumber(DATA_ARRAY_SIZE);
         jSampFrq = cJSON_CreateNumber(SAMP_FREQ);
+        jQualCnt = cJSON_CreateNumber((u32_t)pac_data.ag_pres.cnt);
 
         jCid = cJSON_CreateString((const char*)info.cid);
         jTac = cJSON_CreateString((const char*)info.tac);
@@ -637,6 +644,8 @@ void app_gc_iot(void)
         cJSON_AddItemToObject(envSensObj, jFwvString, jFwv);
         cJSON_AddItemToObject(envSensObj, jVltgString, jVltg);
         cJSON_AddItemToObject(envSensObj, jTempString, jTemp);
+
+        cJSON_AddItemToObject(envSensObj, jQualCntString, jQualCnt);
 
         cJSON_AddItemToObject(envSensObj, jQualCalString, jQualCal);
 
