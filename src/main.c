@@ -568,7 +568,7 @@ void app_gc_iot(void)
         cJSON *jSampSz = NULL;
         cJSON *jSampFrq = NULL;
 
-        const char * jQualCalString = "calibration";
+        const char * jQualCalString = "calibrated";
         cJSON *jQualCal = NULL;
 
         /* Initialise empty string */
@@ -593,9 +593,9 @@ void app_gc_iot(void)
 
         /* IAQ calibration */
         if (pac_data.ag_qual.avg == EXCLUDE) {
-            jQualCal = cJSON_CreateString("not calibrated");
+            jQualCal = cJSON_CreateString("no");
         } else {
-           jQualCal = cJSON_CreateString("calibrated"); 
+           jQualCal = cJSON_CreateString("yes"); 
         }
         
         jSampSz = cJSON_CreateNumber(DATA_ARRAY_SIZE);
