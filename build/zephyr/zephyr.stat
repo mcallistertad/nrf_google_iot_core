@@ -30,7 +30,7 @@ Section Headers:
   [ 6] net_socket_regist PROGBITS        00039f9c 02e05c 00000c 00   A  0   0  4
   [ 7] log_const_section PROGBITS        00039fa8 02e068 0000d0 00   A  0   0  4
   [ 8] log_backends_sect PROGBITS        0003a078 02e138 000010 00   A  0   0  4
-  [ 9] rodata            PROGBITS        0003a090 02e150 00699c 00   A  0   0 16
+  [ 9] rodata            PROGBITS        0003a090 02e150 0069a0 00   A  0   0 16
   [10] .ramfunc          PROGBITS        20020000 0353fc 000000 00   W  0   0  1
   [11] datas             PROGBITS        20020000 034b00 000503 00  WA  0   0  8
   [12] devices           PROGBITS        20020504 035004 0000b0 00  WA  0   0  4
@@ -69,8 +69,8 @@ Key to Flags:
 Program Headers:
   Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
   EXIDX          0x02dd84 0x00039cc4 0x00039cc4 0x00008 0x00008 R   0x4
-  LOAD           0x0000c0 0x0000c000 0x0000c000 0x34a2c 0x34a2c RWE 0x10
-  LOAD           0x034b00 0x20020000 0x00040a2c 0x008fc 0x008fc RW  0x20
+  LOAD           0x0000c0 0x0000c000 0x0000c000 0x34a30 0x34a30 RWE 0x10
+  LOAD           0x034b00 0x20020000 0x00040a30 0x008fc 0x008fc RW  0x20
   LOAD           0x035400 0x20020900 0x20020900 0x00000 0x1826f RW  0x8
 
  Section to Segment mapping:
