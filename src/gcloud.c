@@ -219,8 +219,8 @@ static int make_jwt(char *buffer, size_t buffer_size) {
     s32_t x = (s32_t)(unixtime>>32); 
     s32_t y = (s32_t)unixtime;
 
-    printk("UNIX TIMESTAMP: %d\n", y);
-    s32_t expiry_time = (y + 12 * 60 * 60);
+    LOG_DBG("Unix Timestamp: %d\n", y);
+    s32_t expiry_time = (y + (12 * 60 * 60));
     s32_t issue_time = y;
 
     err = jwt_add_payload(&jb, expiry_time, issue_time, CONFIG_GCLOUD_PROJECT_NAME);

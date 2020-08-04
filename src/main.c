@@ -136,12 +136,12 @@ s32_t calculate_avg_val(s32_t a[], s32_t sz, bool is_qual, s32_t * val_cnt)
             excl_cnt += 1;
         }
     }
-    *val_cnt = sz-excl_cnt;
+    (*val_cnt) = (sz-excl_cnt);
     
     if (excl_cnt == sz) {
         return (EXCLUDE);
     } else {
-        return (sum/(*val_cnt));
+        return (sum/(sz-excl_cnt));
     }
 }
 
@@ -217,12 +217,14 @@ static void modem_configure(void)
     } else {
         int err;
 
+        LOG_INF("Enabling PSM\n");
+        /* Enable PSM mode */
+        lte_lc_psm_req(true);
+
         LOG_INF("Establishing LTE link\n");
         err = lte_lc_init_and_connect();
         __ASSERT(err == 0, "LTE link could not be established. Rebooting\n");
     }
-    /* Enable PSM mode */
-    lte_lc_psm_req(true);
 }
 
 
@@ -351,14 +353,15 @@ void process_env_data(void)
 
         /* Calculate data mean */
         LOG_INF("Calculating environmental data type avg");
-        pac_data.ag_temp.avg = calculate_avg_val(tempArray, DATA_ARRAY_SIZE, false, NULL);
-        pac_data.ag_humi.avg = calculate_avg_val(humiArray, DATA_ARRAY_SIZE, false, NULL);
-        pac_data.ag_pres.avg = calculate_avg_val(presArray, DATA_ARRAY_SIZE, false, NULL);
+        pac_data.ag_temp.avg = calculate_avg_val(tempArray, DATA_ARRAY_SIZE, false, &pac_data.ag_qual.cnt);
+        pac_data.ag_humi.avg = calculate_avg_val(humiArray, DATA_ARRAY_SIZE, false, &pac_data.ag_qual.cnt);
+        pac_data.ag_pres.avg = calculate_avg_val(presArray, DATA_ARRAY_SIZE, false, &pac_data.ag_qual.cnt);
         pac_data.ag_qual.avg = calculate_avg_val(qualArray, DATA_ARRAY_SIZE, true, &pac_data.ag_qual.cnt);
         LOG_INF("Mean temp: %d", (s32_t)pac_data.ag_temp.avg);
         LOG_INF("Mean humi: %d", (s32_t)pac_data.ag_humi.avg);
         LOG_INF("Mean pres: %d", (s32_t)pac_data.ag_pres.avg);
         LOG_INF("Mean qual: %d", (s32_t)pac_data.ag_qual.avg);
+        LOG_INF("Valid IAQ reading count: %d", (s32_t)pac_data.ag_qual.cnt);
 
         /* Calculate data min */
         LOG_INF("Calculating environmental data type min");
@@ -606,8 +609,9 @@ void app_gc_iot(void)
         
         jSampSz = cJSON_CreateNumber(DATA_ARRAY_SIZE);
         jSampFrq = cJSON_CreateNumber(SAMP_FREQ);
-        jQualCnt = cJSON_CreateNumber((u32_t)pac_data.ag_pres.cnt);
 
+        jQualCnt = cJSON_CreateNumber((s32_t)pac_data.ag_qual.cnt);
+        
         jCid = cJSON_CreateString((const char*)info.cid);
         jTac = cJSON_CreateString((const char*)info.tac);
         jRssi = cJSON_CreateString((const char*)info.rssi);
@@ -646,7 +650,6 @@ void app_gc_iot(void)
         cJSON_AddItemToObject(envSensObj, jTempString, jTemp);
 
         cJSON_AddItemToObject(envSensObj, jQualCntString, jQualCnt);
-
         cJSON_AddItemToObject(envSensObj, jQualCalString, jQualCal);
 
         cJSON_AddItemToObject(envSensObj, jDevFwvString, jDvFwv);
