@@ -32,6 +32,11 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "TRUE")
 endif()
 
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "/Users/tadmcallister/opt/gnuarmemb/gcc-arm-none-eabi-8-2019-q3-update/bin/arm-none-eabi-objdump")
+endif()
+
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/lib/bin/cmake_install.cmake")
@@ -42,7 +47,6 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/lib/lte_link_control/cmake_install.cmake")
   include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/lib/modem_info/cmake_install.cmake")
   include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/lib/pdn_management/cmake_install.cmake")
-  include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/lib/adp536x/cmake_install.cmake")
   include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/lib/flash_patch/cmake_install.cmake")
   include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/lib/fatal_error/cmake_install.cmake")
   include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/modules/nrf/lib/modem_key_mgmt/cmake_install.cmake")

@@ -18,6 +18,7 @@ Requirements
 Dependencies
 ************
 * nrf-sdk v1.3 or newer - tracks master https://github.com/nrfconnect/sdk-nrf/tree/v1.3-branch
+* Bosch BSEC library - https://www.bosch-sensortec.com/software-tools/software/bsec/
 * nRF91 modem firmware v1.2 https://www.nordicsemi.com/-/media/Software-and-other-downloads/Dev-Kits/nRF9160-DK/nRF9160-modem-FW/mfwnrf9160120.zip
 * nRF52 firmware - thingy91_nrf52_usb_uart_bridge_2019-11-29_d3130d77.hex
 
@@ -28,6 +29,9 @@ In prj.conf: set gcloud variables
 **CONFIG_GCLOUD_PROJECT_NAME="<project_name>"**
 **CONFIG_GCLOUD_REGISTRY_NAME="<registry_name>"**
 **CONFIG_GCLOUD_DEVICE_NAME="<device_name>"**
+
+* Sign BSEC license agreement and place in nrf/ext folder
+* Update BSEC path in prj.conf if BSEC version is different
 
 * Run shell script in src/private_info to generate GC IoT Core certs/ public key
 **sh create_keys.sh**

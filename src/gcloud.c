@@ -64,7 +64,6 @@ LOG_MODULE_REGISTER(gcloud);
 /* Buffers for MQTT client. */
 static u8_t rx_buffer[CONFIG_MQTT_MESSAGE_BUFFER_SIZE];
 static u8_t tx_buffer[CONFIG_MQTT_MESSAGE_BUFFER_SIZE];
-static u8_t payload_buf[CONFIG_MQTT_MESSAGE_BUFFER_SIZE];
 
 extern void gcloud_thread(void *, void *, void *);
 
@@ -649,7 +648,7 @@ extern void gcloud_thread(void *unused1, void *unused2, void *unused3)
     k_timer_init(&reconnect_timer, reconnect_timer_handler, NULL);
 
     while (true) {
-        printk("Google Cloud Thread Running\n");
+        LOG_INF("Google Cloud Thread Running\n");
 
         k_msgq_get_atomic(&gcloud_msgq, &event, K_FOREVER);
 

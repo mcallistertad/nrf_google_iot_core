@@ -29,6 +29,7 @@
 
 #define CONFIG_APPLICATION_WORKQUEUE_PRIORITY 7
 
+/* Size of buffer determines update rate */
 #define DATA_ARRAY_SIZE 240 
 #define SAMP_FREQ 33
 #define THREAD_INDEX DATA_ARRAY_SIZE-2
@@ -512,11 +513,11 @@ void app_gc_iot(void)
 
         /* Get modem information */
         get_modem_info(&info);
-        printk("CID: [%s]\n", info.cid);
-        printk("TAC: [%s]\n", info.tac);
-        printk("RSSI: [%s]\n", info.rssi);
-        printk("APN: [%s]\n", info.apn);
-        printk("FWV: [%s]\n", info.fwv);
+        // printk("CID: [%s]\n", info.cid);
+        // printk("TAC: [%s]\n", info.tac);
+        // printk("RSSI: [%s]\n", info.rssi);
+        // printk("APN: [%s]\n", info.apn);
+        // printk("FWV: [%s]\n", info.fwv);
         LOG_INF("Voltage: [%d]\n", info.vltg);
         LOG_INF("Temp: [%d]\n", info.temp);
     

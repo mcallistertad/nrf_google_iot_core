@@ -1,4 +1,4 @@
-# Install script for directory: /Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/drivers/i2c
+# Install script for directory: /Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/boards/arm/nrf9160dk_nrf9160
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -30,5 +30,10 @@ endif()
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "TRUE")
+endif()
+
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "/Users/tadmcallister/opt/gnuarmemb/gcc-arm-none-eabi-8-2019-q3-update/bin/arm-none-eabi-objdump")
 endif()
 
