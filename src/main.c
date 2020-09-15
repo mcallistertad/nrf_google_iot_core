@@ -202,8 +202,6 @@ void button_handler(u32_t button_state, u32_t has_changed)
 void received_config_handler(const struct mqtt_publish_message *message) {
 
 	cJSON * data_json = cJSON_Parse(message->payload.data);
-    // printk("%s\n",cJSON_Print(data_json));
-
 	cJSON_Delete(data_json);
 }
 
@@ -513,11 +511,6 @@ void app_gc_iot(void)
 
         /* Get modem information */
         get_modem_info(&info);
-        // printk("CID: [%s]\n", info.cid);
-        // printk("TAC: [%s]\n", info.tac);
-        // printk("RSSI: [%s]\n", info.rssi);
-        // printk("APN: [%s]\n", info.apn);
-        // printk("FWV: [%s]\n", info.fwv);
         LOG_INF("Voltage: [%d]\n", info.vltg);
         LOG_INF("Temp: [%d]\n", info.temp);
     

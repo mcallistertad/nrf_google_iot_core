@@ -3,19 +3,17 @@
 / {
 	#address-cells = < 0x1 >;
 	#size-cells = < 0x1 >;
-	model = "Nordic nRF9160 DK NRF9160";
-	compatible = "nordic,nrf9160-dk-nrf9160";
+	model = "Nordic Thingy91 nRF9160";
+	compatible = "nordic,thingy91-nrf9160";
 	chosen {
 		zephyr,entropy = &cryptocell;
 		zephyr,flash-controller = &flash_controller;
 		zephyr,console = &uart0;
 		zephyr,shell-uart = &uart0;
 		zephyr,uart-mcumgr = &uart0;
-		zephyr,sram = &sram0_s;
+		zephyr,sram = &sram0;
 		zephyr,flash = &flash0;
 		zephyr,code-partition = &slot0_partition;
-		zephyr,sram-secure-partition = &sram0_s;
-		zephyr,sram-non-secure-partition = &sram0_ns;
 	};
 	aliases {
 		flash-controller = &flash_controller;
@@ -54,15 +52,16 @@
 		timer-2 = &timer2;
 		cc310 = &cryptocell;
 		arm-cryptocell-310 = &cryptocell310;
-		led0 = &led0;
-		led1 = &led1;
-		led2 = &led2;
-		led3 = &led3;
-		pwm-led0 = &pwm_led0;
-		sw0 = &button2;
-		sw1 = &button3;
-		sw2 = &button0;
-		sw3 = &button1;
+		sw0 = &button0;
+		led0 = &red_led;
+		led1 = &green_led;
+		led2 = &blue_led;
+		sense-led0 = &sense_red_led;
+		sense-led1 = &sense_green_led;
+		sense-led2 = &sense_blue_led;
+		rgb-pwm = &pwm0;
+		buzzer-pwm = &pwm1;
+		nmos-pwm = &pwm2;
 	};
 	soc {
 		#address-cells = < 0x1 >;
@@ -85,7 +84,7 @@
 		};
 		sram0: memory@20000000 {
 			compatible = "mmio-sram";
-			reg = < 0x20000000 0x40000 >;
+			reg = < 0x20000000 0x10000 >;
 		};
 		peripheral@50000000 {
 			#address-cells = < 0x1 >;
@@ -227,10 +226,10 @@
 				status = "okay";
 				label = "UART_0";
 				current-speed = < 0x1c200 >;
-				tx-pin = < 0x1d >;
-				rx-pin = < 0x1c >;
-				rts-pin = < 0x1b >;
-				cts-pin = < 0x1a >;
+				tx-pin = < 0x12 >;
+				rx-pin = < 0x13 >;
+				rts-pin = < 0x14 >;
+				cts-pin = < 0x15 >;
 			};
 			uart1: uart@9000 {
 				compatible = "nordic,nrf-uarte";
@@ -238,11 +237,11 @@
 				interrupts = < 0x9 0x1 >;
 				status = "okay";
 				label = "UART_1";
-				current-speed = < 0x1c200 >;
-				tx-pin = < 0x1 >;
-				rx-pin = < 0x0 >;
-				rts-pin = < 0xe >;
-				cts-pin = < 0xf >;
+				current-speed = < 0xf4240 >;
+				tx-pin = < 0x16 >;
+				rx-pin = < 0x17 >;
+				rts-pin = < 0x18 >;
+				cts-pin = < 0x19 >;
 			};
 			uart2: uart@a000 {
 				compatible = "nordic,nrf-uarte";
@@ -250,8 +249,6 @@
 				interrupts = < 0xa 0x1 >;
 				status = "disabled";
 				label = "UART_2";
-				tx-pin = < 0x18 >;
-				rx-pin = < 0x17 >;
 			};
 			uart3: uart@b000 {
 				compatible = "nordic,nrf-uarte";
@@ -282,13 +279,24 @@
 				#address-cells = < 0x1 >;
 				#size-cells = < 0x0 >;
 				reg = < 0xa000 0x1000 >;
-				clock-frequency = < 0x186a0 >;
+				clock-frequency = < 0x61a80 >;
 				interrupts = < 0xa 0x1 >;
 				status = "okay";
 				label = "I2C_2";
 				compatible = "nordic,nrf-twim";
-				sda-pin = < 0x1e >;
-				scl-pin = < 0x1f >;
+				sda-pin = < 0xb >;
+				scl-pin = < 0xc >;
+				bme680@76 {
+					compatible = "bosch,bme680";
+					label = "BME680";
+					reg = < 0x76 >;
+				};
+				bh1749@38 {
+					compatible = "rohm,bh1749";
+					label = "BH1749";
+					reg = < 0x38 >;
+					int-gpios = < &gpio0 0x1b 0x0 >;
+				};
 			};
 			i2c3: i2c@b000 {
 				#address-cells = < 0x1 >;
@@ -331,9 +339,24 @@
 				status = "okay";
 				label = "SPI_3";
 				compatible = "nordic,nrf-spim";
-				sck-pin = < 0x13 >;
-				mosi-pin = < 0x12 >;
-				miso-pin = < 0x11 >;
+				sck-pin = < 0x3 >;
+				mosi-pin = < 0x4 >;
+				miso-pin = < 0x5 >;
+				cs-gpios = < &gpio0 0x8 0x0 >, < &gpio0 0x7 0x0 >;
+				adxl362@0 {
+					compatible = "adi,adxl362";
+					label = "ADXL362";
+					spi-max-frequency = < 0x7a1200 >;
+					reg = < 0x0 >;
+					int1-gpios = < &gpio0 0x9 0x0 >;
+				};
+				adxl372@1 {
+					compatible = "adi,adxl372";
+					label = "ADXL372";
+					spi-max-frequency = < 0x7a1200 >;
+					reg = < 0x1 >;
+					int1-gpios = < &gpio0 0x6 0x0 >;
+				};
 			};
 			pwm0: pwm@21000 {
 				compatible = "nordic,nrf-pwm";
@@ -342,8 +365,9 @@
 				status = "okay";
 				label = "PWM_0";
 				#pwm-cells = < 0x1 >;
-				ch0-pin = < 0x2 >;
-				phandle = < 0x3 >;
+				ch0-pin = < 0x1d >;
+				ch1-pin = < 0x1e >;
+				ch2-pin = < 0x1f >;
 			};
 			pwm1: pwm@22000 {
 				compatible = "nordic,nrf-pwm";
@@ -352,6 +376,7 @@
 				status = "okay";
 				label = "PWM_1";
 				#pwm-cells = < 0x1 >;
+				ch0-pin = < 0x1c >;
 			};
 			pwm2: pwm@23000 {
 				compatible = "nordic,nrf-pwm";
@@ -360,6 +385,10 @@
 				status = "okay";
 				label = "PWM_2";
 				#pwm-cells = < 0x1 >;
+				ch0-pin = < 0xd >;
+				ch1-pin = < 0xe >;
+				ch2-pin = < 0xf >;
+				ch3-pin = < 0x10 >;
 			};
 			pwm3: pwm@24000 {
 				compatible = "nordic,nrf-pwm";
@@ -495,62 +524,48 @@
 			};
 		};
 	};
-	leds {
-		compatible = "gpio-leds";
-		led0: led_0 {
-			gpios = < &gpio0 0x2 0x0 >;
-			label = "Green LED 1";
-		};
-		led1: led_1 {
-			gpios = < &gpio0 0x3 0x0 >;
-			label = "Green LED 2";
-		};
-		led2: led_2 {
-			gpios = < &gpio0 0x4 0x0 >;
-			label = "Green LED 3";
-		};
-		led3: led_3 {
-			gpios = < &gpio0 0x5 0x0 >;
-			label = "Green LED 4";
-		};
-	};
-	pwmleds {
-		compatible = "pwm-leds";
-		pwm_led0: pwm_led_0 {
-			pwms = < &pwm0 0x2 >;
-		};
-	};
 	buttons {
 		compatible = "gpio-keys";
 		button0: button_0 {
-			gpios = < &gpio0 0x8 0x11 >;
-			label = "Switch 1";
-		};
-		button1: button_1 {
-			gpios = < &gpio0 0x9 0x11 >;
-			label = "Switch 2";
-		};
-		button2: button_2 {
-			gpios = < &gpio0 0x6 0x11 >;
-			label = "Push button 1";
-		};
-		button3: button_3 {
-			gpios = < &gpio0 0x7 0x11 >;
-			label = "Push button 2";
+			gpios = < &gpio0 0x1a 0x11 >;
+			label = "Button 1";
 		};
 	};
-	reserved-memory {
-		#address-cells = < 0x1 >;
-		#size-cells = < 0x1 >;
-		ranges;
-		sram0_s: image_s@20000000 {
-			reg = < 0x20000000 0x10000 >;
+	leds {
+		compatible = "gpio-leds";
+		red_led: led_1 {
+			gpios = < &gpio0 0x1d 0x0 >;
+			label = "RGB red channel";
 		};
-		sram0_bsd: image_bsd@20010000 {
-			reg = < 0x20010000 0x10000 >;
+		green_led: led_2 {
+			gpios = < &gpio0 0x1e 0x0 >;
+			label = "RGB green channel";
 		};
-		sram0_ns: image_ns@20020000 {
-			reg = < 0x20020000 0x20000 >;
+		blue_led: led_3 {
+			gpios = < &gpio0 0x1f 0x0 >;
+			label = "RGB blue channel";
 		};
+		sense_red_led: led_4 {
+			gpios = < &gpio0 0x0 0x0 >;
+			label = "RGB red channel";
+		};
+		sense_green_led: led_5 {
+			gpios = < &gpio0 0x1 0x0 >;
+			label = "RGB green channel";
+		};
+		sense_blue_led: led_6 {
+			gpios = < &gpio0 0x2 0x0 >;
+			label = "RGB blue channel";
+		};
+	};
+	sram0_bsd: memory@20010000 {
+		device_type = "memory";
+		compatible = "mmio-sram";
+		reg = < 0x20010000 0x10000 >;
+	};
+	sram0_ns: memory@20020000 {
+		device_type = "memory";
+		compatible = "mmio-sram";
+		reg = < 0x20020000 0x20000 >;
 	};
 };

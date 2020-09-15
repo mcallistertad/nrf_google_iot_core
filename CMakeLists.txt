@@ -53,7 +53,7 @@ exec_program(
   ARGS "describe --abbrev=4 --dirty --always --tags"
   OUTPUT_VARIABLE GIT_TAG )
 
-# If tag found get the SHA1 hash instead
+# If tag not found get the SHA1 hash instead
 if( ${GIT_TAG} MATCHES "fatal:.*" )
 exec_program(
   "git"

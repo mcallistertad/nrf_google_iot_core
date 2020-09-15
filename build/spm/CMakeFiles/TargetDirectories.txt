@@ -70,8 +70,9 @@
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/soc/arm/nordic_nrf/nrf91/CMakeFiles/edit_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/boards/CMakeFiles/rebuild_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/boards/CMakeFiles/edit_cache.dir
-/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/boards/boards/arm/nrf9160dk_nrf9160/CMakeFiles/rebuild_cache.dir
-/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/boards/boards/arm/nrf9160dk_nrf9160/CMakeFiles/edit_cache.dir
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/boards/boards/arm/thingy91_nrf9160/CMakeFiles/rebuild_cache.dir
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/boards/boards/arm/thingy91_nrf9160/CMakeFiles/edit_cache.dir
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/boards/boards/arm/thingy91_nrf9160/CMakeFiles/..__nrf__boards__arm__thingy91_nrf9160.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/subsys/CMakeFiles/rebuild_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/subsys/CMakeFiles/edit_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/subsys/debug/CMakeFiles/rebuild_cache.dir
@@ -106,6 +107,9 @@
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/interrupt_controller/CMakeFiles/edit_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/clock_control/CMakeFiles/rebuild_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/clock_control/CMakeFiles/edit_cache.dir
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/i2c/CMakeFiles/rebuild_cache.dir
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/i2c/CMakeFiles/edit_cache.dir
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/i2c/CMakeFiles/drivers__i2c.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/serial/CMakeFiles/rebuild_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/serial/CMakeFiles/edit_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/serial/CMakeFiles/drivers__serial.dir
@@ -120,6 +124,8 @@
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/modules/nrf/lib/CMakeFiles/edit_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/modules/nrf/lib/bin/CMakeFiles/rebuild_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/modules/nrf/lib/bin/CMakeFiles/edit_cache.dir
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/modules/nrf/lib/adp536x/CMakeFiles/rebuild_cache.dir
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/modules/nrf/lib/adp536x/CMakeFiles/edit_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/modules/nrf/lib/flash_patch/CMakeFiles/rebuild_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/modules/nrf/lib/flash_patch/CMakeFiles/edit_cache.dir
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/modules/nrf/lib/fatal_error/CMakeFiles/rebuild_cache.dir

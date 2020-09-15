@@ -77,21 +77,19 @@
   timer-0 = &timer0;
   timer-1 = &timer1;
   timer-2 = &timer2;
-  cc310 = &cryptocell;
-  arm-cryptocell-310 = &cryptocell310;
  };
  chosen {
-  zephyr,entropy = &cryptocell;
   zephyr,flash-controller = &flash_controller;
+  zephyr,entropy = &cryptocell_sw;
  };
  soc {
   sram0: memory@20000000 {
    compatible = "mmio-sram";
   };
-  peripheral@50000000 {
+  peripheral@40000000 {
    #address-cells = <1>;
    #size-cells = <1>;
-   ranges = <0x0 0x50000000 0x10000000>;
+   ranges = <0x0 0x40000000 0x10000000>;
 flash_controller: flash-controller@39000 {
  compatible = "nordic,nrf91-flash-controller";
  reg = <0x39000 0x1000>;
@@ -386,42 +384,17 @@ timer2: timer@11000 {
  label = "TIMER_2";
 };
   };
-  cryptocell: crypto@50840000 {
-   compatible = "nordic,nrf-cc310";
-   reg = <0x50840000 0x1000>;
-   label = "CRYPTOCELL";
-   status = "okay";
-   #address-cells = <1>;
-   #size-cells = <1>;
-   cryptocell310: crypto@50841000 {
-    compatible = "arm,cryptocell-310";
-    reg = <0x50841000 0x1000>;
-    interrupts = <64 1>;
-    label = "CRYPTOCELL310";
-   };
-  };
-  gpiote: gpiote@5000d000 {
+  gpiote: gpiote@40031000 {
    compatible = "nordic,nrf-gpiote";
-   reg = <0x5000d000 0x1000>;
-   interrupts = <13 5>;
+   reg = <0x40031000 0x1000>;
+   interrupts = <49 5>;
    status = "disabled";
-   label = "GPIOTE_0";
+   label = "GPIOTE_1";
   };
-  spu: spu@50003000 {
-   compatible = "nordic,nrf-spu";
-   reg = <0x50003000 0x1000>;
-   interrupts = <3 1>;
-   status = "okay";
-  };
-  ficr: ficr@ff0000 {
-   compatible = "nordic,nrf-ficr";
-   reg = <0xff0000 0x1000>;
-   status = "okay";
-  };
-  uicr: uicr@ff8000 {
-   compatible = "nordic,nrf-uicr";
-   reg = <0xff8000 0x1000>;
-   status = "okay";
+  cryptocell_sw: cryptocell-sw {
+   compatible = "nordic,nrf-cc310-sw";
+   #address-cells = <0>;
+   label = "CRYPTOCELL_SW";
   };
  };
 };
@@ -440,67 +413,58 @@ timer2: timer@11000 {
  };
 };
 / {
- model = "Nordic nRF9160 DK NRF9160";
- compatible = "nordic,nrf9160-dk-nrf9160";
+ model = "Nordic Thingy91 nRF9160";
+ compatible = "nordic,thingy91-nrf9160";
  chosen {
   zephyr,console = &uart0;
   zephyr,shell-uart = &uart0;
   zephyr,uart-mcumgr = &uart0;
  };
- leds {
-  compatible = "gpio-leds";
-  led0: led_0 {
-   gpios = <&gpio0 2 0>;
-   label = "Green LED 1";
-  };
-  led1: led_1 {
-   gpios = <&gpio0 3 0>;
-   label = "Green LED 2";
-  };
-  led2: led_2 {
-   gpios = <&gpio0 4 0>;
-   label = "Green LED 3";
-  };
-  led3: led_3 {
-   gpios = <&gpio0 5 0>;
-   label = "Green LED 4";
-  };
- };
- pwmleds {
-  compatible = "pwm-leds";
-  pwm_led0: pwm_led_0 {
-   pwms = <&pwm0 2>;
-  };
- };
  buttons {
   compatible = "gpio-keys";
   button0: button_0 {
-   gpios = <&gpio0 8 ((1 << 4) | (1 << 0))>;
-   label = "Switch 1";
+   gpios = <&gpio0 26 ((1 << 4) | (1 << 0))>;
+   label = "Button 1";
   };
-  button1: button_1 {
-   gpios = <&gpio0 9 ((1 << 4) | (1 << 0))>;
-   label = "Switch 2";
+ };
+ leds {
+  compatible = "gpio-leds";
+  red_led: led_1 {
+   gpios = <&gpio0 29 0>;
+   label = "RGB red channel";
   };
-  button2: button_2 {
-   gpios = <&gpio0 6 ((1 << 4) | (1 << 0))>;
-   label = "Push button 1";
+  green_led: led_2 {
+   gpios = <&gpio0 30 0>;
+   label = "RGB green channel";
   };
-  button3: button_3 {
-   gpios = <&gpio0 7 ((1 << 4) | (1 << 0))>;
-   label = "Push button 2";
+  blue_led: led_3 {
+   gpios = <&gpio0 31 0>;
+   label = "RGB blue channel";
+  };
+  sense_red_led: led_4 {
+   gpios = <&gpio0 0 0>;
+   label = "RGB red channel";
+  };
+  sense_green_led: led_5 {
+   gpios = <&gpio0 1 0>;
+   label = "RGB green channel";
+  };
+  sense_blue_led: led_6 {
+   gpios = <&gpio0 2 0>;
+   label = "RGB blue channel";
   };
  };
  aliases {
-  led0 = &led0;
-  led1 = &led1;
-  led2 = &led2;
-  led3 = &led3;
-  pwm-led0 = &pwm_led0;
-  sw0 = &button2;
-  sw1 = &button3;
-  sw2 = &button0;
-  sw3 = &button1;
+  sw0 = &button0;
+  led0 = &red_led;
+  led1 = &green_led;
+  led2 = &blue_led;
+  sense-led0 = &sense_red_led;
+  sense-led1 = &sense_green_led;
+  sense-led2 = &sense_blue_led;
+  rgb-pwm = &pwm0;
+  buzzer-pwm = &pwm1;
+  nmos-pwm = &pwm2;
  };
 };
 &adc {
@@ -512,42 +476,65 @@ timer2: timer@11000 {
 &gpio0 {
  status = "okay";
 };
-&uart0 {
+&pwm0 {
  status = "okay";
- current-speed = <115200>;
- tx-pin = <29>;
- rx-pin = <28>;
- rts-pin = <27>;
- cts-pin = <26>;
+ ch0-pin = <29>;
+ ch1-pin = <30>;
+ ch2-pin = <31>;
 };
-&uart1 {
+&pwm1 {
  status = "okay";
- current-speed = <115200>;
- tx-pin = <1>;
- rx-pin = <0>;
- rts-pin = <14>;
- cts-pin = <15>;
+ ch0-pin = <28>;
 };
-&uart2 {
- tx-pin = <24>;
- rx-pin = <23>;
+&pwm2 {
+ status = "okay";
+ ch0-pin = <13>;
+ ch1-pin = <14>;
+ ch2-pin = <15>;
+ ch3-pin = <16>;
+};
+&pwm3 {
+ status = "okay";
 };
 &i2c2 {
  compatible = "nordic,nrf-twim";
  status = "okay";
- sda-pin = <30>;
- scl-pin = <31>;
-};
-&pwm0 {
- status = "okay";
- ch0-pin = <2>;
+ sda-pin = <11>;
+ scl-pin = <12>;
+ clock-frequency = <400000>;
+ bme680@76 {
+  compatible = "bosch,bme680";
+  label = "BME680";
+  reg = <0x76>;
+ };
+ bh1749@38 {
+   compatible = "rohm,bh1749";
+   label = "BH1749";
+   reg = <0x38>;
+   int-gpios = <&gpio0 27 0>;
+ };
 };
 &spi3 {
  compatible = "nordic,nrf-spim";
  status = "okay";
- sck-pin = <19>;
- mosi-pin = <18>;
- miso-pin = <17>;
+ sck-pin = <3>;
+ mosi-pin = <4>;
+ miso-pin = <5>;
+ cs-gpios = <&gpio0 8 0>, <&gpio0 7 0>;
+ adxl362@0 {
+  compatible = "adi,adxl362";
+  label = "ADXL362";
+  spi-max-frequency = <8000000>;
+  reg = <0>;
+  int1-gpios = <&gpio0 9 0>;
+ };
+ adxl372@1 {
+  compatible = "adi,adxl372";
+  label = "ADXL372";
+  spi-max-frequency = <8000000>;
+  reg = <1>;
+  int1-gpios = <&gpio0 6 0>;
+ };
 };
 &timer0 {
  status = "okay";
@@ -557,6 +544,23 @@ timer2: timer@11000 {
 };
 &timer2 {
  status = "okay";
+};
+&uart0 {
+ compatible = "nordic,nrf-uarte";
+ current-speed = <115200>;
+ status = "okay";
+ tx-pin = <18>;
+ rx-pin = <19>;
+ rts-pin = <20>;
+ cts-pin = <21>;
+};
+&uart1 {
+ current-speed = <1000000>;
+ status = "okay";
+ tx-pin = <22>;
+ rx-pin = <23>;
+ rts-pin = <24>;
+ cts-pin = <25>;
 };
 &flash0 {
  partitions {
@@ -590,16 +594,13 @@ timer2: timer@11000 {
  };
 };
 / {
- reserved-memory {
-  #address-cells = <1>;
-  #size-cells = <1>;
-  ranges;
-  sram0_s: image_s@20000000 {
-  };
-  sram0_bsd: image_bsd@20010000 {
-  };
-  sram0_ns: image_ns@20020000 {
-  };
+ sram0_bsd: memory@20010000 {
+  device_type = "memory";
+  compatible = "mmio-sram";
+ };
+ sram0_ns: memory@20020000 {
+  device_type = "memory";
+  compatible = "mmio-sram";
  };
 };
 &slot0_partition {
@@ -614,7 +615,7 @@ timer2: timer@11000 {
 &slot1_ns_partition {
  reg = <0x000b0000 0x40000>;
 };
-&sram0_s {
+&sram0 {
  reg = <0x20000000 ((64) * 1024)>;
 };
 &sram0_bsd {
@@ -625,19 +626,8 @@ timer2: timer@11000 {
 };
 / {
  chosen {
-  zephyr,sram = &sram0_s;
   zephyr,flash = &flash0;
-  zephyr,code-partition = &slot0_partition;
-  zephyr,sram-secure-partition = &sram0_s;
-  zephyr,sram-non-secure-partition = &sram0_ns;
+  zephyr,sram = &sram0_ns;
+  zephyr,code-partition = &slot0_ns_partition;
  };
-};
-&pwm1 {
- status = "okay";
-};
-&pwm2 {
- status = "okay";
-};
-&pwm3 {
- status = "okay";
 };

@@ -1,5 +1,8 @@
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/bootloader/mcuboot/zephyr/Kconfig
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/Kconfig.nrf
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/boards/arm/thingy91_nrf9160/Kconfig
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/boards/arm/thingy91_nrf9160/Kconfig.board
+/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/boards/arm/thingy91_nrf9160/Kconfig.defconfig
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/drivers/Kconfig
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/drivers/bt_ll_nrfxlib/Kconfig
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/drivers/bt_ll_nrfxlib/entropy/Kconfig
@@ -126,9 +129,6 @@
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/arch/arm/core/aarch32/cortex_m/tz/Kconfig
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/arch/arm/core/aarch64/Kconfig
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/boards/Kconfig
-/Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/boards/arm/nrf9160dk_nrf9160/Kconfig
-/Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/boards/arm/nrf9160dk_nrf9160/Kconfig.board
-/Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/boards/arm/nrf9160dk_nrf9160/Kconfig.defconfig
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.shield
 /Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/boards/shields/dfrobot_can_bus_v2_0/Kconfig.defconfig

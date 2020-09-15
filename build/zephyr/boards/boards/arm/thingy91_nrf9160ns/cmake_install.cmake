@@ -1,4 +1,4 @@
-# Install script for directory: /Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/boards/arm/nrf9160dk_nrf9160
+# Install script for directory: /Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/boards/arm/thingy91_nrf9160
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -21,19 +21,16 @@ APPLICATION_BINARY_DIR:PATH=/Users/tadmcallister/Nordic/safecility_thingy/ncs/nr
 APPLICATION_SOURCE_DIR:PATH=/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud
 
 //No help, variable specified on the command line.
-BOARD:UNINITIALIZED=nrf9160_pca10090ns
-
-//Deprecated board name, provided by user
-BOARD_DEPRECATED:STRING=nrf9160_pca10090ns
+BOARD:UNINITIALIZED=thingy91_nrf9160ns
 
 //Path to a file.
-BOARD_DIR:PATH=/Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/boards/arm/nrf9160dk_nrf9160
+BOARD_DIR:PATH=/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/boards/arm/thingy91_nrf9160
 
 //Path to a program.
 BOSSAC:FILEPATH=BOSSAC-NOTFOUND
 
 //Selected board
-CACHED_BOARD:STRING=nrf9160dk_nrf9160ns
+CACHED_BOARD:STRING=thingy91_nrf9160ns
 
 //Selected shield
 CACHED_SHIELD:STRING=
@@ -318,7 +315,7 @@ NcsToolchain_DIR:PATH=NcsToolchain_DIR-NOTFOUND
 //Path to a program.
 OPENOCD:FILEPATH=/Users/tadmcallister/.espressif/tools/openocd-esp32/v0.10.0-esp32-20190313/openocd-esp32/bin/openocd
 
-PM_DOMAINS:STRING=nrf9160dk_nrf9160
+PM_DOMAINS:STRING=thingy91_nrf9160
 
 //Path to a program.
 PUNCOVER:FILEPATH=PUNCOVER-NOTFOUND
@@ -348,10 +345,10 @@ ZEPHYR_BOARD_FLASH_RUNNER:STRING=nrfjprog
 ZEPHYR_RUNNER_ARGS_jlink:STRING=--dt-flash=y;--device=cortex-m33;--speed=4000
 
 //Runner-specific arguments for nrfjprog
-ZEPHYR_RUNNER_ARGS_nrfjprog:STRING=--nrf-family=NRF91
+ZEPHYR_RUNNER_ARGS_nrfjprog:STRING=--nrf-family=NRF91;--softreset
 
 //Board definition directory
-ZEPHYR_RUNNER_CONFIG_BOARD_DIR:STRING=/Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/boards/arm/nrf9160dk_nrf9160
+ZEPHYR_RUNNER_CONFIG_BOARD_DIR:STRING=/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/boards/arm/thingy91_nrf9160
 
 //Path to GDB binary, if applicable
 ZEPHYR_RUNNER_CONFIG_GDB:STRING=/Users/tadmcallister/opt/gnuarmemb/gcc-arm-none-eabi-8-2019-q3-update/bin/arm-none-eabi-gdb
@@ -519,7 +516,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=120
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=123
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

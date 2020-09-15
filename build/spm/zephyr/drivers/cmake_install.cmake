@@ -42,6 +42,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/console/cmake_install.cmake")
   include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/interrupt_controller/cmake_install.cmake")
   include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/clock_control/cmake_install.cmake")
+  include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/i2c/cmake_install.cmake")
   include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/serial/cmake_install.cmake")
   include("/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/drivers/timer/cmake_install.cmake")
 

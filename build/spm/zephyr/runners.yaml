@@ -13,7 +13,7 @@ debug-runner: jlink
 # The other sub-keys give runner-specific arguments.
 args:
   common:
-  - --board-dir=/Users/tadmcallister/Nordic/safecility_thingy/ncs/zephyr/boards/arm/nrf9160dk_nrf9160
+  - --board-dir=/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/boards/arm/thingy91_nrf9160
   - --elf-file=/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/zephyr.elf
   - --hex-file=/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/zephyr.hex
   - --bin-file=/Users/tadmcallister/Nordic/safecility_thingy/ncs/nrf/samples/nrf9160/mqtt_google_cloud/build/spm/zephyr/zephyr.bin
@@ -21,6 +21,7 @@ args:
   - --openocd=/Users/tadmcallister/.espressif/tools/openocd-esp32/v0.10.0-esp32-20190313/openocd-esp32/bin/openocd
   nrfjprog:
     - --nrf-family=NRF91
+    - --softreset
   jlink:
     - --dt-flash=y
     - --device=cortex-m33

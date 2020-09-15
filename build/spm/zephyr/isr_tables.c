@@ -90,7 +90,7 @@ struct _isr_table_entry __sw_isr_table _sw_isr_table[65] = {
 	{(void *)0x0, (void *)&z_irq_spurious},
 	{(void *)0x0, (void *)&z_irq_spurious},
 	{(void *)0x0, (void *)&z_irq_spurious},
-	{(void *)0x0, (void *)&z_irq_spurious},
+	{(void *)0x2279, (void *)0x4b03},
 	{(void *)0x0, (void *)&z_irq_spurious},
 	{(void *)0x0, (void *)&z_irq_spurious},
 	{(void *)0x0, (void *)&z_irq_spurious},
